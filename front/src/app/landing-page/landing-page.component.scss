@@ -10,10 +10,6 @@
 
 .landing-logo {
   margin-left: 2vw;
-  height: 13vw;
-  @media screen and (max-width: 600px) {
-    height: 18vw;
-  }
 }
 
 .button {
@@ -47,6 +43,7 @@
 //login container
 .showBox {
   display: none;
+  width: 100%;
 }
 
 .titleBox{
@@ -55,6 +52,8 @@
 }
 
 .login-box {
+  margin: 0 auto;
+  width: 30%;
   display: flex;
   flex-direction: column;
   background: #d21616;
@@ -75,6 +74,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  width: 100%;
 }
 
 .user-input-box {
@@ -98,10 +98,54 @@
   text-align: center;
   font-size: 1.5vw;
   font-family: "Vesper Libre", serif;
+  margin-bottom: 1vw;
 }
 
-i {
-  padding: 1vw;
-  height: 2vw;
-  width: 20%;
+.remember-box{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
+
+.align-left{
+  float: left;
+}
+
+.align-right{
+  float: right;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  .landing-logo{
+    height: 17vw;
+  }
+
+  .login-box{
+    width: 27%;
+  }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  .landing-logo{
+    height: 15vw;
+  }
+
+  .login-box{
+    width: 25%
+  }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+  .landing-logo{
+    height: 13vw;
+  }
+
+  .login-box{
+    width: 20%
+  }
+}
+
