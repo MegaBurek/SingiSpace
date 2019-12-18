@@ -11,12 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -53,7 +56,10 @@ public class RegisteredUser {
 	@Size(max = 50)
 	private String lastName;
 	
-	@Column(nullable = false)
+	@Column(name="date_of_birth")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy",  timezone = "UTC")
+    @Temporal(TemporalType.DATE)
+    @NotNull
 	private Date DoB;
 
 	@Column(nullable = false)
@@ -62,9 +68,6 @@ public class RegisteredUser {
 
 	@Column(nullable = false)
 	private String biography;
-	
-	@Column
-	private List<RegisteredUserDTO> friends;
 
 	@OneToOne(mappedBy = "registeredUser")
 	@JsonIgnore
@@ -83,7 +86,7 @@ public class RegisteredUser {
 
 	public RegisteredUser(@NotNull Boolean deleted, int version, @Size(max = 50) String username,
 			@Size(max = 50) String password, @Size(max = 50) String email, @Size(max = 50) String firstName,
-			@Size(max = 50) String lastName, Date DoB, @Size(max = 50) String role, String biography, List<RegisteredUserDTO> friends, Learner learner,
+			@Size(max = 50) String lastName, Date DoB, @Size(max = 50) String role, String biography, Learner learner,
 			Tutor tutor, Admin administrator) {
 		super();
 		this.deleted = deleted;
@@ -96,7 +99,6 @@ public class RegisteredUser {
 		this.DoB = DoB;
 		this.role = role;
 		this.biography = biography;
-		this.friends = friends;
 		this.learner = learner;
 		this.tutor = tutor;
 		this.administrator = administrator;
@@ -202,14 +204,6 @@ public class RegisteredUser {
 
 	public void setBiography(String biography) {
 		this.biography = biography;
-	}
-
-	public List<RegisteredUserDTO> getFriends() {
-		return friends;
-	}
-
-	public void setFriends(List<RegisteredUserDTO> friends) {
-		this.friends = friends;
 	}
 
 	public Learner getLearner() {
