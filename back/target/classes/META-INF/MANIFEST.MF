@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
-Built-By: Aleksej
-Build-Jdk: 13.0.1
 Implementation-Title: singispace
 Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: AleksaV
 Implementation-Vendor-Id: praktikum.singispace
+Build-Jdk: 1.8.0_131
 Implementation-URL: http://maven.apache.org
 Created-By: Maven Integration for Eclipse
 

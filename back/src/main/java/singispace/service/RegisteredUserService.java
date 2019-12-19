@@ -17,6 +17,14 @@ public class RegisteredUserService {
 
 	public RegisteredUserService() {
 	}
+	
+	public Optional<RegisteredUser> getUser(String username) {
+		return registeredUserRepository.getByUsername(username);
+	}
+
+	public Optional<RegisteredUser> getUser(String username, String password) {
+		return registeredUserRepository.getByUsernameAndPassword(username, password);
+	}
 
 	public Iterable<RegisteredUser> getRegisteredUsers() {
 		return registeredUserRepository.findAll();
