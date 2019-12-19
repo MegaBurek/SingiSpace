@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: Aleksej
+Built-By: a
 Build-Jdk: 13.0.1
 Implementation-Title: singispace
 Implementation-Version: 0.0.1-SNAPSHOT
