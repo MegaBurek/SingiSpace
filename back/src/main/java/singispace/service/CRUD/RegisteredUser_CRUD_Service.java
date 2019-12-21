@@ -22,6 +22,8 @@ public class RegisteredUser_CRUD_Service {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	RegisteredUserDTO user_front;
 
 	public RegisteredUser_CRUD_Service() {
 	}
@@ -51,12 +53,21 @@ public class RegisteredUser_CRUD_Service {
 		}
 	}
 	
+	
 	public Iterable<RegisteredUserDTO> getUsersDTO() {
 		Iterable<RegisteredUser> users_back = registeredUserRepository.findAll();
 		Set<RegisteredUserDTO> users_front = new HashSet<>();
 		for(RegisteredUser ru: users_back)
 			users_front.add(convertToDTO(ru));
 		return users_front;
+	}
+	
+	public RegisteredUserDTO getUserByIdDTO(Long id) {
+		Optional<RegisteredUser> user_back = registeredUserRepository.findById(id);
+		if(user_back.isPresent()) {
+			user_front = convertToDTO(user_back.get());
+		}
+		return user_front;
 	}
 	
 	public RegisteredUserDTO convertToDTO(RegisteredUser registeredUser)

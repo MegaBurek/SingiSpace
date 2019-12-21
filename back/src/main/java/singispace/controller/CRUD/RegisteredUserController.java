@@ -64,5 +64,10 @@ public class RegisteredUserController {
 	public ResponseEntity<Iterable<RegisteredUserDTO>> getUsers() {
 		return new ResponseEntity<Iterable<RegisteredUserDTO>>(registeredUserService.getUsersDTO(), HttpStatus.OK);
 	}
+    
+    @GetMapping(value="/User/{id}")
+    public ResponseEntity<RegisteredUserDTO> getUserByID(@PathVariable Long id){
+    	return new ResponseEntity<RegisteredUserDTO>(registeredUserService.getUserByIdDTO(id), HttpStatus.OK);
+    }
 	
 }
