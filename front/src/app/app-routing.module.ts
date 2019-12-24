@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LandingPageComponent } from '../app/landing-page/landing-page.component'
+import { HomeComponent } from '../app/home/home.component'
+
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: LandingPageComponent, data: { animation: { value: 'homePage' }} }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LandingPageComponent, data: { animation: { value: 'LoginPage' }} },
+  { path: 'home', component: HomeComponent, data: { animation: { value: 'HomePage' }} }
+
 ];
 
 @NgModule({
