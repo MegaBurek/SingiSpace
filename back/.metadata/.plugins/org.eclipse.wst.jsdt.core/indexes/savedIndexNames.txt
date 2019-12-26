@@ -1,0 +1,5 @@
+INDEX VERSION 1.4+D:\Faks\Cetvrta godina\SingiSpace\SingiSpace-master\back\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3768707187.index
+1233252925.index
+3652542585.index
+3869430958.index

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import singispace.DTO.RegisteredUserDTO;
 import singispace.domain.RegisteredUser;
 import singispace.service.CRUD.RegisteredUser_CRUD_Service;
+import singispace.utils.View.HideOptionalProperties;
 
 @CrossOrigin(origins={"http://localhost:4200"})
 @RestController

@@ -53,6 +53,29 @@ public class RegisteredUser_CRUD_Service {
 		}
 	}
 	
+	public Iterable<RegisteredUserDTO> getUsersDTO() {
+		Iterable<RegisteredUser> users_back = registeredUserRepository.findAll();
+		Set<RegisteredUserDTO> users_front = new HashSet<>();
+		for(RegisteredUser ru: users_back)
+			users_front.add(convertToDTO(ru));
+		return users_front;
+	}
+	
+	public RegisteredUserDTO convertToDTO(RegisteredUser registeredUser)
+	{
+		RegisteredUserDTO rdto = modelMapper.map(registeredUser, RegisteredUserDTO.class);
+		rdto.setSubmissionDate(registeredUser.getDoB());
+		return rdto;
+	}
+	
+	public void removeUserSoft(Long id) {
+		Optional<RegisteredUser> u = registeredUserRepository.findById(id);
+		if(u.isPresent()) {
+			u.get().setDeleted(true);
+			registeredUserRepository.save(u.get());
+		}
+	}
+	
 	
 	public Iterable<RegisteredUserDTO> getUsersDTO() {
 		Iterable<RegisteredUser> users_back = registeredUserRepository.findAll();
