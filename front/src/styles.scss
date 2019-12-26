@@ -32,8 +32,7 @@ h1 {
 
 h2 {
   font-family: "Vesper Libre", serif;
-  text-decoration: underline;
-  color: #f6f4f3;
+  color: #0f0a0a;
   margin: 0;
 }
 
@@ -41,12 +40,19 @@ h2 {
 label{
   margin: 0;
   font-family: "Vesper Libre", serif;
-  color: #f6f4f3;
+  color: #0f0a0a;
+}
+
+p{
+  padding: 0;
+  font-family: "Vesper Libre", serif;
+  color: #0f0a0a;
 }
 
 .input-field {
   border-radius: 10px;
   border: 0;
+  color: #0f0a0a;
   background-color: #f6f4f3;
   width: 85%;
 }
@@ -56,8 +62,8 @@ label{
 }
 
 .input-icon {
-  padding: 1vw;
-  width: 16%;
+  padding: 0.8rem;
+  width: 14%;
 }
 
 /* Mobile Styles */
