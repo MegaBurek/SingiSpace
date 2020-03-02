@@ -1,0 +1,28 @@
+.main-window {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.nav-container {
+  width: 100%;
+  height: 7%;
+}
+
+.content-window {
+  width: 100%;
+  height: 93%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.subscribed-bar {
+  width: 15%;
+  background: #c4c4c4;
+  mix-blend-mode: hard-light;
+  box-sizing: border-box;
+}

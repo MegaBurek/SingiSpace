@@ -1,7 +1,9 @@
 package singispace.utils;
 
 public class View {
-	public interface HideOptionalProperties {};
-	public interface ShowRegisteredUser {};
+	public interface ShowVerificationToken{};
+	public interface ShowUserPermission{};	
+
+	public interface HideOptionalProperties{};
 
 }

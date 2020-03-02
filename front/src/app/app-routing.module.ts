@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LandingPageComponent } from '../app/landing-page/landing-page.component'
-import { HomeComponent } from '../app/home/home.component'
+import { HomeComponent } from './core/home-layout/home.component'
 
 
 

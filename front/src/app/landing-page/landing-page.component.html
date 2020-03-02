@@ -8,19 +8,22 @@
     <div class="showBox">
         <div class="login-box">
             <h2>Sign In</h2>
-            <div class="input-box">
-                <div class="user-input-box">
-                    <img class="input-icon" src="../../assets/images/input-user.png" alt="input-user">
-                    <input class="input-field" type="text" placeholder="Username">
+            <form class="login-form" (submit)="login(loginForm)" #loginForm="ngForm">
+                <div class="input-box">
+                    <div class="user-input-box">
+                        <img class="input-icon" src="../../assets/images/input-user.png" alt="input-user">
+                        <input class="input-field" type="text" placeholder="Username" ngModel #usernameInput="ngModel">
+                    </div>
+                    <div class="user-input-box">
+                        <img class="input-icon" src="../../assets/images/input-pass.png" alt="input-pass">
+                        <input class="input-field" type="password" placeholder="Password" ngModel #passwordInput="ngModel">
+                    </div>
                 </div>
-                <div class="user-input-box">
-                    <img class="input-icon" src="../../assets/images/input-pass.png" alt="input-pass">
-                    <input class="input-field" type="password" placeholder="Password">
-                </div>
-            </div>
-            <button class="sign-in-btn" (click)="submitCredentials()"  routerLink="/home" >
-                Submit
-            </button>
+                <button class="sign-in-btn" type="submit">
+                    Submit
+                </button>
+                <span *ngIf="attempt">You have entered the wrong username or password</span>
+            </form>
             <div class="remember-box">
                 <label><input type="radio" value="remember">Remember Me<span></span></label>
                 <label><a href="">Forgot password?</a></label>
@@ -28,13 +31,16 @@
             <p class="divider">Or</p>
             <p class="social-media-text">Login in with your social media account</p>
             <div class="social-button-box">
-                <button class="social-button-fb"><img src="../../assets/images/facebook.png" class="social-media-icon" alt="facebook">Facebook</button>
-                <button class="social-button-tw"><img src="../../assets/images/twitter.png" class="social-media-icon" alt="twitter">Twitter</button>
-                <button class="social-button-go"><img src="../../assets/images/google.png" class="social-media-icon" alt="google">Google</button>
+                <button class="social-button-fb"><img src="../../assets/images/facebook.png" class="social-media-icon"
+                        alt="facebook">Facebook</button>
+                <button class="social-button-tw"><img src="../../assets/images/twitter.png" class="social-media-icon"
+                        alt="twitter">Twitter</button>
+                <button class="social-button-go"><img src="../../assets/images/google.png" class="social-media-icon"
+                        alt="google">Google</button>
             </div>
             <div class="register-box">
-                <label>Haven't registered before?</label>
-                <label><a href="">Register Here</a></label>
+                <label><a href="/register">Haven't registered before?</a></label>
+                <label><a href="/forgot-password">Register Here</a></label>
             </div>
         </div>
     </div>

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import singispace.domain.Learner;
-import singispace.service.CRUD.Learner_CRUD_Service;
+import singispace.service.CRUD.LearnerCRUDService;
 import singispace.utils.View.HideOptionalProperties;
 
 @CrossOrigin(origins={"http://localhost:4200"})
@@ -24,7 +24,7 @@ import singispace.utils.View.HideOptionalProperties;
 public class Learner_CRUD_Controller {
 
     @Autowired
-    Learner_CRUD_Service learnerCRUDService;
+    LearnerCRUDService learnerCRUDService;
 
     @JsonView(HideOptionalProperties.class)
     @RequestMapping()

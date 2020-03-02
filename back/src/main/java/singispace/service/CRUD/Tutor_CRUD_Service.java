@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import singispace.domain.Tutor;
-import singispace.repository.users.Tutor_Repository;
+import singispace.repository.users.TutorRepository;
 
 
 @Service
 public class Tutor_CRUD_Service {
 
 	@Autowired
-	private Tutor_Repository tutorRepository;
+	private TutorRepository tutorRepository;
 
 	public Tutor_CRUD_Service() {
 	}

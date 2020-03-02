@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import singispace.domain.Admin;
-import singispace.service.CRUD.Admin_CRUD_Service;
+import singispace.service.CRUD.AdminCRUDService;
 import singispace.utils.View.HideOptionalProperties;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -24,7 +24,7 @@ import singispace.utils.View.HideOptionalProperties;
 public class Admin_CRUD_Controller {
 
 	@Autowired
-	Admin_CRUD_Service adminCRUDService;
+	AdminCRUDService adminCRUDService;
 
 	@JsonView(HideOptionalProperties.class)
 	@RequestMapping()

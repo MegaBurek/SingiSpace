@@ -1,9 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 html,
 body {
@@ -23,6 +18,7 @@ body {
   background-position: center center;
 }
 
+
 h1 {
   text-shadow: 0px 0px 7px rgba(0, 0, 0, 0.64);
   font-family: "Vesper Libre", serif;
@@ -34,6 +30,15 @@ h2 {
   font-family: "Vesper Libre", serif;
   color: #0f0a0a;
   margin: 0;
+}
+
+h3{
+  font-family: "Vesper Libre", serif;
+  padding: 5%;
+  color: #0f0a0a;
+  margin: 0;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.2);
 }
 
 
@@ -107,6 +112,6 @@ p{
   }
 
   h3{
-    font-size: 1.1rem;
+    font-size: 3.5rem;
   }
 }

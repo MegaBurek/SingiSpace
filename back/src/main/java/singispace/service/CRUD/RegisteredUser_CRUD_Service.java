@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 
 import singispace.DTO.RegisteredUserDTO;
 import singispace.domain.RegisteredUser;
-import singispace.repository.users.RegisteredUser_Repository;
+import singispace.repository.RegisteredUserRepository;
 
 
 @Service
 public class RegisteredUser_CRUD_Service {
 
 	@Autowired
-	private RegisteredUser_Repository registeredUserRepository;
+	private RegisteredUserRepository registeredUserRepository;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -76,36 +76,12 @@ public class RegisteredUser_CRUD_Service {
 		}
 	}
 	
-	
-	public Iterable<RegisteredUserDTO> getUsersDTO() {
-		Iterable<RegisteredUser> users_back = registeredUserRepository.findAll();
-		Set<RegisteredUserDTO> users_front = new HashSet<>();
-		for(RegisteredUser ru: users_back)
-			users_front.add(convertToDTO(ru));
-		return users_front;
-	}
-	
 	public RegisteredUserDTO getUserByIdDTO(Long id) {
 		Optional<RegisteredUser> user_back = registeredUserRepository.findById(id);
 		if(user_back.isPresent()) {
 			user_front = convertToDTO(user_back.get());
 		}
 		return user_front;
-	}
-	
-	public RegisteredUserDTO convertToDTO(RegisteredUser registeredUser)
-	{
-		RegisteredUserDTO rdto = modelMapper.map(registeredUser, RegisteredUserDTO.class);
-		rdto.setSubmissionDate(registeredUser.getDoB());
-		return rdto;
-	}
-	
-	public void removeUserSoft(Long id) {
-		Optional<RegisteredUser> u = registeredUserRepository.findById(id);
-		if(u.isPresent()) {
-			u.get().setDeleted(true);
-			registeredUserRepository.save(u.get());
-		}
 	}
 	
 	
