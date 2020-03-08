@@ -9,9 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
-import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomeComponent } from './core/home-layout/home.component';
-import { NavbarComponent } from './core/navbar/navbar.component';
 import { MainFeedComponent } from './core/main-feed/main-feed.component';
 import { ChatBarComponent } from './core/chat-bar/chat-bar.component';
 import { SubscribedBarComponent } from './core/subscribed-bar/subscribed-bar.component';
@@ -22,9 +20,7 @@ import { SignInComponent } from '../app/core/auth/sign-in/sign-in.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent,
     HomeComponent,
-    NavbarComponent,
     MainFeedComponent,
     ChatBarComponent,
     SubscribedBarComponent,

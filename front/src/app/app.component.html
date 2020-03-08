@@ -1,3 +1,51 @@
-<div class="main-container">
-    <router-outlet></router-outlet>
+<div class="lead-container">
+    <div class="top">
+        <nav class="navbar navbar-expand-md fixed-top">
+            <div class="container brand-box">
+                <img src="../../../assets/images/singi_logo.png" alt="" class="small-logo">
+                <a class="navbar-brand">SingiSpace</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav" *ngIf="isLoggedin">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Chathub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Friends</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Wall</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#!">Action</a>
+                            <a class="dropdown-item" href="#!">Another action</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="bottom">
+        <div class="container">
+            <div class="row lead-row">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
 </div>

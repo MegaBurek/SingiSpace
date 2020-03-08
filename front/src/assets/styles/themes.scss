@@ -1,0 +1,52 @@
+html[data-theme="dark"] {
+  --primary-theme-color: #1a1a1d; //eerie black
+  --secondary-theme-color: #bd2215; //cornell red
+  --third-theme-color: #ff220c; //red (ryb)
+  --fourth-theme-color: #d33e43; //jasper
+  --fifth-theme-color: #9b7874; //burnished brown
+}
+
+html[data-theme="light"] {
+  --primary-theme-color: #e3e2df; //platinum
+  --secondary-theme-color: #bd2215; //cornell red
+  --third-theme-color: #ff220c; //red (ryb)
+  --fourth-theme-color: #d33e43; //jasper
+  --fifth-theme-color: #9b7874; //burnished brown
+}
+
+// $themes: (
+//   light: (
+//     primary: #1a1a1d,
+//     secondary: #bd2215,
+//     third: #ff220c,
+//     fourth: #d33e43,
+//     fifth: #9b7874
+//   ),
+//   dark: (
+//     primary: #e3e2df,
+//     secondary: #bd2215,
+//     third: #ff220c,
+//     fourth: #d33e43,
+//     fifth: #9b7874
+//   ),
+// );
+
+$text-color: #F5F5F5;
+$primary: #1a1a1d;
+$secondary: #bd2215; //cornell red
+$third: #ff220c; //red (ryb)
+$fourth: #d33e43;
+
+$font-lead: "Patua One", cursive;
+$font-second: "Raleway", sans-serif;
+
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 750ms !important;
+  transition-delay: 0 !important;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Patua+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Patua+One|Raleway&display=swap');

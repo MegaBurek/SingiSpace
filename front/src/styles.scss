@@ -1,117 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
-
-html,
-body {
+* {
   width: 100%;
-  height: 100%;
-  padding: 0;
   margin: 0;
-  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.main-container {
-  width: 100%;
-  height: 100%;
-  background-image: url("../src/assets/images/singi_back.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+*:focus {
+  outline: none !important;
 }
 
-
-h1 {
-  text-shadow: 0px 0px 7px rgba(0, 0, 0, 0.64);
-  font-family: "Vesper Libre", serif;
-  margin: 0;
-  color: black;
-}
-
-h2 {
-  font-family: "Vesper Libre", serif;
-  color: #0f0a0a;
-  margin: 0;
-}
-
-h3{
-  font-family: "Vesper Libre", serif;
-  padding: 5%;
-  color: #0f0a0a;
-  margin: 0;
-  text-decoration: underline;
-  text-decoration-color: rgba(0, 0, 0, 0.2);
-}
-
-
-label{
-  margin: 0;
-  font-family: "Vesper Libre", serif;
-  color: #0f0a0a;
-}
-
-p{
-  padding: 0;
-  font-family: "Vesper Libre", serif;
-  color: #0f0a0a;
-}
-
-.input-field {
-  border-radius: 10px;
-  border: 0;
-  color: #0f0a0a;
-  background-color: #f6f4f3;
-  width: 85%;
-}
-
-.input-field:focus {
-  outline: 0;
-}
-
-.input-icon {
-  padding: 0.8rem;
-  width: 14%;
-}
-
-/* Mobile Styles */
-@media only screen and (max-width: 400px) {
-  h1 {
-    font-size: 14vw;
-  }
-
-  h2 {
-    font-size: 6vw;
-  }
-
-  h3{
-    font-size: 2rem;
-  }
-}
-
-/* Tablet Styles */
-@media only screen and (min-width: 401px) and (max-width: 960px) {
-  h1 {
-    font-size: 12vw;
-  }
-
-  h2 {
-    font-size: 4vw;
-  }
-
-  h3{
-    font-size: 1.1rem;
-  }
-}
-
-/* Desktop Styles */
-@media only screen and (min-width: 961px) {
-  h1 {
-    font-size: 12vw;
-  }
-
-  h2 {
-    font-size: 4vw;
-  }
-
-  h3{
-    font-size: 3.5rem;
-  }
-}
+@import './assets/styles/fonts.scss';
+@import './assets/styles/themes.scss';
+@import './assets/styles/main-layout.scss';
+@import './assets/styles/navbar.scss';
+@import './assets/styles/login.scss';
+@import './assets/styles/registration.scss';
+@import './assets/styles/main-feed.scss';
+@import './assets/styles/subscribed-bar.scss';
+@import './assets/styles/chat-bar.scss';

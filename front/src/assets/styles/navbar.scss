@@ -1,0 +1,73 @@
+@import './themes.scss';
+
+.brand-box {
+  width: 30%;
+  padding-left: 0;
+  color: $text-color;
+}
+
+.navbar{
+  background-color: $primary;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(245, 245, 245)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler {
+  border-color: $text-color;
+} 
+
+.nav-link {
+  font-family: "Raleway", sans-serif;
+  color: $text-color;
+}
+
+.navbar .container {
+  justify-content: flex-start;
+}
+
+.navbar-brand {
+  width: 80%;
+  font-size: 1.8rem;
+  font-family: "Patua One", cursive;
+  margin: 0;
+}
+
+.nav-item {
+  width: 12%;
+}
+
+.small-logo {
+  width: 14%;
+  margin: 3px;
+}
+
+.nav-link {
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .brand-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .small-logo {
+    margin: 0px;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .navbar-brand {
+    width: 40%;
+    text-align: center;
+  }
+}
+
+
+// @media screen and (max-width: )
