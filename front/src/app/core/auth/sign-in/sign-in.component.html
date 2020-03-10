@@ -2,14 +2,15 @@
     <div class="card card-signin my-5">
         <div class="card-body">
             <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin">
+            <form class="form-signin" (submit)="login(loginForm)" #loginForm="ngForm">
                 <div class="form-label-group">
-                    <input class="form-control form-control-lg" type="text" placeholder="Username" required>
+                    <input class="form-control form-control-lg" type="text" placeholder="Username" required ngModel #usernameInput="ngModel">
                 </div>
 
                 <div class="form-label-group">
-                    <input class="form-control form-control-lg" type="password" placeholder="Password" required>
+                    <input class="form-control form-control-lg" type="password" placeholder="Password" required ngModel #passwordInput="ngModel">
                 </div>
+                <p class="error-text" *ngIf="attempt">You have entered a wrong password or username</p>
 
                 <div class="custom-control custom-checkbox mb-3">
                     <input type="checkbox" class="custom-control-input" id="customCheck1">

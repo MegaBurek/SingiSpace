@@ -5,36 +5,48 @@ import decode from 'jwt-decode';
 import { Subject } from 'rxjs';
 
 
-class LoginRes {
-  token: string;
-  role: string;
-  username: string;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable({ providedIn: 'root' })
 export class LoginService {
+
+  roleChanged = new Subject<any[]>();
   loggedInStatusChanged = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
-  login(username: string, password: string) : Boolean {
-    this.http.post<{ token: string }>('http://localhost:8080/authLogin/', { username: username, password: password }).subscribe(response => {
+  login(username: string, password: string) {
+    this.http.post<{ token: string }>('http://localhost:8080/login/', { username: username, password: password }).subscribe(response => {
       if (response.token) {
         localStorage.setItem('token', response.token);
-        this.router.navigate(['/home']);
-        return true;
+        this.roleChanged.next(this.getCurrentRoles());
+        this.router.navigate(['/']);
+        this.loggedInStatusChanged.next(true);
+        return true
+
       }
-      return false;
+      return false
     });
-    return false;
+    return false
   }
 
   logout() {
+    this.roleChanged.next([]);
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+    this.loggedInStatusChanged.next(false);
+  }
+
+  getCurrentRoles() {
+    const token = localStorage.getItem('token');
+    const roles = []
+    if (token) {
+      decode(token).role.forEach(role => {
+        roles.push(role.authority);
+      });
+    }
+    return roles;
   }
 
   getCurrentUser() {
@@ -52,7 +64,18 @@ export class LoginService {
     return false;
   }
 
+  // confirmRegistration(token) {
+  //   return this.http.post(`http://localhost:8080/account-data/confirm-account`, token);
+  // }
 
+  // resetPasswordEmail(accountData: AccountData) {
+  //   console.log(accountData);
+  //   return this.http.post(`http://localhost:8080/account-data/forgot-password`, accountData);
+  // }
 
+  // confirmPassword(accountData: AccountData) {
+  //   console.log(accountData);
+  //   return this.http.post(`http://localhost:8080/account-data/reset-password`, accountData);
+  // }
 
 }

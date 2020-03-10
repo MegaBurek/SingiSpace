@@ -16,6 +16,7 @@ import { SubscribedBarComponent } from './core/subscribed-bar/subscribed-bar.com
 import { GroupsTabComponent } from './core/subscribed-bar/groups-tab/groups-tab.component';
 import { PagesTabComponent } from './core/subscribed-bar/pages-tab/pages-tab.component';
 import { SignInComponent } from '../app/core/auth/sign-in/sign-in.component';
+import { RegisterComponent } from './core/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SignInComponent } from '../app/core/auth/sign-in/sign-in.component';
     SubscribedBarComponent,
     GroupsTabComponent,
     PagesTabComponent,
-    SignInComponent
+    SignInComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
