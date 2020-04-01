@@ -1,10 +1,12 @@
 package singispace.service.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import singispace.domain.AccountData;
+import singispace.domain.*;
 import singispace.repositories.users.AccountDataRepository;
+import singispace.service.PermissionService;
 
 import java.util.Optional;
 
@@ -12,26 +14,53 @@ import java.util.Optional;
 public class AccountDataService {
 
     @Autowired
-    AccountDataRepository accountDataRepository;
+    PermissionService permissionService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public Iterable<AccountData> getAllAccoutDatas() {
+    @Autowired
+    AccountDataRepository accountDataRepository;
+
+    public Iterable<AccountData> getAll() {
         return accountDataRepository.findAll();
+    }
+
+    public Optional<AccountData> getById(String id) {
+        return accountDataRepository.findById(id);
+    }
+
+    public void addAdminAccountData(AccountData accountData) {
+        System.out.println(accountData);
+        permissionService.addAdminPermission(accountData.getPermission());
+        accountDataRepository.save(accountData);
+
+    }
+
+    public void addAdministratorAccountData(AccountData accountData) {
+        permissionService.addAdministratorPermission(accountData.getPermission());
+        accountDataRepository.save(accountData);
+    }
+
+    public void addLearnerAccountData(AccountData accountData) {
+        permissionService.addLearnerPermission(accountData.getPermission());
+        accountDataRepository.save(accountData);
     }
 
     public Optional<AccountData> getAccountByUsername(String username){
         return accountDataRepository.findByUsername(username);
     }
 
-    public Optional<AccountData> getAccountDataById(String id) {
-        return accountDataRepository.findById(id);
-    }
+    public void updateAccountData(String id, AccountData accountData) {
 
-    public void addAccountData(AccountData accountData) {
-        accountDataRepository.save(accountData);
+        Optional<AccountData> a = accountDataRepository.findById(id);
 
+        if(a.isPresent()) {
+            accountData.setId(a.get().getId());
+            accountData.setPassword(passwordEncoder.encode(accountData.getPassword()));
+
+            accountDataRepository.save(accountData);
+        }
     }
 
     public void removeAccountData(String id) {
@@ -39,12 +68,5 @@ public class AccountDataService {
         accountDataRepository.delete(accountData.get());
     }
 
-    public void updateAccountData(String id, AccountData accountData) {
-        Optional<AccountData> Acc = accountDataRepository.findById(id);
-        if(Acc.isPresent()) {
-            accountData.setId(Acc.get().getId());
-            accountDataRepository.save(accountData);
-        }
-    }
-}
 
+}

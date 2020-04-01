@@ -3,7 +3,7 @@ package singispace.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import singispace.domain.Permission;
-import singispace.repositories.PermissionRepository;
+import singispace.repositories.users.PermissionRepository;
 
 @Service
 public class PermissionService {

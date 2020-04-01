@@ -1,4 +1,4 @@
-package singispace.repositories;
+package singispace.repositories.users;
 
 import java.util.Optional;
 

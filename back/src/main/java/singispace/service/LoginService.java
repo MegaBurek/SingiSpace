@@ -10,12 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import singispace.domain.AccountData;
 import singispace.payload.AuthResponse;
-import singispace.repositories.PermissionRepository;
+import singispace.repositories.users.PermissionRepository;
 import singispace.repositories.users.AccountDataRepository;
 import singispace.utils.TokenProvider;
 
 import javax.validation.Valid;
-import java.util.*;
 
 
 @Service
