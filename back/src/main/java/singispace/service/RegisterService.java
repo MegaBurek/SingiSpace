@@ -1,11 +1,10 @@
 package singispace.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import singispace.domain.Admin;
-import singispace.domain.Administrator;
-import singispace.domain.Learner;
+import singispace.domain.*;
 import singispace.repositories.users.AdminRepository;
 import singispace.repositories.users.AdministratorRepository;
 import singispace.repositories.users.LearnerRepository;
@@ -26,6 +25,9 @@ public class RegisterService {
     PasswordEncoder passwordEncoder;
 
     @Autowired
+    PermissionService permissionService;
+
+    @Autowired
     AdminRepository adminRepository;
 
     @Autowired
@@ -35,11 +37,20 @@ public class RegisterService {
     LearnerRepository learnerRepository;
 
     //---------ADMIN---------------//
-    public void addAdmin(Admin admin){
-        loginService.addPermssion(admin.getAccountData(), "ROLE_ADMIN");
-        accountDataService.addAccountData(admin.getAccountData());
-        admin.getAccountData().setPassword(passwordEncoder.encode(admin.getAccountData().getPassword()));
-        adminRepository.save(admin);
+    public HttpStatus addAdmin(Admin admin){
+
+        Optional<AccountData> accountData = accountDataService.getAccountByUsername(admin.getAccountData().getUsername());
+
+        if(accountData.isPresent()){
+            return HttpStatus.IM_USED;
+        }
+        else {
+            admin.getAccountData().setPassword(passwordEncoder.encode(admin.getAccountData().getPassword()));
+            admin.getAccountData().setProvider(AuthProvider.local);
+            permissionService.addAdminPermission(admin.getAccountData().getPermission());
+            accountDataService.addAccountData(admin.getAccountData());
+            return HttpStatus.CREATED;
+        }
     }
 
     public void removeAdmin(String id) {
@@ -61,11 +72,19 @@ public class RegisterService {
 
 
     //---------ADMINISTRATOR---------------//
-    public void addAdministrator(Administrator administrator) {
-        loginService.addPermssion(administrator.getAccountData(), "ROLE_ADMINISTRATOR");
-        accountDataService.addAccountData(administrator.getAccountData());
-        administrator.getAccountData().setPassword(passwordEncoder.encode(administrator.getAccountData().getPassword()));
-        administratorRepository.save(administrator);
+    public HttpStatus addAdministrator(Administrator administrator){
+        Optional<AccountData> accountData = accountDataService.getAccountByUsername(administrator.getAccountData().getUsername());
+
+        if(accountData.isPresent()){
+            return HttpStatus.IM_USED;
+        }
+        else {
+            administrator.getAccountData().setPassword(passwordEncoder.encode(administrator.getAccountData().getPassword()));
+            administrator.getAccountData().setProvider(AuthProvider.local);
+            permissionService.addAdminPermission(administrator.getAccountData().getPermission());
+            accountDataService.addAccountData(administrator.getAccountData());
+            return HttpStatus.CREATED;
+        }
     }
 
     public void removeAdministrator(String id) {
@@ -86,11 +105,19 @@ public class RegisterService {
     }
 
     //---------LEARNER---------------//
-    public void addLearner(Learner learner){
-        loginService.addPermssion(learner.getAccountData(), "ROLE_LEARNER");
-        accountDataService.addAccountData(learner.getAccountData());
-        learner.getAccountData().setPassword(passwordEncoder.encode(learner.getAccountData().getPassword()));
-        learnerRepository.save(learner);
+    public HttpStatus addLearner(Learner learner){
+        Optional<AccountData> accountData = accountDataService.getAccountByUsername(learner.getAccountData().getUsername());
+
+        if(accountData.isPresent()){
+            return HttpStatus.IM_USED;
+        }
+        else {
+            learner.getAccountData().setPassword(passwordEncoder.encode(learner.getAccountData().getPassword()));
+            learner.getAccountData().setProvider(AuthProvider.local);
+            permissionService.addAdminPermission(learner.getAccountData().getPermission());
+            accountDataService.addAccountData(learner.getAccountData());
+            return HttpStatus.CREATED;
+        }
     }
 
     public void removeLearner(String id) {

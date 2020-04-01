@@ -30,25 +30,25 @@ public class RegisterController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/remove-admin")
-    public ResponseEntity<?> removeAdmin(Admin admin){
-        try {
-            registerService.removeAdmin(admin.getId());
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    @PutMapping(value="/update-admin/{id}")
-    public ResponseEntity<?> updateAccountData(@PathVariable String id, @RequestBody Admin admin) {
-        try {
-            registerService.updateAdmin(id, admin);
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
+//    @DeleteMapping("/remove-admin")
+//    public ResponseEntity<?> removeAdmin(Admin admin){
+//        try {
+//            registerService.removeAdmin(admin.getId());
+//        }catch(Exception e){
+//            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+//        }
+//        return new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
+//
+//    @PutMapping(value="/update-admin/{id}")
+//    public ResponseEntity<?> updateAccountData(@PathVariable String id, @RequestBody Admin admin) {
+//        try {
+//            registerService.updateAdmin(id, admin);
+//        }catch(Exception e){
+//            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+//        }
+//        return new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
 
 
 
@@ -64,25 +64,25 @@ public class RegisterController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/remove-administrator")
-    public ResponseEntity<?> removeAdministrator(Administrator administrator){
-        try {
-            registerService.removeAdministrator(administrator.getId());
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    @PutMapping(value="/update-administrator/{id}")
-    public ResponseEntity<?> updateAdministrator(@PathVariable String id, @RequestBody Administrator administrator) {
-        try {
-            registerService.updateAdministrator(id, administrator);
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
+//    @DeleteMapping("/remove-administrator")
+//    public ResponseEntity<?> removeAdministrator(Administrator administrator){
+//        try {
+//            registerService.removeAdministrator(administrator.getId());
+//        }catch(Exception e){
+//            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+//        }
+//        return new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
+//
+//    @PutMapping(value="/update-administrator/{id}")
+//    public ResponseEntity<?> updateAdministrator(@PathVariable String id, @RequestBody Administrator administrator) {
+//        try {
+//            registerService.updateAdministrator(id, administrator);
+//        }catch(Exception e){
+//            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+//        }
+//        return new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
 
     //---------LEARNER--------//
     @PostMapping("/learner")
@@ -96,23 +96,23 @@ public class RegisterController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/remove-learner")
-    public ResponseEntity<?> removeLearner(Learner learner){
-        try {
-            registerService.removeAdministrator(learner.getId());
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    @PutMapping(value="/update-learner/{id}")
-    public ResponseEntity<?> updateLearner(@PathVariable String id, @RequestBody Learner learner) {
-        try {
-            registerService.updateLearner(id, learner);
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
+//    @DeleteMapping("/remove-learner")
+//    public ResponseEntity<?> removeLearner(Learner learner){
+//        try {
+//            registerService.removeAdministrator(learner.getId());
+//        }catch(Exception e){
+//            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+//        }
+//        return new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
+//
+//    @PutMapping(value="/update-learner/{id}")
+//    public ResponseEntity<?> updateLearner(@PathVariable String id, @RequestBody Learner learner) {
+//        try {
+//            registerService.updateLearner(id, learner);
+//        }catch(Exception e){
+//            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+//        }
+//        return new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
 }

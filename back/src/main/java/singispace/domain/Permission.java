@@ -10,35 +10,19 @@ import java.util.Set;
 public class Permission {
 
     @Id
-    private Long id;
-    private String authority;
-    @DBRef
-    private Set<UserPermission> userPermissions;
+    private String id;
 
-    //Constructors
+    private String authority;
 
     public Permission() {
 
     }
 
-    public Permission(Long id, String authority, Set<UserPermission> userPermissions) {
-        this.id = id;
-        this.authority = authority;
-        this.userPermissions = userPermissions;
-    }
-
-    public Permission(String authority, Set<UserPermission> userPermissions) {
-        this.authority = authority;
-        this.userPermissions = userPermissions;
-    }
-
-    //Getters and Setters
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -50,13 +34,7 @@ public class Permission {
         this.authority = authority;
     }
 
-    public Set<UserPermission> getUserPermissions() {
-        return userPermissions;
-    }
-
-    public void setUserPermissions(Set<UserPermission> userPermissions) {
-        this.userPermissions = userPermissions;
-    }
 
 }
+
 

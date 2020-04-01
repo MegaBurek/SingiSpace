@@ -1,35 +1,30 @@
 package singispace.domain;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.security.core.CredentialsContainer;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.Set;
 
 @Document
-public class AccountData implements UserDetails, CredentialsContainer {
+public class AccountData{
 
 	@Id
 	private String id;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
-	private String email;
 	private String username;
 	private String password;
+	private String email;
 	private String imageUrl;
+
 	private boolean enabled;
-	@DBRef
-	private Set<Role> roles;
-	@DBRef
-	private Set<UserPermission> userPermissions;
-	@DBRef
-	private VerificationToken verificationToken;
+
+	@Enumerated(EnumType.STRING)
+	private AuthProvider provider;
+
+	private Permission permission;
 
 	public String getId() {
 		return id;
@@ -47,7 +42,6 @@ public class AccountData implements UserDetails, CredentialsContainer {
 		this.email = email;
 	}
 
-	@Override
 	public String getUsername() {
 		return username;
 	}
@@ -56,7 +50,6 @@ public class AccountData implements UserDetails, CredentialsContainer {
 		this.username = username;
 	}
 
-	@Override
 	public String getPassword() {
 		return password;
 	}
@@ -73,61 +66,23 @@ public class AccountData implements UserDetails, CredentialsContainer {
 		this.imageUrl = imageUrl;
 	}
 
-	@Override
-	public boolean isEnabled() {
-		return enabled;
-	}
-
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public AuthProvider getProvider() {
+		return provider;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setProvider(AuthProvider provider) {
+		this.provider = provider;
 	}
 
-	public Set<UserPermission> getUserPermissions() {
-		return userPermissions;
+	public Permission getPermission() {
+		return permission;
 	}
 
-	public void setUserPermissions(Set<UserPermission> userPermissions) {
-		this.userPermissions = userPermissions;
-	}
-
-	public VerificationToken getVerificationToken() {
-		return verificationToken;
-	}
-
-	public void setVerificationToken(VerificationToken verificationToken) {
-		this.verificationToken = verificationToken;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return false;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return false;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return false;
-	}
-
-	@Override
-	public void eraseCredentials() {
-
+	public void setPermission(Permission permission) {
+		this.permission = permission;
 	}
 }

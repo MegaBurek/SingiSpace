@@ -10,6 +10,5 @@ import singispace.domain.Permission;
 @Repository
 public interface PermissionRepository extends MongoRepository<Permission, String> {
 
-    Permission findByAuthority(String authority);
 }
 

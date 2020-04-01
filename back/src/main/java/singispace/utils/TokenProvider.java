@@ -1,15 +1,22 @@
 package singispace.utils;
 
-import com.sun.security.auth.UserPrincipal;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 import singispace.config.AppProperties;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+@Service
 public class TokenProvider {
+
+    @Value("${token.secret}")
+    private String secret;
 
     private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 
@@ -20,28 +27,28 @@ public class TokenProvider {
     }
 
     public String createToken(Authentication authentication) {
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
 
         Map<String, Object> claims = new HashMap<String, Object>();
+        claims.put("sub", userPrincipal.getId());
+        claims.put("uniq", userPrincipal.getUsername());
         claims.put("created", new Date(System.currentTimeMillis()));
         claims.put("role", authentication.getAuthorities());
 
         return Jwts.builder().setClaims(claims).setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret()).compact();
-
-
-
+                .signWith(SignatureAlgorithm.HS512, this.secret).compact();
     }
 
-    public Long getUserIdFromToken(String token) {
+    public String getUserIdFromToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(appProperties.getAuth().getTokenSecret())
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Long.parseLong(claims.getSubject());
+        return (claims.getSubject());
     }
 
     public boolean validateToken(String authToken) {
@@ -62,5 +69,6 @@ public class TokenProvider {
         return false;
     }
 
-
 }
+
+
