@@ -21,6 +21,9 @@ public class LearnerController {
     @Autowired
     public LearnerService learnerService;
 
+    @Autowired
+    AccountDataController accountDataController;
+
     @GetMapping(value="/all")
     public ResponseEntity<Iterable<Learner>> getAll() {
         return new ResponseEntity<Iterable<Learner>>(learnerService.getLearners(), HttpStatus.OK);
@@ -42,7 +45,7 @@ public class LearnerController {
         return new ResponseEntity<Learner>(learner, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/remove/{id}")
     public ResponseEntity<Learner> removeLearner(@PathVariable String id){
         try {
             learnerService.removeLearner(id);
@@ -53,13 +56,10 @@ public class LearnerController {
     }
 
     @PutMapping(value="/update/{id}")
-    public ResponseEntity<?> updateAccountData(@PathVariable String id, @RequestBody Learner learner) {
-        try {
-            learnerService.updateLearner(id, learner);
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> updateLearner(@PathVariable String id, @RequestBody Learner learner) {
+        learnerService.updateLearner(id, learner);
+        accountDataController.updateAccountData(learner.getAccountData().getId(), learner.getAccountData());
+        return new ResponseEntity<Learner>(learner, HttpStatus.OK);
     }
 
 }

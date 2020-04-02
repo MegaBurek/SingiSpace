@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import singispace.domain.AccountData;
-import singispace.domain.Admin;
 import singispace.domain.AuthProvider;
 import singispace.domain.Learner;
 import singispace.repositories.users.LearnerRepository;
@@ -18,6 +17,9 @@ public class LearnerService {
 
     @Autowired
     LearnerRepository learnerRepository;
+
+    @Autowired
+    PermissionService permissionService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -54,6 +56,8 @@ public class LearnerService {
         Optional<Learner> learner = learnerRepository.findById(id);
         if(learner.isPresent()) {
             learnerRepository.delete(learner.get());
+            accountDataService.removeAccountData(learner.get().getAccountData().getId());
+            permissionService.removePermission(learner.get().getAccountData().getPermission().getId());
         }
     }
 

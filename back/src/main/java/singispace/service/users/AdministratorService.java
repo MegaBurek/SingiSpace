@@ -18,6 +18,9 @@ public class AdministratorService {
     private AdministratorRepository administratorRepository;
 
     @Autowired
+    PermissionService permissionService;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -50,9 +53,11 @@ public class AdministratorService {
     }
 
     public void removeAdministrator(String id) {
-        Optional<Administrator> admin = administratorRepository.findById(id);
-        if(admin.isPresent()) {
-            administratorRepository.delete(admin.get());
+        Optional<Administrator> administrator = administratorRepository.findById(id);
+        if(administrator.isPresent()) {
+            administratorRepository.delete(administrator.get());
+            accountDataService.removeAccountData(administrator.get().getAccountData().getId());
+            permissionService.removePermission(administrator.get().getAccountData().getPermission().getId());
         }
     }
 

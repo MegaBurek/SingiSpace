@@ -1,12 +1,10 @@
 package singispace.service.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import singispace.domain.*;
 import singispace.repositories.users.AccountDataRepository;
-import singispace.service.PermissionService;
 
 import java.util.Optional;
 

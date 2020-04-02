@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import singispace.domain.Admin;
 import singispace.domain.Administrator;
 import singispace.service.users.AdministratorService;
 
@@ -16,6 +17,9 @@ public class AdministratorController {
 
     @Autowired
     public AdministratorService administratorService;
+
+    @Autowired
+    AccountDataController accountDataController;
 
     @GetMapping(value="/all")
     public ResponseEntity<Iterable<Administrator>> getAll() {
@@ -38,7 +42,7 @@ public class AdministratorController {
         return new ResponseEntity<Administrator>(administrator, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/remove/{id}")
     public ResponseEntity<Administrator> removeAdministrator(@PathVariable String id){
         try {
             administratorService.removeAdministrator(id);
@@ -49,9 +53,9 @@ public class AdministratorController {
     }
 
     @PutMapping(value="/update/{id}")
-    public ResponseEntity<?> updateAccountData(@PathVariable String id, @RequestBody Administrator administrator) {
-
+    public ResponseEntity<?> updateAdministrator(@PathVariable String id, @RequestBody Administrator administrator) {
         administratorService.updateAdministrator(id, administrator);
-
+        accountDataController.updateAccountData(administrator.getAccountData().getId(),administrator.getAccountData());
+        return new ResponseEntity<Administrator>(administrator,HttpStatus.OK);
     }
 }

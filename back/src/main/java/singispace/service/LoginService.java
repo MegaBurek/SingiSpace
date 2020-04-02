@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import singispace.domain.AccountData;
+import singispace.domain.LoginAttempt;
 import singispace.payload.AuthResponse;
 import singispace.repositories.users.PermissionRepository;
 import singispace.repositories.users.AccountDataRepository;
@@ -33,11 +33,11 @@ public class LoginService{
     private PermissionRepository permissionRepository;
 
 
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody AccountData loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginAttempt loginAttempt) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
+                        loginAttempt.getUsername(),
+                        loginAttempt.getPassword()
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);

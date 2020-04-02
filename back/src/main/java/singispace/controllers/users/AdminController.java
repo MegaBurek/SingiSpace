@@ -43,7 +43,7 @@ public class AdminController {
     }
 
 
-    @DeleteMapping(value="/{id}")
+    @DeleteMapping(value="/remove/{id}")
     public ResponseEntity<Admin> removeAdmin(@PathVariable String id){
         try {
             adminService.removeAdmin(id);
