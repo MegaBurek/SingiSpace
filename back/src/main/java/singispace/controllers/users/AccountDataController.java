@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import singispace.domain.AccountData;
+import singispace.domain.Admin;
 import singispace.service.users.AccountDataService;
 
 import java.util.Optional;
@@ -31,6 +32,11 @@ public class AccountDataController {
             return new ResponseEntity<AccountData>(accountData.get(), HttpStatus.OK);
         }
         return new ResponseEntity<AccountData>(HttpStatus.NOT_FOUND);
+    }
+
+    public ResponseEntity<AccountData> updateAccountData(String id, AccountData accountData) {
+        accountDataService.updateAccountData(id, accountData);
+        return new ResponseEntity<AccountData>(accountData,HttpStatus.OK);
     }
 
 

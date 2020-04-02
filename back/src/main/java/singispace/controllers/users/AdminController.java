@@ -17,6 +17,9 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+    @Autowired
+    AccountDataController accountDataController;
+
     @GetMapping(value="/all")
     public ResponseEntity<Iterable<Admin>> getAll() {
         return new ResponseEntity<Iterable<Admin>>(adminService.getAdmins(), HttpStatus.OK);
@@ -52,11 +55,8 @@ public class AdminController {
 
     @PutMapping(value="/update/{id}")
     public ResponseEntity<?> updateAdmin(@PathVariable String id, @RequestBody Admin admin) {
-        try {
-            adminService.updateAdmin(id, admin);
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        adminService.updateAdmin(id,admin);
+        accountDataController.updateAccountData(admin.getAccountData().getId(), admin.getAccountData());
+        return new ResponseEntity<Admin>(admin,HttpStatus.OK);
     }
 }

@@ -50,11 +50,8 @@ public class AdministratorController {
 
     @PutMapping(value="/update/{id}")
     public ResponseEntity<?> updateAccountData(@PathVariable String id, @RequestBody Administrator administrator) {
-        try {
-            administratorService.updateAdministrator(id, administrator);
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+
+        administratorService.updateAdministrator(id, administrator);
+
     }
 }
