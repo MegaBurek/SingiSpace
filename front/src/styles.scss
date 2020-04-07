@@ -1,3 +1,13 @@
+@import './assets/styles/fonts.scss';
+@import './assets/styles/themes.scss';
+@import './assets/styles/main-layout.scss';
+@import './assets/styles/navbar.scss';
+@import './assets/styles/sign-in.scss';
+@import './assets/styles/registration.scss';
+@import './assets/styles/main-feed.scss';
+@import './assets/styles/subscribed-bar.scss';
+@import './assets/styles/chat-bar.scss';
+
 * {
   width: 100%;
   margin: 0;
@@ -8,12 +18,8 @@
   outline: none !important;
 }
 
-@import './assets/styles/fonts.scss';
-@import './assets/styles/themes.scss';
-@import './assets/styles/main-layout.scss';
-@import './assets/styles/navbar.scss';
-@import './assets/styles/sign-in.scss';
-@import './assets/styles/registration.scss';
-@import './assets/styles/main-feed.scss';
-@import './assets/styles/subscribed-bar.scss';
-@import './assets/styles/chat-bar.scss';
+body{
+  overflow:hidden;
+  background-color: $primary;
+  height: 100vh;
+}

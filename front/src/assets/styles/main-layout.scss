@@ -1,36 +1,20 @@
-@import "./themes.scss";
+@import "./breakpoints.scss";
 
-.lead-container {
-  height: 100vh;
-  width: 100%;
-}
-
-.top {
-  height: 9vh;
-  width: 100%;
-}
-
-.bottom {
-  width: 100%;
-  background-color: $primary;
-  height: 91vh;
-}
-
-.lead-row {
-  margin: 0;
-}
-
-body {
-  background-color: $primary;
-}
-
-
-@media screen and(max-width: 767px) {
-  .top {
-    height: 21vh;
+header {
+  display: block;
+  height: 10vh;
+  @include for-desktop-only{
+    height: 15vh;
   }
+}
 
-  .bottom {
-    height: 79vh;
+main {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  height: 90vh;
+  @include for-desktop-only{
+    height: 85vh;
   }
 }

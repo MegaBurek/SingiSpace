@@ -1,72 +1,79 @@
-@import './themes.scss';
+@import './breakpoints.scss';
 
 .brand-box {
-  width: 30%;
-  padding-left: 0;
   color: $text-color;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 250px;
+  @include for-phone-only-landscape{
+    width: 280px;
+  }
 }
 
 .navbar{
   background-color: $primary;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  z-index: 1080;
 }
 
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(245, 245, 245)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+
+.navbar-toggler{
+  width: 15%;
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(245, 245, 245)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+  .navbar-toggler-icon:hover{
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(245, 245, 245, 0.8)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
 }
 
-.navbar-toggler {
-  border-color: $text-color;
-} 
+.navbar-nav{
+}
+
+.navbar-collapse{
+  @include for-tablet-portrait{
+    width: 200px;
+    flex-grow: 0;
+    justify-content: flex-end;
+    
+  }
+}
 
 .nav-link {
   font-family: "Raleway", sans-serif;
   color: $text-color;
 }
 
-.navbar .container {
-  justify-content: flex-start;
-}
-
 .navbar-brand {
-  width: 80%;
-  font-size: 1.8rem;
   font-family: "Patua One", cursive;
-  margin: 0;
+  margin: 0px 0px 0px 2px;
+  @include for-phone-only-portrait{
+    font-size: 40px;
+  }
+  @include for-phone-only-landscape{
+    font-size: 45px;
+  }
+  @include for-tablet-portrait{
+    font-size: 45px;
+  }
 }
 
 .nav-item {
-  width: 12%;
+  @include for-tablet-portrait{
+    width: 50%;
+  }
 }
 
 .small-logo {
-  width: 14%;
-  margin: 3px;
+    max-width: 50px;
+    max-height: 50px;
 }
 
 .nav-link {
   text-align: center;
-}
-
-@media screen and (max-width: 767px) {
-  .brand-box {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .small-logo {
-    margin: 0px;
-  }
-
-  .nav-item {
-    width: 100%;
-  }
-
-  .navbar-brand {
-    width: 40%;
-    text-align: center;
-  }
 }
 
 

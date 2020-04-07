@@ -17,6 +17,7 @@ import { GroupsTabComponent } from './core/subscribed-bar/groups-tab/groups-tab.
 import { PagesTabComponent } from './core/subscribed-bar/pages-tab/pages-tab.component';
 import { SignInComponent } from '../app/core/auth/sign-in/sign-in.component';
 import { RegisterComponent } from './core/auth/register/register.component';
+import { NavbarComponent } from './core/nav/navbar.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RegisterComponent } from './core/auth/register/register.component';
     GroupsTabComponent,
     PagesTabComponent,
     SignInComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
