@@ -6,13 +6,10 @@
   flex-direction: row;
   align-items: center;
   width: 250px;
-  @include for-phone-only-landscape{
-    width: 280px;
-  }
 }
 
 .navbar{
-  background-color: $primary;
+  background-color: $bars;
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -30,16 +27,7 @@
   }
 }
 
-.navbar-nav{
-}
-
 .navbar-collapse{
-  @include for-tablet-portrait{
-    width: 200px;
-    flex-grow: 0;
-    justify-content: flex-end;
-    
-  }
 }
 
 .nav-link {
@@ -50,21 +38,15 @@
 .navbar-brand {
   font-family: "Patua One", cursive;
   margin: 0px 0px 0px 2px;
-  @include for-phone-only-portrait{
-    font-size: 40px;
-  }
-  @include for-phone-only-landscape{
-    font-size: 45px;
-  }
-  @include for-tablet-portrait{
-    font-size: 45px;
-  }
+  font-size: 2rem;
 }
 
 .nav-item {
-  @include for-tablet-portrait{
-    width: 50%;
-  }
+  width: 15%;
+}
+
+.navbar-expand-md .navbar-nav {
+	justify-content: flex-end;
 }
 
 .small-logo {

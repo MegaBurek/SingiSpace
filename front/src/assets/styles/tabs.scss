@@ -1,0 +1,47 @@
+.tab-title{
+    color: whitesmoke;
+    height: 8vh;
+}
+
+.tab-list {
+    margin-bottom: 0;
+    overflow: auto;
+    padding: 0;
+    height: 37vh;
+}
+
+.tab-item {
+    width: 90%;
+    margin-left: 0.5rem;
+    margin-bottom: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-radius: 10px;
+}
+
+.tab-image-box {
+    top: 0;
+    left: 0;
+    text-align: center;
+    width: 25%;
+    height: 100%;
+}
+
+.tab-image {
+    width: 100%;
+}
+
+.tab-link {
+    width: 75%;
+    display: block;
+    color: whitesmoke;
+    text-decoration: none;
+    margin-left: 0.5rem;
+}
+
+.tab-item:hover {
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}

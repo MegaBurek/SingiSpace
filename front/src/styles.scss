@@ -2,11 +2,12 @@
 @import './assets/styles/themes.scss';
 @import './assets/styles/main-layout.scss';
 @import './assets/styles/navbar.scss';
-@import './assets/styles/sign-in.scss';
 @import './assets/styles/registration.scss';
 @import './assets/styles/main-feed.scss';
-@import './assets/styles/subscribed-bar.scss';
+@import './assets/styles/tabs.scss';
 @import './assets/styles/chat-bar.scss';
+@import './assets/styles/home-layout.scss';
+@import './assets/styles/cards.scss';
 
 * {
   width: 100%;
@@ -21,5 +22,14 @@
 body{
   overflow:hidden;
   background-color: $primary;
-  height: 100vh;
+  height: 100%;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }

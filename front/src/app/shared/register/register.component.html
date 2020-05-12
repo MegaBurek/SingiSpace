@@ -1,0 +1,51 @@
+<div class="container card-container register-container">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Register</h5>
+      <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="tryRegister()">
+        <div class="register-wrapper">
+          <div class="input-container">
+            <label class="input-label">Name</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" formControlName="name" type="text" required>
+            </div>
+
+            <label class="input-label">Surname</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" formControlName="surname" type="text" required>
+            </div>
+
+            <label class="input-label">Email</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" formControlName="email" type="email" required>
+            </div>
+
+            <label class="input-label">Date of Birth</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" formControlName="dob" type="date" required>
+            </div>
+          </div>
+
+          <div class="input-container">
+            <label class="input-label text-right">Username</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" formControlName="username" type="text" required>
+            </div>
+
+            <label class="input-label text-right">Password</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" formControlName="password" type="password" required>
+            </div>
+
+            <label class="input-label text-right">Re-enter Password</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" formControlName="repassword" type="password" required>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-lg btn-block text-uppercase" type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+</div>

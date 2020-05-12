@@ -19,5 +19,10 @@ public class LoginController {
         return loginService.authenticateUser(loginAttempt);
     }
 
+//    @GetMapping(value="/{id}")
+//    public ResponseEntity<?> getUserByAccountID(String id) {
+//
+//    }
+
 
 }

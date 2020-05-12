@@ -4,8 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import singispace.domain.AccountData;
 import singispace.domain.AuthProvider;
+import singispace.domain.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,19 +28,19 @@ public class UserPrincipal implements OAuth2User, UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserPrincipal create(AccountData accountData) {
-        if (accountData.getProvider() == AuthProvider.local) {
+    public static UserPrincipal create(User user) {
+        if (user.getProvider() == AuthProvider.local) {
             ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-            authorities.add(new SimpleGrantedAuthority(accountData.getPermission().getAuthority()));
-            return new UserPrincipal(accountData.getId(), accountData.getUsername(), accountData.getPassword(), authorities);
+            authorities.add(new SimpleGrantedAuthority(user.getPermission().getAuthority()));
+            return new UserPrincipal(user.getId(), user.getUsername(), user.getPassword(), authorities);
         }
 
         return null;
 
     }
 
-    public static UserPrincipal create(AccountData accountData, Map<String, Object> attributes) {
-        UserPrincipal userPrincipal = UserPrincipal.create(accountData);
+    public static UserPrincipal create(User user, Map<String, Object> attributes) {
+        UserPrincipal userPrincipal = UserPrincipal.create(user);
         userPrincipal.setAttributes(attributes);
         return userPrincipal;
     }

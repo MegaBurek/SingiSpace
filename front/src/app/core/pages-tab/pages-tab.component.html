@@ -1,0 +1,12 @@
+<h3 class="tab-title">Pages</h3>
+<ul class="tab-list">
+    <li class="tab-item" *ngFor="let page of pages">
+        <div class="tab-image-box">
+            <img class="tab-image" src="../../assets/images/connection.png" alt="">
+        </div>
+        <a class="tab-link" href="">
+            <h5>{{page.name}}</h5>
+            <div class="mb-1 text-muted">{{page.author.name}} {{page.author.surname}}</div>
+        </a>
+    </li>
+</ul>

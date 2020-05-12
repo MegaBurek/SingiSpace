@@ -1,7 +1,6 @@
-import { User } from './user'
-
 export class Group{
-    id: number
-    name: String
-    author: User
+    id:number
+    name:string
+    owner: string
+    imgUrl: string
 }

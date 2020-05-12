@@ -6,33 +6,33 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import singispace.domain.AccountData;
+import singispace.domain.User;
 import singispace.exception.ResourceNotFoundException;
-import singispace.repositories.users.AccountDataRepository;
+import singispace.repositories.users.UserAccRepository;
 import singispace.utils.UserPrincipal;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private AccountDataRepository accountDataRepository;
+    private UserAccRepository userAccRepository;
 
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        AccountData accountData = accountDataRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username : " + username));
+        User user = userAccRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username : " + username));
 
-        return UserPrincipal.create(accountData);
+        return UserPrincipal.create(user);
     }
 
 
     @Transactional
     public UserDetails loadUserById(String id) {
-        AccountData accountData = accountDataRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+        User user = userAccRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
         System.out.println("id");
-        return UserPrincipal.create(accountData);
+        return UserPrincipal.create(user);
     }
 }
 

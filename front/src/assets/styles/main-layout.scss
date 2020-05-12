@@ -1,20 +1,7 @@
-@import "./breakpoints.scss";
-
-header {
-  display: block;
-  height: 10vh;
-  @include for-desktop-only{
-    height: 15vh;
-  }
+header{
+    height: 74px;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  height: 90vh;
-  @include for-desktop-only{
-    height: 85vh;
-  }
+main{
+    height: 100%;
 }

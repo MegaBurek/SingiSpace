@@ -1,0 +1,12 @@
+<h3 class="tab-title">Themes</h3>
+<ul class="tab-list">
+    <li class="tab-item" *ngFor="let theme of themes">
+        <div class="tab-image-box">
+            <img class="tab-image" src="../../assets/images/connection.png" alt="">
+        </div>
+        <a class="tab-link" href="">
+            <h5 class="name-label">{{theme.name}}</h5>
+            <div class="mb-1 text-muted">{{theme.author.name}} {{theme.author.surname}}</div>
+        </a>
+    </li>
+</ul>

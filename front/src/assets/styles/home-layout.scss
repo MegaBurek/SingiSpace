@@ -1,0 +1,41 @@
+@import "./breakpoints.scss";
+
+.main-window {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    height: 90vh;
+}
+
+.subscribed-bar {
+    @include for-desktop-only {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 250px;
+        background-color: $bars;
+    }
+}
+.main-feed {
+    overflow-y: auto;
+    @include for-desktop-only {
+        width: 600px;
+        background-color: $bars;
+    }
+}
+.chat-bar {
+    @include for-desktop-only {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 250px;
+        background-color: $bars;
+    }
+}
+
+.tab-container{
+    height: 45vh;
+}

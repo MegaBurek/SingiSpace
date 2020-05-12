@@ -1,0 +1,12 @@
+<h3 class="tab-title text-right">Friends</h3>
+<ul class="tab-list">
+    <li class="tab-item" *ngFor="let friend of friends">
+        <div class="tab-image-box">
+            <img class="tab-image" [src]="friend.imgUrl" alt="">
+        </div>
+        <a class="tab-link" href="">
+            <h5 class="name-label">{{friend.name}}</h5>
+            <div class="mb-1 text-muted">{{friend.faculty}}</div>
+        </a>
+    </li>
+</ul>

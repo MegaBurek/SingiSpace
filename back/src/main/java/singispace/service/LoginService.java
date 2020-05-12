@@ -9,9 +9,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import singispace.domain.LoginAttempt;
+import singispace.domain.User;
 import singispace.payload.AuthResponse;
 import singispace.repositories.users.PermissionRepository;
-import singispace.repositories.users.AccountDataRepository;
+import singispace.repositories.users.UserAccRepository;
 import singispace.utils.TokenProvider;
 
 import javax.validation.Valid;
@@ -21,7 +22,7 @@ import javax.validation.Valid;
 public class LoginService{
 
     @Autowired
-    private AccountDataRepository accountRepository;
+    private UserAccRepository accountRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -44,5 +45,6 @@ public class LoginService{
         String token = tokenProvider.createToken(authentication);
         return ResponseEntity.ok(new AuthResponse(token));
     }
+
 
 }

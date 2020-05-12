@@ -1,9 +1,35 @@
 <header>
-    <app-navbar></app-navbar>
+  <div class="navbar navbar-expand-md justify-content-around">
+    <div class="brand-box">
+      <img src="../../../assets/images/singi_logo.png" alt="" class="small-logo">
+      <a class="navbar-brand">SingiSpace</a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user-profile">{{getUsername()}}</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" (click)="onLogout()">Logout</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto" *ngIf="!isLoggedIn()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </header>
 
 <main role='main'>
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </main>
 
 

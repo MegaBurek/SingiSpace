@@ -2,35 +2,35 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 
-import { HomeComponent } from './core/home-layout/home.component';
+import { HomeComponent } from './core/home/home.component';
 import { MainFeedComponent } from './core/main-feed/main-feed.component';
-import { ChatBarComponent } from './core/chat-bar/chat-bar.component';
-import { SubscribedBarComponent } from './core/subscribed-bar/subscribed-bar.component';
-import { GroupsTabComponent } from './core/subscribed-bar/groups-tab/groups-tab.component';
-import { PagesTabComponent } from './core/subscribed-bar/pages-tab/pages-tab.component';
-import { SignInComponent } from '../app/core/auth/sign-in/sign-in.component';
-import { RegisterComponent } from './core/auth/register/register.component';
-import { NavbarComponent } from './core/nav/navbar.component';
+import { PagesTabComponent } from './core/pages-tab/pages-tab.component';
+import { SignInComponent } from './shared/sign-in/sign-in.component';
+import { RegisterComponent } from './shared/register/register.component';
+import { FriendsTabComponent } from './core/friends-tab/friends-tab.component';
+import { ThemesTabComponent } from './core/themes-tab/themes-tab.component';
+import { GroupsTabComponent } from './core/groups-tab/groups-tab.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MainFeedComponent,
-    ChatBarComponent,
-    SubscribedBarComponent,
-    GroupsTabComponent,
     PagesTabComponent,
     SignInComponent,
     RegisterComponent,
-    NavbarComponent
+    FriendsTabComponent,
+    ThemesTabComponent,
+    GroupsTabComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +38,10 @@ import { NavbarComponent } from './core/nav/navbar.component';
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,3 +4,12 @@ export class User{
     surname: String
     role: String
 }
+
+// id: string
+//     name: string
+//     surname: string
+//     username: string
+//     password: string
+//     email: string
+//     imgUrl: string
+//     permission: Permission
