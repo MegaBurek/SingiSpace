@@ -16,11 +16,6 @@ export class GroupsTabComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getGroups();
-  }
-
-  getGroups():void{
-    this.groups = this.groupService.getGroups();
   }
 
 }

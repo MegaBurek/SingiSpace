@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-import { GroupsService } from '../../../services/groups.service'
 import { Group } from '../../../model/group';
 
 @Component({
@@ -12,18 +10,11 @@ import { Group } from '../../../model/group';
 
 export class GroupsTabComponent implements OnInit {
 
-  groups: Group[];
 
   constructor(
-    private groupService: GroupsService
   ) { }
 
   ngOnInit() {
-    this.getGroups();
-  }
-
-  getGroups(): void{
-    this.groups = this.groupService.getGroups();
   }
 
 }

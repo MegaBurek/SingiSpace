@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Document
 public class User {
@@ -19,11 +20,15 @@ public class User {
 
     private String username;
 
-    private String email;
-
     private String password;
 
+    private String email;
+
     private String imgUrl;
+
+    private List<String> page_subs;
+
+    private List<String> theme_subs;
 
     private boolean enabled;
 
@@ -36,26 +41,32 @@ public class User {
 
     public User(){}
 
-    public User(String id, String name, String surname, String username, String email, String password, String imgUrl, boolean enabled, Permission permission) {
+    public User(String id, String name, String surname, String username, String password, String email, String imgUrl, List<String> page_subs, List<String> theme_subs, boolean enabled, Permission permission, @NotNull AuthProvider provider) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.username = username;
-        this.email = email;
         this.password = password;
+        this.email = email;
         this.imgUrl = imgUrl;
+        this.page_subs = page_subs;
+        this.theme_subs = theme_subs;
         this.enabled = enabled;
         this.permission = permission;
+        this.provider = provider;
     }
 
-    public User(String name, String surname, String username, String email, String password, String imgUrl, Permission permission) {
+    public User(String name, String surname, String username, String password, String email, String imgUrl, List<String> page_subs, List<String> theme_subs, Permission permission, @NotNull AuthProvider provider) {
         this.name = name;
         this.surname = surname;
         this.username = username;
-        this.email = email;
         this.password = password;
+        this.email = email;
         this.imgUrl = imgUrl;
+        this.page_subs = page_subs;
+        this.theme_subs = theme_subs;
         this.permission = permission;
+        this.provider = provider;
     }
 
     public String getId() {
@@ -136,5 +147,21 @@ public class User {
 
     public void setProvider(AuthProvider provider) {
         this.provider = provider;
+    }
+
+    public List<String> getPage_subs() {
+        return page_subs;
+    }
+
+    public void setPage_subs(List<String> page_subs) {
+        this.page_subs = page_subs;
+    }
+
+    public List<String> getTheme_subs() {
+        return theme_subs;
+    }
+
+    public void setTheme_subs(List<String> theme_subs) {
+        this.theme_subs = theme_subs;
     }
 }

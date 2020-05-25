@@ -16,12 +16,7 @@ export class FriendsTabComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getFriends();
   }
 
-  getFriends():void{
-    this.friends = this.friendService.getFriends();
-
-  }
 
 }

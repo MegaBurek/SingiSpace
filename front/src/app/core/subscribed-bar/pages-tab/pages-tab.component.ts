@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PagesService } from '../../../services/pages.service';
 import { Page } from '../../../model/page';
 
 @Component({
@@ -9,18 +8,11 @@ import { Page } from '../../../model/page';
 })
 export class PagesTabComponent implements OnInit {
 
-  pages: Page[];
 
   constructor(
-    private pageService: PagesService
   ) { }
 
   ngOnInit() {
-    this.getPages();
-  }
-
-  getPages(): void{
-    this.pages = this.pageService.getPages();
   }
 
 }

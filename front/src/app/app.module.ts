@@ -6,9 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxsModule } from "@ngxs/store";
 
 import { AppComponent } from './app.component';
-
 import { HomeComponent } from './core/home/home.component';
 import { MainFeedComponent } from './core/main-feed/main-feed.component';
 import { PagesTabComponent } from './core/pages-tab/pages-tab.component';
@@ -18,6 +18,8 @@ import { FriendsTabComponent } from './core/friends-tab/friends-tab.component';
 import { ThemesTabComponent } from './core/themes-tab/themes-tab.component';
 import { GroupsTabComponent } from './core/groups-tab/groups-tab.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserState } from "./store/user-store/user.state";
+import { NotifierService } from 'angular-notifier';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,13 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxsModule.forRoot([
+      UserState
+    ])
+
   ],
-  providers: [ ],
+  providers: [ NotifierService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

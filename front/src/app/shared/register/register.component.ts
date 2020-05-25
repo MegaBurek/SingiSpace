@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UserAccService} from '../../services/users/user-acc.service';
+import { User } from 'src/app/model/user';
+import { Store } from '@ngxs/store';
+import { RegisterUser } from 'src/app/store/user-store/user.actions';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NotificaitionService } from 'src/app/services/notificaition.service';
 
 @Component({
   selector: 'app-register',
@@ -10,75 +13,63 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup;
-  password = '';
+  rePassword = '';
+
+  user: User = {
+    id: null,
+    name: '',
+    surname: '',
+    username: '',
+    password: '',
+    email: '',
+    dob: null,
+    imgUrl: '',
+    page_subs: [],
+    theme_subs: [],
+    provider: 'local',
+    permission: {
+      id: null,
+      authority: 'ROLE_LEARNER'
+    }
+  }
 
   constructor(
-    private formBuilder: FormBuilder,
-    private userAccService: UserAccService,
-    private toastr: ToastrService
-  ) { this.createRegisterForm();
+    private notify: NotificaitionService,
+    private store: Store,
+    private router: Router
+  ) {
   }
 
-  createRegisterForm() {
-    this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      repassword: ['', Validators.required],
-      email: ['', Validators.required]
-    });
-  }
   ngOnInit() {
   }
 
-  get f() {return this.registerForm.controls; }
-
   tryRegister() {
-    this.password = this.f.password.value;
-    if (this.f.name.value === '') {
-      this.toastr.error('Please enter your name', 'Notification', {
-        timeOut: 1700
-      });
-    } else if (this.f.surname.value === '') {
-      this.toastr.error('Please enter your surname', 'Notification', {
-        timeOut: 1700
-      });
-    } else if (this.f.username.value === '') {
-      this.toastr.error('Please enter a username', 'Notification', {
-        timeOut: 1700
-      });
-    } else if (this.f.password.value === '') {
-      this.toastr.error('Please enter a password', 'Notification', {
-        timeOut: 1700
-      });
-    } else if (this.f.repassword.value === '') {
-      this.toastr.error('Please re-enter your password', 'Notification', {
-        timeOut: 1700
-      });
-    } else if (this.f.password.value !== this.f.repassword.value) {
-      this.toastr.error('Your passwords do not match', 'Notification', {
-        timeOut: 1700
-      });
-    } else if (this.password.length < 6) {
-      this.toastr.error('Your password must be more than 6 characters', 'Notification', {
-        timeOut: 1700
-      });
-    } else if (this.f.email.value === '') {
-      this.toastr.error('Please enter an email', 'Notification', {
-        timeOut: 1700
-      });
-    } else if (!this.validateEmail(this.f.email.value)) {
-      this.toastr.error('Your email is invalid', 'Notification', {
-        timeOut: 1700
-      });
-    } else if (this.f.dob.value === '') {
-      this.toastr.error('Please enter a date of birth', 'Notification', {
-        timeOut: 1700
-      });
+    if (this.user.name == '') {
+      this.notify.showError('Please enter a name','Notification');
+    } else if (this.user.surname == '') {
+      this.notify.showError('Please enter a surname','Notification');
+    } else if (this.user.email == '') {
+      this.notify.showError('Please enter your email','Notification')
+    } else if (!this.validateEmail(this.user.email)) {
+      this.notify.showError('Your email is not valid','Notification')
+    } else if (this.user.dob == null) {
+      this.notify.showError('Please enter your date of birth','Notification')
+    } else if (this.user.username == '') {
+      this.notify.showError('Please enter a username','Notification');
+    } else if (this.user.password == '') {
+      this.notify.showError('Please enter a password','Notification')
+    } else if (this.rePassword == '') {
+      this.notify.showError('Please re-enter your password','Notification')
+    } else if (this.user.password != this.rePassword) {
+      this.notify.showError('Your passwords do not match','Notification')
+    } else if (this.user.password.length < 6) {
+      this.notify.showError('Your password has less than 6 characters','Notification')
     } else {
-
+      this.store.dispatch(new RegisterUser(this.user))
+        .subscribe(_ =>
+          this.notify.showSuccess('success','You have succesfully registered!')
+        );
+      this.router.navigate(['/login']);
     }
   }
 

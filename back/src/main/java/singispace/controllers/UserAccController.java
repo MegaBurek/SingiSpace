@@ -19,12 +19,12 @@ public class UserAccController {
     UserAccService userAccService;
 
     @GetMapping(value="/all")
-    public ResponseEntity<Iterable<User>> getAccountData() {
+    public ResponseEntity<Iterable<User>> getAllUsers() {
         return new ResponseEntity<Iterable<User>>(userAccService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<User> getAccountDataById(@PathVariable String id) {
+    public ResponseEntity<User> getUserById(@PathVariable String id) {
         Optional<User> accountData = userAccService.getById(id);
         if(accountData.isPresent()) {
             return new ResponseEntity<User>(accountData.get(), HttpStatus.OK);

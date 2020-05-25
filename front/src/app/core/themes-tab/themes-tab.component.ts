@@ -16,11 +16,6 @@ export class ThemesTabComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getThemes();
-  }
-
-  getThemes(): void{
-    this.themes = this.themeService.getThemes();
   }
 
 }

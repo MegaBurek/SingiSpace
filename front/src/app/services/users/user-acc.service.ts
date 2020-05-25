@@ -14,10 +14,18 @@ export class UserAccService {
   ) { }
 
   registerUser(user) {
-
+    return this.http.post<User>(this.baseUrl + `/register/learner`, user);
   }
 
   getUserByID(id) {
     return this.http.get<User>(this.baseUrl + `/${id}`);
+  }
+
+  getUsers() {
+    return this.http.get<User[]>(this.baseUrl + `/all`)
+  }
+
+  removeUser(id) {
+    return this.http.delete<string>(this.baseUrl + `/${id}`)
   }
 }

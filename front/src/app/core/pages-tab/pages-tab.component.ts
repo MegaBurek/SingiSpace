@@ -16,11 +16,6 @@ export class PagesTabComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getPages();
-  }
-
-  getPages(): void{
-    this.pages = this.pageService.getPages();
   }
 
 }
