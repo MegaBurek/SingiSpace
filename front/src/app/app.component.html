@@ -10,24 +10,26 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn()">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Create
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="nav-link" routerLink="/create-page">Page</a>
+            <a class="nav-link" href="#">Theme</a>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/user-profile">{{getUsername()}}</a>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{getUsername()}}</a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="nav-link" href="/user-profile">My Profile</a>
+            <a class="nav-link" href="#">My Pages</a>
+            <a class="nav-link" href="#">My Themes</a>
+            <div class="dropdown-divider"></div>
+            <a class="nav-link" href="#" (click)="onLogout()">Logout</a>
+          </div>
         </li>
         <li class="nav-item" *ngIf="isAdmin()">
           <a class="nav-link" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="onLogout()">Logout</a>
         </li>
       </ul>
       <ul class="navbar-nav mr-auto" *ngIf="!isLoggedIn()">

@@ -4,33 +4,39 @@ import { Router } from '@angular/router';
 import decode from 'jwt-decode';
 import { Subject, BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
+import { NotificaitionService } from '../notificaition.service';
+import {GetUserPageSubs} from '../../store/page-store/page.actions';
+import {Store} from '@ngxs/store';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
   roleChanged = new Subject<any[]>();
-  private loggedIn = new BehaviorSubject<boolean>(false);
 
   private clientUrl = `http://localhost:8080/login`;
 
   constructor(
+    private notify: NotificaitionService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {
   }
 
   login(username: string, password: string) {
     // tslint:disable-next-line:max-line-length
-    this.http.post<{ accessToken: string }>(this.clientUrl, { username, password }).subscribe(response => {
+    this.http.post<{ accessToken: string}>(this.clientUrl, { username, password }).subscribe(response => {
       if (response.accessToken) {
         localStorage.setItem('accessToken', response.accessToken);
+        this.notify.showSuccess('Successful Attempt', 'Notification');
         this.roleChanged.next(this.getCurrentRoles());
+        this.store.dispatch(new GetUserPageSubs(this.getCurrentUserID()));
+        // this.store.dispatch(new GetUserThemeSubs(this.getCurrentUserID()));
         this.router.navigate(['/home']);
-        return true;
-      } else {
-        return false;
       }
+    }, (err) => {
+      this.notify.showError('Incorrect Username or Password', 'Notification');
     });
     return;
   }

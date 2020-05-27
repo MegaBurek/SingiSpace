@@ -1,0 +1,26 @@
+<script src="../../model/page.ts"></script>
+<div class="container card-container register-container">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Create Page</h5>
+      <form class="form-signin">
+        <div class="input-container">
+          <label class="input-label">Display Photo</label>
+          <div class="form-label-group">
+            <input class="form-control form-control-lg" name="disp_photo" type="file" #file style="display: none" (change)="onFilesAdded()" multiple>
+          </div>
+          <label class="input-label">Name</label>
+          <div class="form-label-group">
+            <input class="form-control form-control-lg" name="name" [(ngModel)]="page.name" type="text" required>
+          </div>
+          <label class="input-label">Description</label>
+          <div class="form-label-group">
+            <textarea class="form-control form-control-lg" name="desc" [(ngModel)]="page.desc" type="text" required></textarea>
+          </div>
+        </div>
+
+        <button class="btn btn-lg btn-block text-uppercase" type="submit" (click)="createPage()">Create</button>
+      </form>
+    </div>
+  </div>
+</div>

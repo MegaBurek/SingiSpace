@@ -43,6 +43,7 @@ public class LoginService{
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = tokenProvider.createToken(authentication);
+        System.out.println("here"+token);
         return ResponseEntity.ok(new AuthResponse(token));
     }
 

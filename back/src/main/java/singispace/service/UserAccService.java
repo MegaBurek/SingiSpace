@@ -29,7 +29,7 @@ public class UserAccService {
         return userAccRepository.findById(id);
     }
 
-    public void addUser(User user){
+    public void addUser(User user) {
         userAccRepository.save(user);
     }
 
@@ -42,7 +42,7 @@ public class UserAccService {
 
         Optional<User> a = userAccRepository.findById(id);
 
-        if(a.isPresent()) {
+        if (a.isPresent()) {
             user.setId(a.get().getId());
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -51,13 +51,12 @@ public class UserAccService {
 
     }
 
-    public HttpStatus addAdmin(User user){
+    public HttpStatus addAdmin(User user) {
 
         Optional<User> accountData = userAccRepository.findByUsername(user.getUsername());
-        if(accountData.isPresent()){
+        if (accountData.isPresent()) {
             return HttpStatus.IM_USED;
-        }
-        else {
+        } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setProvider(AuthProvider.local);
             permissionService.addAdminPermission(user.getPermission());
@@ -66,12 +65,11 @@ public class UserAccService {
         }
     }
 
-    public HttpStatus addLearner(User user){
+    public HttpStatus addLearner(User user) {
         Optional<User> accountData = userAccRepository.findByUsername(user.getUsername());
-        if(accountData.isPresent()){
+        if (accountData.isPresent()) {
             return HttpStatus.IM_USED;
-        }
-        else {
+        } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setProvider(AuthProvider.local);
             permissionService.addLearnerPermission(user.getPermission());
@@ -80,12 +78,11 @@ public class UserAccService {
         }
     }
 
-    public HttpStatus addTutor(User user){
+    public HttpStatus addTutor(User user) {
         Optional<User> accountData = userAccRepository.findByUsername(user.getUsername());
-        if(accountData.isPresent()){
+        if (accountData.isPresent()) {
             return HttpStatus.IM_USED;
-        }
-        else {
+        } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setProvider(AuthProvider.local);
             permissionService.addTutorPermission(user.getPermission());

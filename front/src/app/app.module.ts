@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
-import { NgxsModule } from "@ngxs/store";
+import { NgxsModule } from '@ngxs/store';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
@@ -18,8 +18,11 @@ import { FriendsTabComponent } from './core/friends-tab/friends-tab.component';
 import { ThemesTabComponent } from './core/themes-tab/themes-tab.component';
 import { GroupsTabComponent } from './core/groups-tab/groups-tab.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserState } from "./store/user-store/user.state";
+import { UserState } from './store/user-store/user.state';
 import { NotifierService } from 'angular-notifier';
+import { PageCreationComponent } from './shared/page-creation/page-creation.component';
+import {PageState} from './store/page-store/page.state';
+import { MyPagesComponent } from './shared/my-pages/my-pages.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { NotifierService } from 'angular-notifier';
     FriendsTabComponent,
     ThemesTabComponent,
     GroupsTabComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    PageCreationComponent,
+    MyPagesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import { NotifierService } from 'angular-notifier';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxsModule.forRoot([
-      UserState
+      UserState,
+      PageState
     ])
 
   ],

@@ -10,9 +10,15 @@
 
 .navbar{
   background-color: $bars;
-  overflow: hidden;
 }
 
+.dropdown-menu{
+  background-color: $bars;
+  border: 2px solid #c4c4c4;
+  .dropdown-divider{
+    border-top: 1px solid #c4c4c4
+  }
+}
 
 .navbar-toggler{
   width: 15%;

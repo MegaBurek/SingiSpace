@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PagesService } from '../../services/pages/pages.service';
-import { Page } from '../../model/page';
+import {Component, OnInit} from '@angular/core';
+import {Page} from '../../model/page';
+import { Store } from '@ngxs/store';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'pages-tab',
@@ -9,13 +10,20 @@ import { Page } from '../../model/page';
 })
 export class PagesTabComponent implements OnInit {
 
-  pages: Page[];
+  subbedPages: Observable<Page[]>;
 
   constructor(
-    private pageService: PagesService
-  ) { }
+    private store: Store
+  ) {
+  }
 
   ngOnInit() {
+    this.getSubbedPages();
+
+  }
+
+  getSubbedPages() {
+    this.subbedPages = this.store.select(state => state.subbedPages);
   }
 
 }

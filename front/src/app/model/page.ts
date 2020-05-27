@@ -1,7 +1,8 @@
-import { User } from './user'
-
-export class Page{
-    id: number
-    name: String
-    author: User
+export class Page {
+    id: string;
+    name: string;
+    desc: string;
+    owner: string;
+    members: [];
+    feed: [];
 }
