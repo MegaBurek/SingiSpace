@@ -59,10 +59,13 @@ public class PagesService {
     // get all pages that logged in user is subscribed to
     public Iterable<Page> getPageSubsByUserId(String id) {
         List<Page> page_subs = new ArrayList<>();
+        List<String> page_subs_ids;
         Page page;
+
         Optional<User> user = userAccService.getById(id);
-        List<String> page_subs_ids = user.get().getPage_subs();
-        for(String page_sub_id: page_subs_ids){
+
+        page_subs_ids = user.get().getPage_subs();
+        for (String page_sub_id : page_subs_ids) {
             page = getById(page_sub_id).get();
             page_subs.add(page);
         }

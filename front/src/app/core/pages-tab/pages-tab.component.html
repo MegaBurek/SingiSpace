@@ -1,11 +1,7 @@
 <h3 class="tab-title">Pages</h3>
 <ul class="tab-list">
-    <li class="tab-item" *ngFor="let page of subbedPages | async">
-        <div class="tab-image-box">
-            <img class="tab-image" src="../../assets/images/connection.png" alt="">
-        </div>
-        <a class="tab-link" href="">
-            <h5>{{page.name}}</h5>
-        </a>
-    </li>
+  <li class="tab-item" *ngFor="let page of subbedPages | async">
+    <img class="tab-image img-responsive" src="https://via.placeholder.com/150" alt="">
+    <h5 class="name-label">{{page.name}}</h5>
+  </li>
 </ul>

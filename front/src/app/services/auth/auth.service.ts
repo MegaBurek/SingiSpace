@@ -7,12 +7,12 @@ import { User } from 'src/app/model/user';
 import { NotificaitionService } from '../notificaition.service';
 import {GetUserPageSubs} from '../../store/page-store/page.actions';
 import {Store} from '@ngxs/store';
+import {GetUserThemeSubs} from '../../store/themes-store/theme.action';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  roleChanged = new Subject<any[]>();
 
   private clientUrl = `http://localhost:8080/login`;
 
@@ -29,10 +29,10 @@ export class AuthService {
     this.http.post<{ accessToken: string}>(this.clientUrl, { username, password }).subscribe(response => {
       if (response.accessToken) {
         localStorage.setItem('accessToken', response.accessToken);
+        const id  = this.getCurrentUserID();
+        this.store.dispatch(new GetUserPageSubs(id));
+        this.store.dispatch(new GetUserThemeSubs(id));
         this.notify.showSuccess('Successful Attempt', 'Notification');
-        this.roleChanged.next(this.getCurrentRoles());
-        this.store.dispatch(new GetUserPageSubs(this.getCurrentUserID()));
-        // this.store.dispatch(new GetUserThemeSubs(this.getCurrentUserID()));
         this.router.navigate(['/home']);
       }
     }, (err) => {
@@ -44,7 +44,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('accessToken');
     this.router.navigate(['/login']);
-    this.roleChanged.next([]);
   }
 
   isLoggedIn() {
@@ -78,7 +77,7 @@ export class AuthService {
   isAdmin() {
     const token = localStorage.getItem('accessToken');
     if (token) {
-      if (decode(token).sub == 'ROLE_ADMIN') {
+      if (decode(token).sub === 'ROLE_ADMIN') {
         return true;
       } else {
         return false;

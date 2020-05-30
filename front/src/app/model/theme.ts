@@ -1,7 +1,10 @@
-import { User } from './user'
+import {Post} from './post';
 
-export class Theme{
-    id: number
-    name: String
-    author: User
+export class Theme {
+  id: string;
+  name: string;
+  desc: string;
+  owner: string;
+  members: [];
+  feed: Post[];
 }

@@ -1,47 +1,58 @@
-.tab-title{
-    color: whitesmoke;
-    height: 8vh;
+.tab-title {
+  color: whitesmoke;
+  font-family: "Raleway", "cursive";
 }
 
 .tab-list {
-    margin-bottom: 0;
-    overflow: auto;
-    padding: 0;
-    height: 37vh;
+  margin-bottom: 0;
+  overflow: auto;
+  padding: 0;
+  height: 37vh;
 }
 
 .tab-item {
-    width: 90%;
-    margin-left: 0.5rem;
-    margin-bottom: 0.3rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    border-radius: 10px;
+  cursor: pointer;
+  width: 95%;
+  margin-left: 0.5rem;
+  margin-bottom: 0.3rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .tab-image-box {
-    top: 0;
-    left: 0;
-    text-align: center;
-    width: 25%;
-    height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  width: 25%;
+  height: 100%;
+}
+
+.name-label {
+  color: $text-color;
+  font-family: "Raleway", "cursive";
+  margin-bottom: 0;
+  margin-left: 5px;
 }
 
 .tab-image {
-    width: 100%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: fill;
 }
 
 .tab-link {
-    width: 75%;
-    display: block;
-    color: whitesmoke;
-    text-decoration: none;
-    margin-left: 0.5rem;
+  width: 75%;
+  display: block;
+  color: whitesmoke;
+  text-decoration: none;
+  margin-left: 0.5rem;
+  color: $text-color;
 }
 
 .tab-item:hover {
-    -webkit-box-shadow: 0 8px 6px -6px black;
-    -moz-box-shadow: 0 8px 6px -6px black;
-    box-shadow: 0 8px 6px -6px black;
+  background-color: $primary;
 }

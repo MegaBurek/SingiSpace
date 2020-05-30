@@ -48,6 +48,7 @@ export class SignInComponent implements OnInit {
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       this.notify.showError('Enter username and password', 'Notificaiton');
+      return;
     }
     this.loading = true;
     await this.loginService.login(this.f.username.value, this.f.password.value);

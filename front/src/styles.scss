@@ -8,6 +8,8 @@
 @import './assets/styles/chat-bar.scss';
 @import './assets/styles/home-layout.scss';
 @import './assets/styles/cards.scss';
+@import './assets/styles/social-group';
+@import './assets/styles/post';
 
 * {
   width: 100%;
@@ -29,6 +31,7 @@ html,
 body {
   min-height: 100%;
 }
+
 
 html {
   scroll-behavior: smooth;

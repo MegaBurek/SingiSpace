@@ -1,0 +1,30 @@
+.post{
+  max-height: 200px;
+  border-radius: 1rem;
+  background-color: $bars;
+  margin-bottom: 1em;
+  padding: 1em;
+  overflow: hidden;
+}
+
+.post-title{
+  font-family: "Raleway", "cursive";
+  color: $text-color;
+  font-size: 1.7rem;
+}
+
+.post-text-content{
+  font-family: "Raleway", "cursive";
+  color: $text-color;
+  margin-bottom: 5px;
+}
+
+.module { // line clamp container
+  overflow: hidden;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

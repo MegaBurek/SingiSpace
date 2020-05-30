@@ -2,13 +2,15 @@ import {Injectable} from '@angular/core';
 import {Page} from '../../model/page';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {AuthService} from '../auth/auth.service';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PagesService {
 
-  private baseUrl = 'http://localhost:8080/page';
+  private baseUrl = 'http://localhost:8080/pages';
 
   constructor(
     private http: HttpClient
@@ -27,12 +29,12 @@ export class PagesService {
     return this.http.put<Page>(this.baseUrl + `/${id}`, page);
   }
 
-  getPageByID(id) {
-    return this.http.get<Page>(this.baseUrl + `/${id}`);
+  getUserPageSubs(id) {
+    return this.http.get<Page[]>(this.baseUrl + `/user-subscribed` + `/${id}`);
   }
 
-  getUserPageSubs(id) {
-    return this.http.get<Page[]>(this.baseUrl + `/user-subscribed`, id);
+  getPageByID(id) {
+    return this.http.get<Page>(this.baseUrl + `/${id}`);
   }
 
 }

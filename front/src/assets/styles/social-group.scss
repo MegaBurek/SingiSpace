@@ -1,0 +1,84 @@
+.detail-card {
+  width: 60%;
+  margin-top: 2em;
+  box-shadow: 0px 0px 5px $bars;
+  height: 600px;
+  background-color: $bars;
+  box-shadow: 0px 0px 5px $text-color;
+}
+
+.detail-card-title {
+  color: $text-color;
+  margin-bottom: 10px;
+}
+
+.detail-card-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.detail-card-info{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-feed{
+  width: 70%;
+  height: 500px;
+  border-radius: 1rem;
+  background-color: $primary;
+  padding: 1em;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.social-button {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 0;
+  background-color: $primary;
+  padding-bottom: 5px;
+  color: whitesmoke;
+  margin-right: 10px;
+}
+
+.detail-card-owner{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.detail-card-subtitle{
+  color: $text-color;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.7rem;
+  padding-top: 5px;
+  margin-bottom: 5px;
+}
+
+.profile-photo{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.detail-card-members{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.detail-card-text{
+  color: $text-color;
+  font-family: "Raleway", "cursive";
+}

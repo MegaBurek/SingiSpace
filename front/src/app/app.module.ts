@@ -6,7 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
+
 import { NgxsModule } from '@ngxs/store';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
@@ -23,6 +25,11 @@ import { NotifierService } from 'angular-notifier';
 import { PageCreationComponent } from './shared/page-creation/page-creation.component';
 import {PageState} from './store/page-store/page.state';
 import { MyPagesComponent } from './shared/my-pages/my-pages.component';
+import { NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
+import { ThemeCreationComponent } from './shared/theme-creation/theme-creation.component';
+import {ThemeState} from './store/themes-store/theme.state';
+import { ThemeDetailComponent } from './shared/theme-detail/theme-detail.component';
+import { PageDetailComponent } from './shared/page-detail/page-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +44,10 @@ import { MyPagesComponent } from './shared/my-pages/my-pages.component';
     GroupsTabComponent,
     UserProfileComponent,
     PageCreationComponent,
-    MyPagesComponent
+    MyPagesComponent,
+    ThemeCreationComponent,
+    ThemeDetailComponent,
+    PageDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -49,8 +59,11 @@ import { MyPagesComponent } from './shared/my-pages/my-pages.component';
     ToastrModule.forRoot(),
     NgxsModule.forRoot([
       UserState,
-      PageState
-    ])
+      PageState,
+      ThemeState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot()
 
   ],
   providers: [ NotifierService],

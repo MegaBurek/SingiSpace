@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@ngxs/devtools-plugin": "^3.6.2",
+    "@ngxs/storage-plugin": "^3.6.2",
     "@ngxs/store": "^3.6.2",
     "angular-notifier": "^6.0.1",
     "angular-ui-notification": "^0.3.6",
@@ -26,6 +28,7 @@
     "hover": "^3.0.0-alpha.6",
     "jwt-decode": "^2.2.0",
     "ngx-toastr": "^10.0.4",
+    "remote-redux-devtools": "^0.5.16",
     "rxjs": "^6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

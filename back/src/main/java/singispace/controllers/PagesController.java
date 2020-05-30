@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
-@RequestMapping("/page")
+@RequestMapping("/pages")
 public class PagesController {
 
     @Autowired
@@ -48,8 +48,8 @@ public class PagesController {
         return new ResponseEntity<Page>(page,HttpStatus.OK);
     }
 
-    @GetMapping(value="/user-subscribed")
-    public ResponseEntity<Iterable<Page>> getUserSubscribedPages(@RequestBody String id){
+    @GetMapping(value="/user-subscribed/{id}")
+    public ResponseEntity<Iterable<Page>> getUserSubscribedPages(@PathVariable String id){
         return new ResponseEntity<Iterable<Page>>(pagesService.getPageSubsByUserId(id),HttpStatus.OK);
     }
 }
