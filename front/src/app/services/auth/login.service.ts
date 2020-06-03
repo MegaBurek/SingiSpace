@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 import decode from 'jwt-decode';
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
-import { User } from 'src/app/model/user';
+import {Subject, BehaviorSubject, Observable} from 'rxjs';
+import {User} from 'src/app/model/user';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class LoginService {
 
   roleChanged = new Subject<any[]>();
@@ -16,19 +16,19 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {  
+  ) {
   }
 
-  login(username: string, password: string) :Boolean{
-    this.http.post<{ accessToken: string }>('http://localhost:8080/login', { username: username, password: password }).subscribe(response => {
+  login(username: string, password: string) {
+    this.http.post<{ accessToken: string }>('http://localhost:8080/login', {username: username, password: password}).subscribe(response => {
       if (response.accessToken) {
         localStorage.setItem('accessToken', response.accessToken);
         this.roleChanged.next(this.getCurrentRoles());
         this.router.navigate(['/home']);
         this.loggedInStatusChanged.next(true);
-        return true
-      }else{
-        return false
+        return true;
+      } else {
+        return false;
       }
     });
     return;
@@ -43,7 +43,7 @@ export class LoginService {
 
   getCurrentRoles() {
     const token = localStorage.getItem('token');
-    const roles = []
+    const roles = [];
     if (token) {
       decode(token).role.forEach(role => {
         roles.push(role.authority);

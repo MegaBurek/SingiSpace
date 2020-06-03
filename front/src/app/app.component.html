@@ -1,8 +1,16 @@
 <header>
-  <nav class="navbar navbar-expand-md justify-content-around fixed-top">
+  <nav class="navbar navbar-expand-md justify-content-between fixed-top">
     <div class="brand-box">
       <img src="../../../assets/images/singi_logo.png" alt="" class="small-logo">
       <a class="navbar-brand">SingiSpace</a>
+    </div>
+    <div class="navigation-menu" *ngIf="isLoggedIn()">
+      <div class="nav-menu-tab" (click)="toHome()">
+        <img src="assets/images/icons/home.svg" class="img-responsive nav-icon ml-auto mr-auto">
+      </div>
+      <div class="nav-menu-tab" (click)="toDiscovery()">
+        <img src="assets/images/icons/search.svg" class="img-responsive nav-icon ml-auto mr-auto">
+      </div>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -10,22 +18,42 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn()">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Create
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false">
+            <img src="assets/images/icons/bell.svg" class="img-responsive nav-icon">
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="nav-link" routerLink="/create-page">Page</a>
-            <a class="nav-link" routerLink="/create-theme">Theme</a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <h6 class="dropdown-header">Notifications</h6>
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{getUsername()}}</a>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false">
+            <img src="assets/images/icons/create.svg" class="img-responsive nav-icon">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <h6 class="dropdown-header">Create</h6>
+            <div class="nav-links">
+              <a class="nav-link" routerLink="/create-page">Page</a>
+              <a class="nav-link" routerLink="/create-theme">Theme</a>
+              <a class="nav-link" routerLink="#">Post</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false">
+            <img src="assets/images/icons/profile.svg" class="img-responsive nav-icon">
+          </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="nav-link" href="/user-profile">My Profile</a>
-            <a class="nav-link" href="#">My Pages</a>
-            <a class="nav-link" href="#">My Themes</a>
-            <div class="dropdown-divider"></div>
-            <a class="nav-link" href="#" (click)="onLogout()">Logout</a>
+            <h6 class="dropdown-header">Profile</h6>
+            <div class="nav-links">
+              <a class="nav-link" href="/user-profile">{{getUsername()}}</a>
+              <a class="nav-link" href="#">My Pages</a>
+              <a class="nav-link" href="#">My Themes</a>
+              <div class="dropdown-divider"></div>
+              <a class="nav-link" href="#" (click)="onLogout()">Logout</a>
+            </div>
           </div>
         </li>
         <li class="nav-item" *ngIf="isAdmin()">
@@ -33,10 +61,10 @@
         </li>
       </ul>
       <ul class="navbar-nav mr-auto" *ngIf="!isLoggedIn()">
-        <li class="nav-item">
+        <li class="nav-item-word">
           <a class="nav-link" routerLink="/login">Sign In</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item-word">
           <a class="nav-link" routerLink="/register">Register</a>
         </li>
       </ul>

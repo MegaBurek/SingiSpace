@@ -7,29 +7,31 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 
+import { ModalModule } from './_modal';
+
 import { NgxsModule } from '@ngxs/store';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './core/home/home.component';
-import { MainFeedComponent } from './core/main-feed/main-feed.component';
-import { PagesTabComponent } from './core/pages-tab/pages-tab.component';
-import { SignInComponent } from './shared/sign-in/sign-in.component';
-import { RegisterComponent } from './shared/register/register.component';
-import { FriendsTabComponent } from './core/friends-tab/friends-tab.component';
-import { ThemesTabComponent } from './core/themes-tab/themes-tab.component';
-import { GroupsTabComponent } from './core/groups-tab/groups-tab.component';
+import { HomeComponent } from './shared/layout/home/home.component';
+import { MainFeedComponent } from './shared/layout/main-feed/main-feed.component';
+import { PagesTabComponent } from './shared/components/pages-tab/pages-tab.component';
+import { SignInComponent } from './shared/components/sign-in/sign-in.component';
+import { RegisterComponent } from './shared/components/register/register.component';
+import { FriendsTabComponent } from './shared/components/friends-tab/friends-tab.component';
+import { ThemesTabComponent } from './shared/components/themes-tab/themes-tab.component';
+import { GroupsTabComponent } from './shared/components/groups-tab/groups-tab.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserState } from './store/user-store/user.state';
 import { NotifierService } from 'angular-notifier';
-import { PageCreationComponent } from './shared/page-creation/page-creation.component';
+import { PageCreationComponent } from './shared/components/page-creation/page-creation.component';
 import {PageState} from './store/page-store/page.state';
-import { MyPagesComponent } from './shared/my-pages/my-pages.component';
+import { MyPagesComponent } from './shared/components/my-pages/my-pages.component';
 import { NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
-import { ThemeCreationComponent } from './shared/theme-creation/theme-creation.component';
+import { ThemeCreationComponent } from './shared/components/theme-creation/theme-creation.component';
 import {ThemeState} from './store/themes-store/theme.state';
-import { ThemeDetailComponent } from './shared/theme-detail/theme-detail.component';
-import { PageDetailComponent } from './shared/page-detail/page-detail.component';
+import { ThemeDetailComponent } from './shared/components/theme-detail/theme-detail.component';
+import { PageDetailComponent } from './shared/components/page-detail/page-detail.component';
 
 @NgModule({
   declarations: [
@@ -63,8 +65,8 @@ import { PageDetailComponent } from './shared/page-detail/page-detail.component'
       ThemeState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsStoragePluginModule.forRoot()
-
+    NgxsStoragePluginModule.forRoot(),
+    ModalModule
   ],
   providers: [ NotifierService],
   bootstrap: [AppComponent]

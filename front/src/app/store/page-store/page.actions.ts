@@ -1,9 +1,17 @@
 import {Page} from '../../model/page';
+import {Post} from '../../model/post';
 
 export class CreatePage {
   static readonly type = '[Page API] Create Page';
 
   constructor(public page: Page) {
+  }
+}
+
+export class CreatePost {
+  static readonly type = '[Page API] Create Post';
+
+  constructor(public post: Post, public id: string) {
   }
 }
 

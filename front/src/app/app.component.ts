@@ -11,7 +11,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   title = 'SingiSpace';
 
   constructor(
-    private loginService: AuthService
+    private loginService: AuthService,
+    private router: Router
   ) { }
 
   getUsername() {
@@ -29,6 +30,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   isAdmin() {
     return this.loginService.isAdmin();
+  }
+
+  toHome() {
+    this.router.navigate(['/home']);
+  }
+
+  toDiscovery() {
+    this.router.navigate(['/discovery']);
   }
 
   ngOnInit() {

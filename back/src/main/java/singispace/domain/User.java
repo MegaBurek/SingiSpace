@@ -13,35 +13,26 @@ public class User {
 
     @Id
     private String id;
-
     private String name;
-
     private String surname;
-
     private String username;
-
     private String password;
-
     private String email;
-
     private String imgUrl;
-
     private List<String> page_subs;
-
     private List<String> theme_subs;
-
+    private List<String> friends;
     private boolean enabled;
-
     private Permission permission;
-
     @NotNull
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
 
-    public User(){}
+    public User() {
+    }
 
-    public User(String id, String name, String surname, String username, String password, String email, String imgUrl, List<String> page_subs, List<String> theme_subs, boolean enabled, Permission permission, @NotNull AuthProvider provider) {
+    public User(String id, String name, String surname, String username, String password, String email, String imgUrl, List<String> page_subs, List<String> theme_subs, List<String> friends, boolean enabled, Permission permission, @NotNull AuthProvider provider) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -51,12 +42,13 @@ public class User {
         this.imgUrl = imgUrl;
         this.page_subs = page_subs;
         this.theme_subs = theme_subs;
+        this.friends = friends;
         this.enabled = enabled;
         this.permission = permission;
         this.provider = provider;
     }
 
-    public User(String name, String surname, String username, String password, String email, String imgUrl, List<String> page_subs, List<String> theme_subs, Permission permission, @NotNull AuthProvider provider) {
+    public User(String name, String surname, String username, String password, String email, String imgUrl, List<String> page_subs, List<String> theme_subs, List<String> friends, Permission permission, @NotNull AuthProvider provider) {
         this.name = name;
         this.surname = surname;
         this.username = username;
@@ -65,6 +57,7 @@ public class User {
         this.imgUrl = imgUrl;
         this.page_subs = page_subs;
         this.theme_subs = theme_subs;
+        this.friends = friends;
         this.permission = permission;
         this.provider = provider;
     }
@@ -163,5 +156,13 @@ public class User {
 
     public void setTheme_subs(List<String> theme_subs) {
         this.theme_subs = theme_subs;
+    }
+
+    public List<String> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<String> friends) {
+        this.friends = friends;
     }
 }

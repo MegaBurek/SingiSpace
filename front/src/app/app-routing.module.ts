@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SignInComponent } from './shared/sign-in/sign-in.component';
-import { HomeComponent } from './core/home/home.component';
+import { SignInComponent } from './shared/components/sign-in/sign-in.component';
+import { HomeComponent } from './shared/layout/home/home.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
-import {RegisterComponent} from './shared/register/register.component';
-import {PageCreationComponent} from './shared/page-creation/page-creation.component';
-import {ThemeCreationComponent} from './shared/theme-creation/theme-creation.component';
-import {PageDetailComponent} from './shared/page-detail/page-detail.component';
-import {ThemeDetailComponent} from './shared/theme-detail/theme-detail.component';
+import {RegisterComponent} from './shared/components/register/register.component';
+import {PageCreationComponent} from './shared/components/page-creation/page-creation.component';
+import {ThemeCreationComponent} from './shared/components/theme-creation/theme-creation.component';
+import {PageDetailComponent} from './shared/components/page-detail/page-detail.component';
+import {ThemeDetailComponent} from './shared/components/theme-detail/theme-detail.component';
 
 
 
