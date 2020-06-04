@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import singispace.domain.Page;
 import singispace.domain.Post;
 import singispace.domain.Theme;
 import singispace.service.PostService;

@@ -33,6 +33,10 @@ public class FriendsService {
 //
 //    }
 
+//    public void addFriend(String id){
+//
+//    }
+
     public Iterable<Friend> getFriends(String id){
         List<Friend> friends = new ArrayList<>();
         List<String> friends_ids;
