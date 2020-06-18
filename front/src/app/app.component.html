@@ -48,11 +48,11 @@
           <div class="dropdown-menu dropdown-menu-right">
             <h6 class="dropdown-header">Profile</h6>
             <div class="nav-links">
-              <a class="nav-link" href="/user-profile">{{getUsername()}}</a>
+              <a class="nav-link" routerLink="/user-profile">{{getUsername()}}</a>
               <a class="nav-link" href="#">My Pages</a>
               <a class="nav-link" href="#">My Themes</a>
               <div class="dropdown-divider"></div>
-              <a class="nav-link" href="#" (click)="onLogout()">Logout</a>
+              <a class="nav-link" (click)="onLogout()">Logout</a>
             </div>
           </div>
         </li>

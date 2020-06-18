@@ -7,16 +7,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import singispace.domain.User;
+import singispace.dto.FriendDTO;
+import singispace.service.FriendsService;
 import singispace.service.UserAccService;
 
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/userAcc")
 public class UserAccController {
 
     @Autowired
     UserAccService userAccService;
+
+    @Autowired
+    FriendsService friendsService;
 
     @GetMapping(value="/all")
     public ResponseEntity<Iterable<User>> getAllUsers() {

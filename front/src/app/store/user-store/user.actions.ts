@@ -15,6 +15,20 @@ export class DeleteUser {
   }
 }
 
+export class GetUserFriends {
+  static readonly type = '[User API] Get User Friends';
+
+  constructor(public id: string) {
+  }
+}
+
+export class SetLoggedIn {
+  static readonly type = '[User API] Set Logged In';
+
+  constructor(public currentUser: User) {
+  }
+}
+
 export class GetUser {
   static readonly type = '[User API] Get User';
 

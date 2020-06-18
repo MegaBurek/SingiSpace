@@ -4,6 +4,8 @@ import {User} from '../model/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserAccService} from '../services/users/user-acc.service';
 import {Observable} from 'rxjs';
+import {UserState} from '../store/user-store/user.state';
+import {Select} from '@ngxs/store';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,28 +14,18 @@ import {Observable} from 'rxjs';
 })
 export class UserProfileComponent implements OnInit {
 
-  user: any = {};
-  imageUrl = '';
-  edit = false;
+  @Select(UserState.getSelectedUser) selectedUser: Observable<User>;
   editForm: FormGroup;
 
   constructor(
     private logInService: AuthService,
-    private formBuilder: FormBuilder,
-    private userAccService: UserAccService
+    private formBuilder: FormBuilder
   ) { this.createEditForm(); }
 
   ngOnInit() {
-    this.userAccService.getUserByID(this.logInService.getCurrentUserID()).subscribe(res => {
-      this.user = res;
-      console.log(this.user);
-    });
   }
 
-  getUsername() {
-    const username = this.logInService.getLoggedInUsername();
-    return username;
-  }
+
 
   createEditForm() {
     this.editForm = this.formBuilder.group({

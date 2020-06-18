@@ -17,11 +17,12 @@ const routes: Routes = [
   { path: 'login', component: SignInComponent, data: { animation: { value: 'LoginPage' }} },
   { path: 'register', component: RegisterComponent, data: { animation: { value: 'RegisterPage' }} },
   { path: 'home', component: HomeComponent, data: { animation: { value: 'HomePage' }} },
-  { path: 'user-profile', component: UserProfileComponent, data: { animation: { value: 'UserProfilePage'}}},
+  { path: 'user/:username', component: UserProfileComponent, data: { animation: { value: 'UserProfilePage'}}},
   { path: 'create-page', component: PageCreationComponent, data: { animation: { value: 'PageCreationPage'}}},
   { path: 'create-theme', component: ThemeCreationComponent, data: { animation: { value: 'ThemeCreationPage'}}},
   { path: 'page/:pageName', component: PageDetailComponent, data: {animation: {value: 'PageDetailPage'}}},
-  { path: 'theme/:themeName', component: ThemeDetailComponent, data: {animation: {value: 'ThemeDetailPage'}}}
+  { path: 'theme/:themeName', component: ThemeDetailComponent, data: {animation: {value: 'ThemeDetailPage'}}},
+
 
 ];
 

@@ -25,11 +25,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserState } from './store/user-store/user.state';
 import { NotifierService } from 'angular-notifier';
 import { PageCreationComponent } from './shared/components/page-creation/page-creation.component';
-import {PageState} from './store/page-store/page.state';
 import { MyPagesComponent } from './shared/components/my-pages/my-pages.component';
 import { NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import { ThemeCreationComponent } from './shared/components/theme-creation/theme-creation.component';
-import {ThemeState} from './store/themes-store/theme.state';
 import { ThemeDetailComponent } from './shared/components/theme-detail/theme-detail.component';
 import { PageDetailComponent } from './shared/components/page-detail/page-detail.component';
 
@@ -61,8 +59,6 @@ import { PageDetailComponent } from './shared/components/page-detail/page-detail
     ToastrModule.forRoot(),
     NgxsModule.forRoot([
       UserState,
-      PageState,
-      ThemeState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot(),

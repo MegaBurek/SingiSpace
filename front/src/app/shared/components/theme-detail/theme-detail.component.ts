@@ -3,13 +3,13 @@ import {ActivatedRoute} from '@angular/router';
 import {Theme} from '../../../model/theme';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {ThemeState} from '../../../store/themes-store/theme.state';
 import {ModalService} from '../../../_modal';
 import {Post} from '../../../model/post';
 import {NotificaitionService} from '../../../services/notificaition.service';
-import {CreatePost, UpdateTheme} from '../../../store/themes-store/theme.action';
+import {CreatePost, UpdateTheme} from '../../../store/user-store/theme.action';
 import {error} from 'util';
 import {PostsService} from '../../../services/posts/posts.service';
+import {UserState} from '../../../store/user-store/user.state';
 
 @Component({
   selector: 'app-theme-detail',
@@ -18,8 +18,8 @@ import {PostsService} from '../../../services/posts/posts.service';
 })
 export class ThemeDetailComponent implements OnInit {
 
-  @Select(ThemeState.selectTheme) selectedTheme: Observable<Theme>;
-  @Select(ThemeState.getSelectedThemeFeed) feed: Observable<Post[]>;
+  @Select(UserState.getSelectedTheme) selectedTheme: Observable<Theme>;
+  @Select(UserState.getSelectedThemeFeed) feed: Observable<Post[]>;
   currentTheme: Theme;
 
   post: Post = {

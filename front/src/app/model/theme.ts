@@ -5,6 +5,7 @@ export class Theme {
   name: string;
   desc: string;
   owner: string;
+  categories: string[];
   members: [];
   feed: Post[];
 }

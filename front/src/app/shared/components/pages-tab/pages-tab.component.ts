@@ -3,7 +3,6 @@ import {Page} from '../../../model/page';
 import {Select, Store} from '@ngxs/store';
 import {forkJoin, Observable} from 'rxjs';
 import {map, mergeMap} from 'rxjs/operators';
-import {PageState} from '../../../store/page-store/page.state';
 
 @Component({
   selector: 'pages-tab',
@@ -12,7 +11,6 @@ import {PageState} from '../../../store/page-store/page.state';
 })
 export class PagesTabComponent implements OnInit {
 
-  @Select(PageState.getUserPageSubs) subbedPages: Observable<Page[]>;
 
   constructor(
   ) {

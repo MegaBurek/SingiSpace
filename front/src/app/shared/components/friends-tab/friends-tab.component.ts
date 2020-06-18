@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Friend } from 'src/app/model/friend';
 import { FriendsService } from 'src/app/services/friends/friends.service';
+import {UserState} from '../../../store/user-store/user.state';
+import {Observable} from 'rxjs';
+import {Select} from '@ngxs/store';
 
 @Component({
   selector: 'friends-tab',
@@ -9,8 +12,7 @@ import { FriendsService } from 'src/app/services/friends/friends.service';
 })
 export class FriendsTabComponent implements OnInit {
 
-  friends: Friend[] = [];
-
+  @Select(UserState.getMyFriends) userFriends: Observable<Friend[]>;
   constructor(
     private friendService: FriendsService
   ) { }

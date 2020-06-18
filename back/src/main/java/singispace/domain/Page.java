@@ -21,24 +21,28 @@ public class Page {
 
     private List<Post> feed;
 
+    private List<String> categories;
+
     public Page() {
     }
 
-    public Page(String id, String name, String desc, String owner, List<String> members, List<Post> feed) {
+    public Page(String id, String name, String desc, String owner, List<String> members, List<Post> feed, List<String> categories) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.owner = owner;
         this.members = members;
         this.feed = feed;
+        this.categories = categories;
     }
 
-    public Page(String name, String desc, String owner, List<String> members, List<Post> feed) {
+    public Page(String name, String desc, String owner, List<String> members, List<Post> feed, List<String> categories) {
         this.name = name;
         this.desc = desc;
         this.owner = owner;
         this.members = members;
         this.feed = feed;
+        this.categories = categories;
     }
 
     public String getId() {
@@ -87,5 +91,13 @@ public class Page {
 
     public void setFeed(List<Post> feed) {
         this.feed = feed;
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
     }
 }

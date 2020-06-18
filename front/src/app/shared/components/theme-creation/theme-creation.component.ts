@@ -4,7 +4,7 @@ import {NotificaitionService} from '../../../services/notificaition.service';
 import {Store} from '@ngxs/store';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth.service';
-import {CreateTheme} from '../../../store/themes-store/theme.action';
+import {CreateTheme} from '../../../store/user-store/theme.action';
 
 @Component({
   selector: 'app-theme-creation',
@@ -18,9 +18,16 @@ export class ThemeCreationComponent implements OnInit {
     name: '',
     desc: '',
     owner: '',
+    categories: [],
     members: [],
     feed: []
   };
+
+  userSelects = [];
+  categories = [{id: '001', name: 'Information'}, {id: '002', name: 'Exams'}, {id: '003', name: 'Tests'}, {
+    id: '004',
+    name: 'Trips'
+  }];
 
   constructor(
     private notify: NotificaitionService,
@@ -45,11 +52,24 @@ export class ThemeCreationComponent implements OnInit {
       this.notify.showError('Write a longer description', 'Notification');
     } else {
       this.theme.owner = this.authService.getCurrentUserID();
+      for(let i = 0; i < this.userSelects.length; i++) {
+        this.theme.categories.push(this.userSelects[i].name);
+      }
       this.store.dispatch(new CreateTheme(this.theme))
         .subscribe(_ =>
           this.notify.showSuccess('You have succesfully created a theme', 'Notification')
         );
       this.router.navigate(['/home']);
     }
+  }
+
+  isSelected(s) {
+    return this.userSelects.findIndex((item) => item.id === s.id) > -1 ? true : false;
+  }
+
+  selectSuggestion(c) {
+    this.userSelects.find((item) => item.id === c.id) ?
+      this.userSelects = this.userSelects.filter((item) => item.id !== c.id) :
+      this.userSelects.push(c);
   }
 }

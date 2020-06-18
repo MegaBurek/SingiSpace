@@ -8,6 +8,7 @@ public class Post {
 
     private String imgContent;
 
+
     private String owner;
 
     private Comment[] comments;

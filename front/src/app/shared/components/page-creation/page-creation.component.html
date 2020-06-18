@@ -4,13 +4,17 @@
       <h5 class="card-title text-center">Create Page</h5>
       <form class="form-signin">
         <div class="input-container">
-          <label class="input-label">Display Photo</label>
-          <div class="form-label-group">
-            <input class="form-control form-control-lg" name="disp_photo" type="file" #file style="display: none" (change)="onFilesAdded()" multiple>
-          </div>
           <label class="input-label">Name</label>
           <div class="form-label-group">
             <input class="form-control form-control-lg" name="name" [(ngModel)]="page.name" type="text" required>
+          </div>
+          <label class="input-label">Category</label>
+          <div class="form-label-group">
+            <div class="autocomplete">
+              <div class="autocomplete-items">
+                <div *ngFor="let category of categories" class="suggestion" [ngClass]="isSelected(category) ? 'selected-suggestion' : ''" (click)="selectSuggestion(category)">{{ category.name }}</div>
+              </div>
+            </div>
           </div>
           <label class="input-label">Description</label>
           <div class="form-label-group">

@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotificaitionService } from 'src/app/services/notificaition.service';
 import {PagesService} from '../../../services/pages/pages.service';
 import {Store} from '@ngxs/store';
-import { GetUserPageSubs } from '../../../store/page-store/page.actions';
+import { GetUserPageSubs } from '../../../store/user-store/page.actions';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,9 +22,7 @@ export class SignInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: AuthService,
     private router: Router,
-    private notify: NotificaitionService,
-    private pagesService: PagesService,
-    private store: Store
+    private notify: NotificaitionService
 
   ) {
     // redirect to home if already logged in
@@ -43,7 +41,7 @@ export class SignInComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
-  async login() {
+  login() {
     this.submitted = true;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
@@ -51,7 +49,7 @@ export class SignInComponent implements OnInit {
       return;
     }
     this.loading = true;
-    await this.loginService.login(this.f.username.value, this.f.password.value);
+    this.loginService.login(this.f.username.value, this.f.password.value);
   }
 
   logout() {

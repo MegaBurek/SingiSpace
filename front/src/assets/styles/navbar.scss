@@ -57,6 +57,14 @@
   }
 }
 
+a:not([href]) {
+  cursor: pointer;
+  color: $text-color;
+  &:hover{
+    color: #007bff;
+  }
+}
+
 .nav-item-word{
   font-family: "Raleway", sans-serif;
   color: $text-color;

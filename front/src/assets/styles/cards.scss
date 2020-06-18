@@ -64,7 +64,7 @@ hr{
   padding: 1rem;
   font-family: $font-second;
   background-color: $secondary;
-  border: 5px solid #F7C727;
+  border: 3px solid #F7C727;
   color: whitesmoke;
   transition: all 0.2s;
 }
@@ -77,10 +77,52 @@ hr{
 .custom-control-label {
   font-family: $font-second;
 }
-
+span{
+  font-weight: bold;
+  font-size: 1.3rem
+}
 .quote {
   text-align: center;
   font-family: "Raleway", "cursive";
   font-size: 1.5rem;
   color: $text-color;
+}
+
+//Category selection
+.chips-input-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.autocomplete-items {
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.selected-suggestion{
+  background-color: #bd2215 !important;
+  border: 3px solid #F7C727;
+  color: white;
+}
+
+.suggestion{
+  border-radius: 1rem;
+  margin-bottom: 0.5em;
+  width: 45%;
+  text-align: center;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.autocomplete-items div:hover {
+  background-color: grey;
 }

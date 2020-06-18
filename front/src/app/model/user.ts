@@ -1,4 +1,5 @@
 import {Permission} from './permission';
+import {Friend} from './friend';
 
 export class User {
   id: string;
@@ -10,6 +11,7 @@ export class User {
   dob: Date;
   page_subs: Array<string>;
   theme_subs: Array<string>;
+  friends: Array<Friend>;
   imgUrl: string;
   permission: Permission;
   provider: 'local';

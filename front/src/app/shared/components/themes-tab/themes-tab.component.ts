@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Theme} from 'src/app/model/theme';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {ThemeState} from '../../../store/themes-store/theme.state';
-import {GetTheme, SelectTheme} from '../../../store/themes-store/theme.action';
+import {GetTheme, SelectTheme} from '../../../store/user-store/theme.action';
 import {Router} from '@angular/router';
+import {UserState} from '../../../store/user-store/user.state';
 
 @Component({
   selector: 'themes-tab',
@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 })
 export class ThemesTabComponent implements OnInit {
 
-  @Select(ThemeState.getUserThemeSubs) subbedThemes: Observable<Theme[]>;
+  @Select(UserState.getUserThemeSubs) subbedThemes: Observable<Theme[]>;
   selectedTheme;
 
   constructor(

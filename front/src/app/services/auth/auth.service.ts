@@ -1,20 +1,22 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 import decode from 'jwt-decode';
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
-import { User } from 'src/app/model/user';
-import { NotificaitionService } from '../notificaition.service';
-import {GetUserPageSubs} from '../../store/page-store/page.actions';
+import {Subject, BehaviorSubject, Observable} from 'rxjs';
+import {User} from 'src/app/model/user';
+import {NotificaitionService} from '../notificaition.service';
+import {GetUserPageSubs} from '../../store/user-store/page.actions';
 import {Store} from '@ngxs/store';
-import {GetUserThemeSubs} from '../../store/themes-store/theme.action';
+import {GetUserThemeSubs} from '../../store/user-store/theme.action';
+import {GetUserFriends, SetLoggedIn} from '../../store/user-store/user.actions';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthService {
 
 
   private clientUrl = `http://localhost:8080/login`;
+  private userUrl = `http://localhost:8080/userAcc`;
 
   constructor(
     private notify: NotificaitionService,
@@ -24,14 +26,18 @@ export class AuthService {
   ) {
   }
 
-  login(username: string, password: string) {
+  async login(username: string, password: string) {
     // tslint:disable-next-line:max-line-length
-    this.http.post<{ accessToken: string}>(this.clientUrl, { username, password }).subscribe(response => {
+    this.http.post<{ accessToken: string }>(this.clientUrl, {username, password}).subscribe(async response => {
       if (response.accessToken) {
         localStorage.setItem('accessToken', response.accessToken);
-        const id  = this.getCurrentUserID();
-        this.store.dispatch(new GetUserPageSubs(id));
-        this.store.dispatch(new GetUserThemeSubs(id));
+        const id = this.getCurrentUserID();
+        await this.store.dispatch(new GetUserThemeSubs(id));
+        await this.store.dispatch(new GetUserPageSubs(id));
+        await this.store.dispatch(new GetUserFriends(id));
+        await this.getCurrentUser(id).subscribe(logged => {
+          this.store.dispatch(new SetLoggedIn(logged));
+        });
         this.notify.showSuccess('Successful Attempt', 'Notification');
         this.router.navigate(['/home']);
       }
@@ -86,7 +92,7 @@ export class AuthService {
   }
 
   getCurrentUser(id: string) {
-    return this.http.get<User>(this.clientUrl + `${id}`);
+    return this.http.get<User>(this.userUrl + `/${id}`);
   }
 
   getLoggedInUsername() {
