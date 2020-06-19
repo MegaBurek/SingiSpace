@@ -8,43 +8,52 @@ import {Observable, throwError} from 'rxjs';
 })
 export class UserAccService {
 
-  private baseUrl = 'http://localhost:8080/user';
+  private userUrl = 'http://localhost:8080/user';
+  private userAccUrl = `http://localhost:8080/userAcc`;
 
   constructor(
     private http: HttpClient
   ) {
   }
 
-  registerUser(user) {
-    return this.http.post<User>(this.baseUrl + `/register/learner`, user);
+  getUserByUsername(username) {
+    return this.http.get<User>(this.userUrl + `/${username}`);
   }
 
-  getUserByID(id) {
-    return this.http.get<User>(this.baseUrl + `/${id}`);
+  getCurrentUser(id: string) {
+    return this.http.get<User>(this.userAccUrl + `/${id}`);
   }
 
-  getUsers() {
-    return this.http.get<User[]>(this.baseUrl + `/all`);
+  registerTutor(tutor) {
+    return this.http.post<User>(this.userAccUrl + `/register/tutor`, tutor);
   }
 
-  editUser(id, user) {
-    return this.http.put<User>(this.baseUrl + `/${id}`, user);
+  registerAdmin(admin) {
+    return this.http.post<User>(this.userAccUrl + `/register/tutor`, admin);
   }
 
-  removeUser(id) {
-    return this.http.delete<string>(this.baseUrl + `/${id}`);
+  registerLearner(learner) {
+    return this.http.post<User>(this.userAccUrl + `/register/tutor`, learner);
   }
 
-  errorMgmt(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
-  }
+  // editUser(id, user) {
+  //   return this.http.put<User>(this.baseUrl + `/${id}`, user);
+  // }
+  //
+  // removeUser(id) {
+  //   return this.http.delete<string>(this.baseUrl + `/${id}`);
+  // }
+
+  // errorMgmt(error: HttpErrorResponse) {
+  //   let errorMessage = '';
+  //   if (error.error instanceof ErrorEvent) {
+  //     // Get client-side error
+  //     errorMessage = error.error.message;
+  //   } else {
+  //     // Get server-side error
+  //     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  //   }
+  //   console.log(errorMessage);
+  //   return throwError(errorMessage);
+  // }
 }

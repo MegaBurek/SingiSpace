@@ -30,6 +30,16 @@ import { NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import { ThemeCreationComponent } from './shared/components/theme-creation/theme-creation.component';
 import { ThemeDetailComponent } from './shared/components/theme-detail/theme-detail.component';
 import { PageDetailComponent } from './shared/components/page-detail/page-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserAnalyticsChartComponent } from './dashboard/user-analytics-chart/user-analytics-chart.component';
+import {ChartsModule} from 'ng2-charts';
+import { NewUserAnalyticsChartComponent } from './dashboard/new-user-analytics-chart/new-user-analytics-chart.component';
+import { SocialGroupAnalyticsChartComponent } from './dashboard/social-group-analytics-chart/social-group-analytics-chart.component';
+import { CreateTutorComponent } from './dashboard/create-tutor/create-tutor.component';
+import { CreateAdminComponent } from './dashboard/create-admin/create-admin.component';
+import { ManageUsersComponent } from './dashboard/manage-users/manage-users.component';
+import { FlaggedContentComponent } from './dashboard/flagged-content/flagged-content.component';
+import {AnalyticsState} from './store/analytics-store/analytics.state';
 
 @NgModule({
   declarations: [
@@ -47,7 +57,15 @@ import { PageDetailComponent } from './shared/components/page-detail/page-detail
     MyPagesComponent,
     ThemeCreationComponent,
     ThemeDetailComponent,
-    PageDetailComponent
+    PageDetailComponent,
+    DashboardComponent,
+    UserAnalyticsChartComponent,
+    NewUserAnalyticsChartComponent,
+    SocialGroupAnalyticsChartComponent,
+    CreateTutorComponent,
+    CreateAdminComponent,
+    ManageUsersComponent,
+    FlaggedContentComponent
   ],
   imports: [
     BrowserModule,
@@ -59,10 +77,12 @@ import { PageDetailComponent } from './shared/components/page-detail/page-detail
     ToastrModule.forRoot(),
     NgxsModule.forRoot([
       UserState,
+      AnalyticsState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot(),
-    ModalModule
+    ModalModule,
+    ChartsModule
   ],
   providers: [ NotifierService],
   bootstrap: [AppComponent]

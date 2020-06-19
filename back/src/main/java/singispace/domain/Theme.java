@@ -17,6 +17,8 @@ public class Theme {
 
     private String owner;
 
+    private String imgUrl;
+
     private List<String> members;
 
     private List<Post> feed;
@@ -25,7 +27,7 @@ public class Theme {
 
     public Theme() {}
 
-    public Theme(String id, String name, String desc, String owner, List<String> members, List<Post> feed, List<String> categories) {
+    public Theme(String id, String name, String desc, String owner, String imgUrl, List<String> members, List<Post> feed, List<String> categories) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -33,15 +35,17 @@ public class Theme {
         this.members = members;
         this.feed = feed;
         this.categories = categories;
+        this.imgUrl = imgUrl;
     }
 
-    public Theme(String name, String desc, String owner, List<String> members, List<Post> feed, List<String> categories) {
+    public Theme(String name, String desc, String owner, String imgUrl, List<String> members, List<Post> feed, List<String> categories) {
         this.name = name;
         this.desc = desc;
         this.owner = owner;
         this.members = members;
         this.feed = feed;
         this.categories = categories;
+        this.imgUrl = imgUrl;
     }
 
     public String getId() {
@@ -74,6 +78,14 @@ public class Theme {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public List<String> getMembers() {

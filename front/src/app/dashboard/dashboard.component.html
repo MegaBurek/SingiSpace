@@ -1,0 +1,43 @@
+<div class="card dashboard ml-auto mr-auto">
+  <div class="card-body">
+    <h5 class="card-title text-center detail-card-title" style="margin: 0">Dashboard</h5>
+    <div class="dashboard-column-titles">
+      <h2 class="dashboard-column-title-left text-center">Menu</h2>
+      <h2 class="dashboard-column-title-right text-center">DB Analytics</h2>
+    </div>
+    <div class="dashboard-main">
+      <div class="dashboard-column dashboard-column-left">
+        <div class="dashboard-button" (click)="toManageUsers()">
+          <img src="../assets/images/icons/manage_users.svg" class="dashboard-button-image">
+          <h2 class="dashboard-button-text text-center">Manage Users</h2>
+        </div>
+        <div class="dashboard-button" (click)="toFlaggedContent()">
+          <img src="../assets/images/icons/flagged.svg" class="dashboard-button-image">
+          <h2 class="dashboard-button-text text-center">Flagged Content</h2>
+        </div>
+        <div class="dashboard-button" (click)="toCreateAdmin()">
+          <img src="../assets/images/icons/add_admin.png" class="dashboard-button-image">
+          <h2 class="dashboard-button-text text-center">Create Admin</h2>
+        </div>
+        <div class="dashboard-button" (click)="toCreateTutor()">
+          <img src="../assets/images/icons/add_tutor.png" class="dashboard-button-image">
+          <h2 class="dashboard-button-text text-center">Create Tutor</h2>
+        </div>
+      </div>
+      <div class="dashboard-column dashboard-column-right">
+        <div class="dashboard-analytics">
+          <h2 class="dashboard-analytics-text text-center">All Users</h2>
+          <user-analytics-chart></user-analytics-chart>
+        </div>
+        <div class="dashboard-analytics">
+          <h2 class="dashboard-analytics-text text-center">All Social Groups</h2>
+          <social-group-analytics-chart></social-group-analytics-chart>
+        </div>
+        <div class="dashboard-analytics analytics-bar">
+          <h2 class="dashboard-analytics-text text-center">New Users</h2>
+          <new-user-analytics-chart></new-user-analytics-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

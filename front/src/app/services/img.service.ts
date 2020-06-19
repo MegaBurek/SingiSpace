@@ -11,7 +11,8 @@ export class ImgService {
 
   private profilePhotoUrl = 'http://localhost:8080/images/uploadProfile';
   private postPhotoUrl = 'http://localhost:8080/images/posts';
-  private returnImageDownloadUrl = 'http://localhost:8080/images/fileDownloadUrl';
+  private pagesUrl = 'http://localhost:8080/images/uploadPage';
+  private themesUrl = 'http://localhost:8080/images/uploadTheme';
 
   constructor(
     private http: HttpClient
@@ -24,6 +25,22 @@ export class ImgService {
     formData.append('file', file);
 
     return this.http.post(`${this.profilePhotoUrl}`, formData, {responseType: 'text'});
+  }
+
+  uploadThemePhoto(file) {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    return this.http.post(`${this.themesUrl}`, formData, {responseType: 'text'});
+  }
+
+  uploadPagePhoto(file) {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    return this.http.post(`${this.pagesUrl}`, formData, {responseType: 'text'});
   }
 
   getFiles() {

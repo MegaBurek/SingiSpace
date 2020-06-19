@@ -8,13 +8,6 @@ export class RegisterUser {
   }
 }
 
-export class DeleteUser {
-  static readonly type = '[User API] Delete User';
-
-  constructor(public id: string) {
-  }
-}
-
 export class GetUserFriends {
   static readonly type = '[User API] Get User Friends';
 
@@ -29,17 +22,11 @@ export class SetLoggedIn {
   }
 }
 
-export class GetUser {
-  static readonly type = '[User API] Get User';
+export class GetUserViewByUsername {
+  static readonly type = '[User API] Get User By Username';
 
-  constructor(public id: string) {
+  constructor(public username: string) {
   }
 }
 
-export class GetUsers {
-  static readonly type = '[User API] Get Users';
-
-  constructor() {
-  }
-}
 

@@ -5,6 +5,9 @@ import {Store} from '@ngxs/store';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth.service';
 import {CreateTheme} from '../../../store/user-store/theme.action';
+import {ModalService} from '../../../_modal';
+import {ImgService} from '../../../services/img.service';
+import {CreatePage} from '../../../store/user-store/page.actions';
 
 @Component({
   selector: 'app-theme-creation',
@@ -18,22 +21,28 @@ export class ThemeCreationComponent implements OnInit {
     name: '',
     desc: '',
     owner: '',
+    imgUrl: '',
     categories: [],
     members: [],
     feed: []
   };
 
+  public imagePath;
+  imageSrc: any;
+
+  selectedFile: File;
+
   userSelects = [];
-  categories = [{id: '001', name: 'Information'}, {id: '002', name: 'Exams'}, {id: '003', name: 'Tests'}, {
-    id: '004',
-    name: 'Trips'
-  }];
+  categories = [{id: '001', name: 'Briefing'}, {id: '002', name: 'Exam'}, {id: '003', name: 'Test'}, {id: '004', name: 'Trip'},
+    {id: '005', name: 'Sport'}, {id: '006', name: 'Event'}];
 
   constructor(
     private notify: NotificaitionService,
     private store: Store,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private modal: ModalService,
+    private imgService: ImgService
   ) {
   }
 
@@ -52,13 +61,19 @@ export class ThemeCreationComponent implements OnInit {
       this.notify.showError('Write a longer description', 'Notification');
     } else {
       this.theme.owner = this.authService.getCurrentUserID();
-      for(let i = 0; i < this.userSelects.length; i++) {
+      for (let i = 0; i < this.userSelects.length; i++) {
         this.theme.categories.push(this.userSelects[i].name);
       }
-      this.store.dispatch(new CreateTheme(this.theme))
-        .subscribe(_ =>
-          this.notify.showSuccess('You have succesfully created a theme', 'Notification')
-        );
+      this.imgService.uploadThemePhoto(this.selectedFile).subscribe(
+        imgUrl => {
+          this.theme.imgUrl = imgUrl.toString();
+          this.store.dispatch(new CreateTheme(this.theme));
+          this.notify.showSuccess('Theme created successfully', 'Notification');
+        }, error1 => {
+          console.log(error1);
+        }
+      );
+      this.selectedFile = undefined;
       this.router.navigate(['/home']);
     }
   }
@@ -71,5 +86,46 @@ export class ThemeCreationComponent implements OnInit {
     this.userSelects.find((item) => item.id === c.id) ?
       this.userSelects = this.userSelects.filter((item) => item.id !== c.id) :
       this.userSelects.push(c);
+  }
+
+  openThemeCompletion(id) {
+    this.modal.open(id);
+  }
+
+  checkIfEmpty() {
+    if (this.theme.name === '' || this.userSelects.length === 0 || this.theme.desc === '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  preview(files) {
+    if (files.length === 0) {
+      return;
+    }
+
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.notify.showError('Only images are supported', 'Notification');
+      return;
+    }
+
+    this.selectedFile = files[0];
+
+    const reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (event) => {
+      this.imageSrc = reader.result;
+    };
+  }
+
+  checkIfCompletionEmpty() {
+    if (this.imageSrc === null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

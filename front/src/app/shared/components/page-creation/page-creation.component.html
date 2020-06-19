@@ -1,4 +1,4 @@
-<div class="container card-container register-container">
+<div class="container card-container">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title text-center">Create Page</h5>
@@ -12,18 +12,37 @@
           <div class="form-label-group">
             <div class="autocomplete">
               <div class="autocomplete-items">
-                <div *ngFor="let category of categories" class="suggestion" [ngClass]="isSelected(category) ? 'selected-suggestion' : ''" (click)="selectSuggestion(category)">{{ category.name }}</div>
+                <div *ngFor="let category of categories" class="suggestion"
+                     [ngClass]="isSelected(category) ? 'selected-suggestion' : ''"
+                     (click)="selectSuggestion(category)">{{ category.name }}</div>
               </div>
             </div>
           </div>
           <label class="input-label">Description</label>
           <div class="form-label-group">
-            <textarea class="form-control form-control-lg" name="desc" [(ngModel)]="page.desc" type="text" required></textarea>
+            <textarea class="form-control form-control-lg" name="desc" [(ngModel)]="page.desc" type="text"
+                      required></textarea>
           </div>
         </div>
 
-        <button class="btn btn-lg btn-block text-uppercase" type="submit" (click)="createPage()">Create</button>
+        <button class="btn btn-lg btn-block text-uppercase" type="submit" *ngIf="checkIfEmpty()" (click)="openPageCompletion('page-completion')">Continue</button>
       </form>
     </div>
   </div>
 </div>
+<jw-modal id="page-completion">
+  <div class="card form-card">
+    <div class="card-body">
+      <div class="d-flex flex-column justify-content-between align-items-center">
+        <h5 class="card-title text-center">Completion</h5>
+        <img [src]="imageSrc || 'https://via.placeholder.com/150'" alt="your image"
+             class="profile-photo ml-auto mr-auto">
+        <label class="input-label text-center">Display Photo</label>
+        <input type="file" #file accept="image/*" (change)="preview(file.files)">
+        <button class="btn text-uppercase form-button" type="submit" *ngIf="checkIfCompletionEmpty()"
+                (click)="createPage()">Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</jw-modal>

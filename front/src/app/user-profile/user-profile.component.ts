@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth/auth.service';
 import {User} from '../model/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UserAccService} from '../services/users/user-acc.service';
 import {Observable} from 'rxjs';
 import {UserState} from '../store/user-store/user.state';
-import {Select} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
+import {ActivatedRoute} from '@angular/router';
+import {GetUserViewByUsername} from '../store/user-store/user.actions';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,13 +19,23 @@ export class UserProfileComponent implements OnInit {
   editForm: FormGroup;
 
   constructor(
-    private logInService: AuthService,
-    private formBuilder: FormBuilder
-  ) { this.createEditForm(); }
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private store: Store
+  ) {
+    const username = this.activatedRoute.snapshot.params.username;
+    this.store.dispatch(new GetUserViewByUsername(username));
+
+    this.createEditForm();
+  }
 
   ngOnInit() {
   }
 
+  getCurrentUserID() {
+    return this.authService.getCurrentUserID();
+  }
 
 
   createEditForm() {

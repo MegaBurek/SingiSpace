@@ -17,16 +17,17 @@ public class Page {
 
     private String owner;
 
+    private String imgUrl;
+
     private List<String> members;
 
     private List<Post> feed;
 
     private List<String> categories;
 
-    public Page() {
-    }
+    public Page() {}
 
-    public Page(String id, String name, String desc, String owner, List<String> members, List<Post> feed, List<String> categories) {
+    public Page(String id, String name, String desc, String owner, String imgUrl, List<String> members, List<Post> feed, List<String> categories) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -34,15 +35,17 @@ public class Page {
         this.members = members;
         this.feed = feed;
         this.categories = categories;
+        this.imgUrl = imgUrl;
     }
 
-    public Page(String name, String desc, String owner, List<String> members, List<Post> feed, List<String> categories) {
+    public Page(String name, String desc, String owner, String imgUrl, List<String> members, List<Post> feed, List<String> categories) {
         this.name = name;
         this.desc = desc;
         this.owner = owner;
         this.members = members;
         this.feed = feed;
         this.categories = categories;
+        this.imgUrl = imgUrl;
     }
 
     public String getId() {
@@ -75,6 +78,14 @@ public class Page {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public List<String> getMembers() {

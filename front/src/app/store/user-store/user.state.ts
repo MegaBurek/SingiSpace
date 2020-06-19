@@ -2,7 +2,11 @@ import {User} from 'src/app/model/user';
 import {State, Selector, Action, StateContext} from '@ngxs/store';
 import {tap} from 'rxjs/operators';
 import {UserAccService} from 'src/app/services/users/user-acc.service';
-import {GetUser, GetUsers, DeleteUser, RegisterUser, SetLoggedIn, GetUserFriends} from './user.actions';
+import {
+  SetLoggedIn,
+  GetUserFriends,
+  GetUserViewByUsername
+} from './user.actions';
 import {Friend} from '../../model/friend';
 import {FriendsService} from '../../services/friends/friends.service';
 import {Page} from '../../model/page';
@@ -41,12 +45,12 @@ export class UserStateModel {
     subbedPages: [],
     myPages: [],
     selectedPage: {
-      id: null, name: null, desc: null, feed: null, members: null, owner: null, categories: null
+      id: null, name: null, desc: null, feed: null, members: null, owner: null, imgUrl: null, categories: null
     },
     subbedThemes: [],
     myThemes: [],
     selectedTheme: {
-      id: null, name: null, desc: null, feed: null, members: null, owner: null, categories: null
+      id: null, name: null, desc: null, feed: null, members: null, owner: null, imgUrl: null, categories: null
     }
   }
 })
@@ -116,13 +120,13 @@ export class UserState {
     }));
   }
 
-  @Action(GetUser)
-  getUser({patchState}: StateContext<UserStateModel>, {id}: GetUser) {
-    return this.userAccService.getUserByID(id).pipe(tap((user => {
+  @Action(GetUserViewByUsername)
+  getUserViewByUsername({patchState}: StateContext<UserStateModel>, {username}: GetUserViewByUsername) {
+    return this.userAccService.getUserByUsername(username).pipe(tap((user) => {
       patchState({
         selectedUser: user
       });
-    })));
+    }));
   }
 
   // Page actions

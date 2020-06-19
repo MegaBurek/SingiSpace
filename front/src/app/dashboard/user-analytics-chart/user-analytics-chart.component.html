@@ -1,0 +1,11 @@
+<div class="chart-wrapper" *ngIf="pieChatData | async as data">
+  <canvas baseChart
+          [data]="data"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [legend]="pieChartLegend"
+  height="160">
+  </canvas>
+</div>

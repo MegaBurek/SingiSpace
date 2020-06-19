@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from './services/auth/auth.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {AuthService} from './services/auth/auth.service';
+import {ModalService} from './_modal';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private loginService: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private modal: ModalService
+  ) {
+  }
 
   getUsername() {
     const username = this.loginService.getLoggedInUsername();
@@ -29,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   isAdmin() {
-    return this.loginService.isAdmin();
+    return this.loginService.isAdminLogged();
   }
 
   toHome() {
@@ -54,5 +57,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isLoggedIn();
     this.getUsername();
     this.isAdmin();
+  }
+
+  openModal(id) {
+    this.modal.open(id);
   }
 }

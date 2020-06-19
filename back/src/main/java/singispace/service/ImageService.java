@@ -17,19 +17,37 @@ import java.util.stream.Stream;
 @Service
 public class ImageService {
 
-    private final Path root = Paths.get("images/profile_photos");
+    private final Path ProfilePhotoroot = Paths.get("images/profile_photos");
+    private final Path ThemePhotoroot = Paths.get("images/themes");
+    private final Path PagePhotoroot = Paths.get("images/pages");
 
-    public void save(MultipartFile file){
+    public void saveProfilePhoto(MultipartFile file){
         try {
-            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+            Files.copy(file.getInputStream(), this.ProfilePhotoroot.resolve(file.getOriginalFilename()));
         } catch (Exception e){
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
     }
 
-    public Resource load(String filename) {
+    public void saveThemePhoto(MultipartFile file){
         try {
-            Path file = root.resolve(filename);
+            Files.copy(file.getInputStream(), this.ThemePhotoroot.resolve(file.getOriginalFilename()));
+        } catch (Exception e){
+            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+        }
+    }
+
+    public void savePagePhoto(MultipartFile file){
+        try {
+            Files.copy(file.getInputStream(), this.PagePhotoroot.resolve(file.getOriginalFilename()));
+        } catch (Exception e){
+            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+        }
+    }
+
+    public Resource loadProfile(String filename) {
+        try {
+            Path file = ProfilePhotoroot.resolve(filename);
             Resource resource = new UrlResource(file.toUri());
 
             if (resource.exists() || resource.isReadable()) {
@@ -42,12 +60,42 @@ public class ImageService {
         }
     }
 
-    public Stream<Path> loadAll() {
+    public Resource loadThemePhoto(String filename) {
         try {
-            return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not load the files!");
+            Path file = ThemePhotoroot.resolve(filename);
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         }
     }
+
+    public Resource loadPagePhoto(String filename) {
+        try {
+            Path file = PagePhotoroot.resolve(filename);
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+
+//    public Stream<Path> loadAll() {
+//        try {
+//            return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
+//        } catch (IOException e) {
+//            throw new RuntimeException("Could not load the files!");
+//        }
+//    }
 
 }

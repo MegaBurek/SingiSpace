@@ -1,10 +1,13 @@
 package singispace.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import singispace.domain.*;
+import singispace.dto.FriendDTO;
+import singispace.dto.UserViewDTO;
 import singispace.repositories.users.UserAccRepository;
 
 import java.util.Optional;
@@ -21,12 +24,24 @@ public class UserAccService {
     @Autowired
     UserAccRepository userAccRepository;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     public Iterable<User> getAll() {
         return userAccRepository.findAll();
     }
 
     public Optional<User> getById(String id) {
         return userAccRepository.findById(id);
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userAccRepository.findByUsername(username);
+    }
+
+    public Optional<UserViewDTO> findUserViewByUsername(String username) {
+        Optional<User> user = findByUsername(username);
+        return Optional.of(convertToDto(user.get()));
     }
 
     public void addUser(User user) {
@@ -91,32 +106,10 @@ public class UserAccService {
         }
     }
 
-//    public void addLearnerAccountData(AccountData accountData) {
-//        permissionService.addLearnerPermission(accountData.getPermission());
-//        userAccRepository.save(accountData);
-//    }
-
-//    public Optional<AccountData> getAccountByUsername(String username){
-//        return userAccRepository.findByUsername(username);
-//    }
-
-//    public void updateAccountData(String id, AccountData accountData) {
-//
-//        Optional<AccountData> a = userAccRepository.findById(id);
-//
-//        if(a.isPresent()) {
-//            accountData.setId(a.get().getId());
-//            accountData.setPassword(passwordEncoder.encode(accountData.getPassword()));
-//
-//            userAccRepository.save(accountData);
-//        }
-//
-//    }
-//
-//    public void removeAccountData(String id) {
-//        Optional<AccountData> accountData = userAccRepository.findById(id);
-//        userAccRepository.delete(accountData.get());
-//    }
+    private UserViewDTO convertToDto(User user) {
+        UserViewDTO userViewDTO = modelMapper.map(user, UserViewDTO.class);
+        return userViewDTO;
+    }
 
 
 }

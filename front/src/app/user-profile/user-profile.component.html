@@ -8,16 +8,28 @@
         </div>
 
         <div class="detail-card-about">
-          <h2 class="detail-card-subtitle">About</h2>
           <p class="detail-card-text">
             <span>Email: </span>{{user.email}}
           </p>
           <p class="detail-card-text">
-            <span>Interests: </span>School · Lectures · Information
+            <span>Theme Subs</span>
           </p>
+          <div class="user-profile-subbed-themes">
+            <img src="../assets/images/google.png" class="subbed-theme-view">
+          </div>
+          <p class="detail-card-text">
+            <span>Page Subs</span>
+          </p>
+          <div class="user-profile-subbed-themes">
+            <img src="../assets/images/google.png" style="width: 40px;height: 40px; border-radius: 1rem">
+            <img src="../assets/images/google.png" style="width: 40px;height: 40px; border-radius: 1rem">
+            <img src="../assets/images/google.png" style="width: 40px;height: 40px; border-radius: 1rem">
+            <img src="../assets/images/google.png" style="width: 40px;height: 40px; border-radius: 1rem">
+          </div>
         </div>
         <div class="d-flex justify-content-center flex-row flex-wrap align-items-center">
-          <div class="d-flex justify-content-center align-items-center action-box" (click)="openCreatePage('custom-modal-1')">
+          <div class="d-flex justify-content-center align-items-center action-box"
+               (click)="openCreatePage('custom-modal-1')">
             <img src="../../../../assets/images/icons/create.svg" class="img-responsive actions">
             <div class="info-drop">
               <p class="info-text">Post</p>
@@ -26,22 +38,82 @@
         </div>
       </div>
       <div class="detail-feed">
-<!--        <div class="post" *ngFor="let post of feed | async">-->
-<!--          <h2 class="post-title">-->
-<!--            {{post.title}}-->
-<!--          </h2>-->
-<!--          <div class="module line-clamp">-->
-<!--            <p class="post-text-content">-->
-<!--              {{post.textContent}}-->
-<!--            </p>-->
-<!--          </div>-->
-<!--          <div class="d-flex justify-content-center align-items-center action-box">-->
-<!--            <img src="../../../../assets/images/icons/eye.svg" class="img-responsive actions">-->
-<!--            <div class="info-drop" (click)="openPost('postDetail')">-->
-<!--              <p class="info-text">View</p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--        <div class="post" *ngFor="let post of feed | async">-->
+        <!--          <h2 class="post-title">-->
+        <!--            {{post.title}}-->
+        <!--          </h2>-->
+        <!--          <div class="module line-clamp">-->
+        <!--            <p class="post-text-content">-->
+        <!--              {{post.textContent}}-->
+        <!--            </p>-->
+        <!--          </div>-->
+        <!--          <div class="d-flex justify-content-center align-items-center action-box">-->
+        <!--            <img src="../../../../assets/images/icons/eye.svg" class="img-responsive actions">-->
+        <!--            <div class="info-drop" (click)="openPost('postDetail')">-->
+        <!--              <p class="info-text">View</p>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card detail-card ml-auto mr-auto" *ngIf="loggedInUser | async as user">
+  <div class="card-body">
+    <div class="detail-card-body">
+      <div class="detail-card-info">
+        <div class="detail-card-owner">
+          <img [src]="user.imgUrl" class="profile-photo img-responsive">
+          <h2 class="detail-card-subtitle">{{user.name}} {{user.surname}}</h2>
+        </div>
+
+        <div class="detail-card-about">
+          <p class="detail-card-text">
+            <span>Email: </span>{{user.email}}
+          </p>
+          <p class="detail-card-text">
+            <span>Theme Subs</span>
+          </p>
+          <div class="user-profile-subbed-themes">
+            <img src="../assets/images/google.png" class="subbed-theme-view">
+          </div>
+          <p class="detail-card-text">
+            <span>Page Subs</span>
+          </p>
+          <div class="user-profile-subbed-themes">
+            <img src="../assets/images/google.png" style="width: 40px;height: 40px; border-radius: 1rem">
+            <img src="../assets/images/google.png" style="width: 40px;height: 40px; border-radius: 1rem">
+            <img src="../assets/images/google.png" style="width: 40px;height: 40px; border-radius: 1rem">
+            <img src="../assets/images/google.png" style="width: 40px;height: 40px; border-radius: 1rem">
+          </div>
+        </div>
+        <div class="d-flex justify-content-center flex-row flex-wrap align-items-center">
+          <div class="d-flex justify-content-center align-items-center action-box"
+               (click)="openCreatePage('custom-modal-1')">
+            <img src="../../../../assets/images/icons/create.svg" class="img-responsive actions">
+            <div class="info-drop">
+              <p class="info-text">Post</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-feed">
+        <!--        <div class="post" *ngFor="let post of feed | async">-->
+        <!--          <h2 class="post-title">-->
+        <!--            {{post.title}}-->
+        <!--          </h2>-->
+        <!--          <div class="module line-clamp">-->
+        <!--            <p class="post-text-content">-->
+        <!--              {{post.textContent}}-->
+        <!--            </p>-->
+        <!--          </div>-->
+        <!--          <div class="d-flex justify-content-center align-items-center action-box">-->
+        <!--            <img src="../../../../assets/images/icons/eye.svg" class="img-responsive actions">-->
+        <!--            <div class="info-drop" (click)="openPost('postDetail')">-->
+        <!--              <p class="info-text">View</p>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
       </div>
     </div>
   </div>

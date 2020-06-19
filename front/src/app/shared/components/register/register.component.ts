@@ -125,7 +125,7 @@ export class RegisterComponent implements OnInit {
 
     const mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
-      this.notify.showError('Only images are supported', 'Notifcation');
+      this.notify.showError('Only images are supported', 'Notification');
       return;
     }
 

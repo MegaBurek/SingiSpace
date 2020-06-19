@@ -9,37 +9,42 @@ import {GetUserPageSubs} from '../../store/user-store/page.actions';
 import {Store} from '@ngxs/store';
 import {GetUserThemeSubs} from '../../store/user-store/theme.action';
 import {GetUserFriends, SetLoggedIn} from '../../store/user-store/user.actions';
+import {UserAccService} from '../users/user-acc.service';
 
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
 
-  private clientUrl = `http://localhost:8080/login`;
-  private userUrl = `http://localhost:8080/userAcc`;
+  private loginUrl = `http://localhost:8080/login`;
 
   constructor(
     private notify: NotificaitionService,
     private http: HttpClient,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private userAccService: UserAccService,
   ) {
   }
 
   async login(username: string, password: string) {
     // tslint:disable-next-line:max-line-length
-    this.http.post<{ accessToken: string }>(this.clientUrl, {username, password}).subscribe(async response => {
+    this.http.post<{ accessToken: string }>(this.loginUrl, {username, password}).subscribe(async response => {
       if (response.accessToken) {
         localStorage.setItem('accessToken', response.accessToken);
         const id = this.getCurrentUserID();
         await this.store.dispatch(new GetUserThemeSubs(id));
         await this.store.dispatch(new GetUserPageSubs(id));
         await this.store.dispatch(new GetUserFriends(id));
-        await this.getCurrentUser(id).subscribe(logged => {
+        await this.userAccService.getCurrentUser(id).subscribe(logged => {
           this.store.dispatch(new SetLoggedIn(logged));
         });
-        this.notify.showSuccess('Successful Attempt', 'Notification');
-        this.router.navigate(['/home']);
+        await this.notify.showSuccess('Successful Attempt', 'Notification');
+        if (this.isAdminLogged()) {
+          await this.router.navigate(['/home']);
+        } else {
+          await this.router.navigate(['/dashboard']);
+        }
       }
     }, (err) => {
       this.notify.showError('Incorrect Username or Password', 'Notification');
@@ -80,7 +85,7 @@ export class AuthService {
     return null;
   }
 
-  isAdmin() {
+  isAdminLogged() {
     const token = localStorage.getItem('accessToken');
     if (token) {
       if (decode(token).sub === 'ROLE_ADMIN') {
@@ -91,8 +96,15 @@ export class AuthService {
     }
   }
 
-  getCurrentUser(id: string) {
-    return this.http.get<User>(this.userUrl + `/${id}`);
+  isTutor() {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      if (decode(token).sub === 'ROLE_TUTOR') {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 
   getLoggedInUsername() {
