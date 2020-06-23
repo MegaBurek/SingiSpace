@@ -14,7 +14,6 @@ import {UserState} from '../../../store/user-store/user.state';
 export class ThemesTabComponent implements OnInit {
 
   @Select(UserState.getUserThemeSubs) subbedThemes: Observable<Theme[]>;
-  selectedTheme;
 
   constructor(
     private store: Store,
@@ -25,9 +24,8 @@ export class ThemesTabComponent implements OnInit {
   ngOnInit() {
   }
 
-  openTheme(theme: Theme) {
-    this.selectedTheme = theme;
-    this.store.dispatch(new SelectTheme(this.selectedTheme));
+  openTheme(theme) {
+    this.store.dispatch(new SelectTheme(theme));
     this.router.navigate(['/theme/' + theme.name]);
   }
 

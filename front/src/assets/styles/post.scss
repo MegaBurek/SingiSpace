@@ -1,5 +1,5 @@
 .post{
-  max-height: 200px;
+  max-height: 400px;
   border-radius: 1rem;
   background-color: $bars;
   margin-bottom: 1em;
@@ -17,6 +17,11 @@
   font-family: "Raleway", "cursive";
   color: $text-color;
   margin-bottom: 5px;
+}
+
+.post-image{
+  border-radius: 1rem;
+  height: 180px;
 }
 
 .module { // line clamp container

@@ -1,7 +1,9 @@
 <h3 class="tab-title">Themes</h3>
-<ul class="tab-list">
-  <li class="tab-item" *ngFor="let theme of subbedThemes | async" (click)="openTheme(theme)">
-    <img class="tab-image img-responsive" src="https://via.placeholder.com/150" alt="">
-    <h5 class="name-label">{{theme.name}}</h5>
-  </li>
-</ul>
+<div class="tab-feed">
+  <ul class="tab-list">
+    <li class="tab-item" *ngFor="let theme of subbedThemes | async" (click)="openTheme(theme)">
+      <img class="tab-image img-responsive" src="https://via.placeholder.com/150" alt="">
+      <h5 class="name-label">{{theme.name}}</h5>
+    </li>
+  </ul>
+</div>

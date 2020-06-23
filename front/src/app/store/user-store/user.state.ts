@@ -223,13 +223,11 @@ export class UserState {
 
   @Action(UpdateTheme)
   updateTheme({getState, patchState}: StateContext<UserStateModel>, {id, theme}: UpdateTheme) {
-    return this.themesService.editTheme(id, theme).pipe(tap((theme) => {
-      const state = getState();
-      const filteredThemes = state.myThemes.filter(theme => theme.id !== id);
-      patchState({
-        myThemes: [...filteredThemes]
-      });
-    }));
+    const state = getState();
+    const filteredThemes = state.myThemes.filter(theme => theme.id !== id);
+    patchState({
+      myThemes: [...filteredThemes]
+    });
   }
 
   @Action(CreateTheme)

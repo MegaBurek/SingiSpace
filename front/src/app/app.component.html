@@ -8,6 +8,9 @@
       <div class="nav-menu-tab" (click)="toHome()">
         <img src="assets/images/icons/home.svg" class="img-responsive nav-icon ml-auto mr-auto">
       </div>
+      <div class="nav-menu-tab" (click)="toHome()" *ngIf="isAdmin()">
+        <img src="assets/images/icons/home.svg" class="img-responsive nav-icon ml-auto mr-auto">
+      </div>
       <div class="nav-menu-tab" (click)="toDiscovery()">
         <img src="assets/images/icons/search.svg" class="img-responsive nav-icon ml-auto mr-auto">
       </div>

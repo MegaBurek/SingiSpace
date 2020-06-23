@@ -1,13 +1,16 @@
 .tab-title {
   color: whitesmoke;
   font-family: "Raleway", "cursive";
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .tab-list {
   margin-bottom: 0;
   overflow: auto;
   padding: 0;
-  height: 37vh;
+  height: 250px;
+  border-radius: 1rem;
   background-color: $primary;
   scrollbar-width: thin;
 }
@@ -56,6 +59,13 @@
   text-decoration: none;
   margin-left: 0.5rem;
   color: $text-color;
+}
+
+.tab-feed{
+  overflow-y: auto;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  border-radius: 1rem;
 }
 
 .tab-item:hover {

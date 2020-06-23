@@ -36,7 +36,8 @@
               <p class="info-text">Join</p>
             </div>
           </div>
-          <div class="d-flex justify-content-center align-items-center action-box" (click)="openCreatePage('custom-modal-1')">
+          <div class="d-flex justify-content-center align-items-center action-box"
+               (click)="openCreatePage('custom-modal-1')">
             <img src="../../../../assets/images/icons/create.svg" class="img-responsive actions">
             <div class="info-drop">
               <p class="info-text">Post</p>
@@ -49,6 +50,9 @@
           <h2 class="post-title">
             {{post.title}}
           </h2>
+          <div *ngIf="post.imgContent !== ''">
+            <img [src]="post.imgContent" class="post-image">
+          </div>
           <div class="module line-clamp">
             <p class="post-text-content">
               {{post.textContent}}
@@ -68,15 +72,52 @@
     <div class="card form-card">
       <div class="card-body">
         <h5 class="card-title text-center">Create Post</h5>
-        <label class="input-label">Title</label>
-        <div class="form-label-group">
-          <input class="form-control" name="title" [(ngModel)]="post.title" type="text" required>
+        <div class="d-flex flex-row justify-content-around align-items-center">
+          <div class="modal-button" (click)="openCreateTextPost()" *ngIf="!createPostopen">
+            <img src="../assets/images/icons/text_post.svg" class="dashboard-button-image">
+            <h2 class="dashboard-button-text text-center">Text</h2>
+          </div>
+          <div class="modal-button" (click)="openCreateImagePost()" *ngIf="!createPostopen">
+            <img src="../assets/images/icons/image_post.svg" class="dashboard-button-image">
+            <h2 class="dashboard-button-text text-center">Image</h2>
+          </div>
         </div>
-        <label class="input-label">Text Content</label>
-        <div class="form-label-group">
-          <textarea class="form-control" name="textContent" [(ngModel)]="post.textContent" type="text" required></textarea>
+        <div *ngIf="textPost">
+          <label class="input-label">Title</label>
+          <div class="form-label-group">
+            <input class="form-control" name="title" [(ngModel)]="post.title" type="text" required>
+          </div>
+          <label class="input-label">Text Content</label>
+          <div class="form-label-group">
+                  <textarea class="form-control" name="textContent" [(ngModel)]="post.textContent" type="text"
+                            required></textarea>
+          </div>
+          <button class="btn text-uppercase form-button" type="submit" (click)="tryCreatePost()">Submit</button>
         </div>
-        <button class="btn text-uppercase form-button" type="submit" (click)="tryCreatePost()">Submit</button>
+        <div *ngIf="imagePost">
+          <div class="d-flex justify-content-center align-items-center action-box">
+            <label class="modal-upload">
+              <img src="../../../../assets/images/icons/add_image.png" class="img-responsive actions">
+              <input type="file" #file accept="image/*" style="display: none" (change)="preview(file.files)">
+            </label>
+            <div class="info-drop">
+              <p class="info-text">Image</p>
+            </div>
+          </div>
+          <img [src]="imageSrc || 'https://via.placeholder.com/200'" alt="your image"
+               class="post-image ml-auto mr-auto">
+          <label class="input-label text-center">Post Photo</label>
+          <label class="input-label">Title</label>
+          <div class="form-label-group">
+            <input class="form-control" name="title" [(ngModel)]="post.title" type="text" required>
+          </div>
+          <label class="input-label">Text Content</label>
+          <div class="form-label-group">
+                  <textarea class="form-control" name="textContent" [(ngModel)]="post.textContent" type="text"
+                            required></textarea>
+          </div>
+          <button class="btn text-uppercase form-button" type="submit" (click)="tryCreatePost()">Submit</button>
+        </div>
       </div>
     </div>
   </jw-modal>
@@ -85,15 +126,16 @@
     <div class="card form-card">
       <div class="card-body">
         <h5 class="card-title text-center">Create Post</h5>
-        <label class="input-label">Title</label>
-        <div class="form-label-group">
-          <input class="form-control" name="title" [(ngModel)]="post.title" type="text" required>
-        </div>
-        <label class="input-label">Text Content</label>
-        <div class="form-label-group">
-          <textarea class="form-control" name="textContent" [(ngModel)]="post.textContent" type="text" required></textarea>
-        </div>
-        <button class="btn text-uppercase form-button" type="submit" (click)="tryCreatePost()">Submit</button>
+        <!--        <label class="input-label">Title</label>-->
+        <!--        <div class="form-label-group">-->
+        <!--          <input class="form-control" name="title" [(ngModel)]="post.title" type="text" required>-->
+        <!--        </div>-->
+        <!--        <label class="input-label">Text Content</label>-->
+        <!--        <div class="form-label-group">-->
+        <!--          <textarea class="form-control" name="textContent" [(ngModel)]="post.textContent" type="text"-->
+        <!--                    required></textarea>-->
+        <!--        </div>-->
+        <!--        <button class="btn text-uppercase form-button" type="submit" (click)="tryCreatePost()">Submit</button>-->
       </div>
     </div>
   </jw-modal>

@@ -10,11 +10,12 @@
 
 .subscribed-bar {
   @include for-desktop-only {
+    box-shadow: 0 0 5px -1px #F5F5F5;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 250px;
+    width: 300px;
     background-color: $bars;
   }
 }
@@ -22,6 +23,7 @@
 .main-feed {
   overflow-y: auto;
   padding: 1.2rem;
+  box-shadow: 0 0 5px #F5F5F5;
   @include for-desktop-only {
     width: 600px;
     background-color: $bars;
@@ -34,11 +36,8 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 250px;
+    box-shadow: 0 0 5px -1px #F5F5F5;
+    width: 300px;
     background-color: $bars;
   }
-}
-
-.tab-container {
-  height: 45vh;
 }

@@ -10,7 +10,7 @@ const url = 'http://localhost:8080/upload';
 export class ImgService {
 
   private profilePhotoUrl = 'http://localhost:8080/images/uploadProfile';
-  private postPhotoUrl = 'http://localhost:8080/images/posts';
+  private postPhotoUrl = 'http://localhost:8080/images/uploadPost';
   private pagesUrl = 'http://localhost:8080/images/uploadPage';
   private themesUrl = 'http://localhost:8080/images/uploadTheme';
 
@@ -41,6 +41,14 @@ export class ImgService {
     formData.append('file', file);
 
     return this.http.post(`${this.pagesUrl}`, formData, {responseType: 'text'});
+  }
+
+  uploadPostPhoto(file) {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    return this.http.post(`${this.postPhotoUrl}`, formData, {responseType: 'text'});
   }
 
   getFiles() {

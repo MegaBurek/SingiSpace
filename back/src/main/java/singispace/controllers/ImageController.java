@@ -67,6 +67,22 @@ public class ImageController {
         }
     }
 
+    @PostMapping("/uploadPost")
+    public ResponseEntity<String> uploadPostPhoto(@RequestParam("file") MultipartFile file) {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        try {
+            imageService.savePostPhoto(file);
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/images/posts/")
+                    .path(fileName)
+                    .toUriString();
+            System.out.println(fileDownloadUri);
+            return new ResponseEntity<String>(fileDownloadUri, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("profile_photos/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getProfilePhoto(@PathVariable String filename) {
@@ -87,6 +103,14 @@ public class ImageController {
     @ResponseBody
     public ResponseEntity<Resource> getPagePhoto(@PathVariable String filename) {
         Resource file = imageService.loadPagePhoto(filename);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
+    @GetMapping("posts/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getPostPhoto(@PathVariable String filename) {
+        Resource file = imageService.loadPostPhoto(filename);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }

@@ -1,1 +1,32 @@
+.modal-upload{
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
+.modal-button{
+  cursor: pointer;
+  width: 150px;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 150px;
+  background-color: $bars;
+  .dashboard-button-text{
+    font-family: "Raleway", "cursive";
+    color: $text-color;
+    font-size: 1.3rem;
+  }
+  .dashboard-button-image{
+    width: 70px;
+    height: 70px;
+  }
+  &:hover{
+    box-shadow: 0px 0px 5px #F5F5F5;
+  }
+}

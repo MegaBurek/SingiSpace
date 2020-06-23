@@ -18,6 +18,7 @@ public class PostService{
     private PagesService pagesService;
 
     public Optional<Theme> createThemePost(String id, Post post){
+        System.out.println("This should be the post" + post.toString());
         Optional<Theme> selectedTheme = themesService.getById(id);
         selectedTheme.get().getFeed().add(post);
         themesService.updateTheme(id, selectedTheme.get());

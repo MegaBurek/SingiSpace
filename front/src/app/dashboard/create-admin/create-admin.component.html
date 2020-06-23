@@ -1,1 +1,67 @@
-<p>create-admin works!</p>
+<div class="container card-container">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Create Admin</h5>
+      <form class="form-signin">
+        <div class="register-wrapper">
+          <div class="input-container">
+            <label class="input-label">Name</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" name="name" [(ngModel)]="user.name" type="text" required
+                     autofocus>
+            </div>
+
+            <label class="input-label">Surname</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" name="surname" [(ngModel)]="user.surname" type="text"
+                     required>
+            </div>
+
+            <label class="input-label">Email</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" name="email" [(ngModel)]="user.email" type="email" required>
+            </div>
+
+            <label class="input-label">Date of Birth</label>
+            <div class="form-label-group">
+              <input class="form-control form-control-lg" name="dob" [(ngModel)]="user.dob" type="date" required>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-lg btn-block text-uppercase" type="submit" *ngIf="checkIfEmpty()"
+                (click)="openAccountCompletion('account-completion')">Proceed
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<jw-modal id="account-completion">
+  <div class="card form-card">
+    <div class="card-body">
+      <div class="d-flex flex-column justify-content-between align-items-center">
+        <h5 class="card-title text-center">Completion</h5>
+        <img [src]="imageSrc || 'https://via.placeholder.com/150'" alt="your image" class="profile-photo ml-auto mr-auto">
+        <label class="input-label text-center">Display Photo</label>
+        <input type="file" #file accept="image/*" (change)="preview(file.files)">
+
+        <label class="input-label text-left">Username</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg" name="username" [(ngModel)]="user.username" type="text" required>
+        </div>
+
+        <label class="input-label text-left">Password</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg" name="password" [(ngModel)]="user.password" type="password"
+                 required>
+        </div>
+
+        <label class="input-label text-left">Re-enter Password</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg" name="rePassword" [(ngModel)]="rePassword" type="password"
+                 required>
+        </div>
+      </div>
+      <button class="btn text-uppercase form-button" type="submit" *ngIf="checkIfCompletionEmpty()" (click)="tryRegister()">Submit</button>
+    </div>
+  </div>
+</jw-modal>

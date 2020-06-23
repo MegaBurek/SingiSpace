@@ -20,6 +20,7 @@ public class ImageService {
     private final Path ProfilePhotoroot = Paths.get("images/profile_photos");
     private final Path ThemePhotoroot = Paths.get("images/themes");
     private final Path PagePhotoroot = Paths.get("images/pages");
+    private final Path PostPhotoroot = Paths.get("images/posts");
 
     public void saveProfilePhoto(MultipartFile file){
         try {
@@ -40,6 +41,14 @@ public class ImageService {
     public void savePagePhoto(MultipartFile file){
         try {
             Files.copy(file.getInputStream(), this.PagePhotoroot.resolve(file.getOriginalFilename()));
+        } catch (Exception e){
+            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+        }
+    }
+
+    public void savePostPhoto(MultipartFile file){
+        try {
+            Files.copy(file.getInputStream(), this.PostPhotoroot.resolve(file.getOriginalFilename()));
         } catch (Exception e){
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
@@ -89,6 +98,23 @@ public class ImageService {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
+
+    public Resource loadPostPhoto(String filename) {
+        try {
+            Path file = PostPhotoroot.resolve(filename);
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+
+
 
 //    public Stream<Path> loadAll() {
 //        try {

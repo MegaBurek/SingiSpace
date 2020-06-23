@@ -1,7 +1,9 @@
 <h3 class="tab-title text-right">Friends</h3>
-<ul class="tab-list">
-  <li class="tab-item" *ngFor="let friend of userFriends | async">
-    <h5 class="name-label">{{friend.name}} {{friend.surname}}</h5>
-    <img class="tab-image img-responsive" [src]="friend.imgUrl" alt="">
-  </li>
-</ul>
+<div class="tab-feed">
+  <ul class="tab-list">
+    <li class="tab-item" *ngFor="let friend of userFriends | async">
+      <h5 class="name-label">{{friend.name}} {{friend.surname}}</h5>
+      <img class="tab-image img-responsive" [src]="friend.imgUrl" alt="">
+    </li>
+  </ul>
+</div>

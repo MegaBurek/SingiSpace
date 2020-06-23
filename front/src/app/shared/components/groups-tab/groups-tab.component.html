@@ -1,12 +1,14 @@
 <h3 class="tab-title text-right">Groups</h3>
-<ul class="tab-list">
+<div class="tab-feed">
+  <ul class="tab-list">
     <li class="tab-item" *ngFor="let group of groups">
-        <div class="tab-image-box">
-            <img class="tab-image" [src]="group.imgUrl" alt="">
-        </div>
-        <a class="tab-link" href="">
-            <h5 class="name-label">{{group.name}}</h5>
-            <div class="mb-1 text-muted">{{group.owner}}</div>
-        </a>
+      <div class="tab-image-box">
+        <img class="tab-image" [src]="group.imgUrl" alt="">
+      </div>
+      <a class="tab-link" href="">
+        <h5 class="name-label">{{group.name}}</h5>
+        <div class="mb-1 text-muted">{{group.owner}}</div>
+      </a>
     </li>
-</ul>
+  </ul>
+</div>
