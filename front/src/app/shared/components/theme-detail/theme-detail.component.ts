@@ -20,8 +20,8 @@ import {ImgService} from '../../../services/img.service';
 export class ThemeDetailComponent implements OnInit {
 
   @Select(UserState.getSelectedTheme) selectedTheme: Observable<Theme>;
-  @Select(UserState.getSelectedThemeFeed) feed: Observable<Post[]>;
   currentTheme: Theme;
+  feed: Post[];
 
   public imagePath;
   imageSrc: any;
@@ -50,6 +50,7 @@ export class ThemeDetailComponent implements OnInit {
   ) {
     this.selectedTheme.subscribe((value) => {
       this.currentTheme = value;
+      this.feed = value.feed;
     });
   }
 

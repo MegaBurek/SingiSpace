@@ -39,6 +39,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['/home']);
   }
 
+  toDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+
   toDiscovery() {
     this.router.navigate(['/discovery']);
   }

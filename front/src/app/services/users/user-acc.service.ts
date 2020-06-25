@@ -29,11 +29,11 @@ export class UserAccService {
   }
 
   registerAdmin(admin) {
-    return this.http.post<User>(this.userAccUrl + `/register/tutor`, admin);
+    return this.http.post<User>(this.userAccUrl + `/register/admin`, admin);
   }
 
   registerLearner(learner) {
-    return this.http.post<User>(this.userAccUrl + `/register/tutor`, learner);
+    return this.http.post<User>(this.userAccUrl + `/register/learner`, learner);
   }
 
   // editUser(id, user) {

@@ -40,6 +40,7 @@ import { CreateAdminComponent } from './dashboard/create-admin/create-admin.comp
 import { ManageUsersComponent } from './dashboard/manage-users/manage-users.component';
 import { FlaggedContentComponent } from './dashboard/flagged-content/flagged-content.component';
 import {AnalyticsState} from './store/analytics-store/analytics.state';
+import { DiscoveryPageComponent } from './shared/components/discovery-page/discovery-page.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {AnalyticsState} from './store/analytics-store/analytics.state';
     CreateTutorComponent,
     CreateAdminComponent,
     ManageUsersComponent,
-    FlaggedContentComponent
+    FlaggedContentComponent,
+    DiscoveryPageComponent
   ],
   imports: [
     BrowserModule,

@@ -94,13 +94,18 @@ export class CreateTutorComponent implements OnInit {
     } else if (this.user.password.length < 6) {
       this.notify.showError('Your password has less than 6 characters', 'Notification');
     } else {
-      this.imgService.uploadProfile(this.selectedFile).subscribe(
+      const selectedFileName = this.selectedFile.name;
+      const uniqueName = this.makeid(10) + selectedFileName;
+      const blob = this.selectedFile.slice(0, this.selectedFile.size);
+      const newFile = new File([blob], uniqueName);
+      this.imgService.uploadProfile(newFile).subscribe(
         imgUrl => {
           this.user.imgUrl = imgUrl.toString();
+          console.log(this.user.imgUrl);
           this.userAccService.registerTutor(this.user).subscribe(user => {
             console.log(user);
           });
-          this.notify.showSuccess('You have successfully created a tutor', 'Notification');
+          this.notify.showSuccess('You have successfully created an admin', 'Notification');
         }, error => {
           console.log(error);
           this.selectedFile = undefined;
@@ -109,6 +114,16 @@ export class CreateTutorComponent implements OnInit {
       this.selectedFile = undefined;
       this.router.navigate(['/dashboard']);
     }
+  }
+
+  makeid(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 
   validateEmail(email) {

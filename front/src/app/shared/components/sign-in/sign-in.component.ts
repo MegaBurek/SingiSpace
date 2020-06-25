@@ -3,9 +3,6 @@ import { AuthService } from '../../../services/auth/auth.service'
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotificaitionService } from 'src/app/services/notificaition.service';
-import {PagesService} from '../../../services/pages/pages.service';
-import {Store} from '@ngxs/store';
-import { GetUserPageSubs } from '../../../store/user-store/page.actions';
 
 @Component({
   selector: 'app-sign-in',
@@ -50,10 +47,6 @@ export class SignInComponent implements OnInit {
     }
     this.loading = true;
     this.loginService.login(this.f.username.value, this.f.password.value);
-  }
-
-  logout() {
-    this.loginService.logout();
   }
 
 

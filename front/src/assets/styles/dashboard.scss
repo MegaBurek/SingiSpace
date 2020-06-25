@@ -15,7 +15,6 @@
 .dashboard-column {
   border-radius: 1rem;
   padding: 0.6em;
-  border: 2px #F5F5F5;
   background-color: $primary;
   display: flex;
   flex-wrap: wrap;
@@ -28,17 +27,19 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  .dashboard-column-title-left{
+  .dashboard-column-title{
     font-family: "Raleway", "cursive";
     color: $text-color;
     font-size: 1.6rem;
+  }
+  .title-left{
     width: 35%;
   }
-  .dashboard-column-title-right{
-    font-family: "Raleway", "cursive";
-    font-size: 1.6rem;
-    color: $text-color;
+  .title-right{
     width: 60%;
+  }
+  .title-3{
+    width: 30%;
   }
 }
 
@@ -94,4 +95,41 @@
 .analytics-bar{
   width: 90%;
   height: 250px;
+}
+
+//user management system
+.user-column{
+  width: 30%;
+}
+
+.user-card{
+  padding: 0.4em;
+  border-radius: 1rem;
+  background-color: $bars;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  .user-card-photo{
+    width: 55px;
+    height: 55px;
+  }
+  .user-card-texts{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .user-card-text{
+      font-size: 1.3rem;
+    }
+  }
+  .manage-action-box{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
 }

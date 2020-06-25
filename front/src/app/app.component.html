@@ -8,8 +8,8 @@
       <div class="nav-menu-tab" (click)="toHome()">
         <img src="assets/images/icons/home.svg" class="img-responsive nav-icon ml-auto mr-auto">
       </div>
-      <div class="nav-menu-tab" (click)="toHome()" *ngIf="isAdmin()">
-        <img src="assets/images/icons/home.svg" class="img-responsive nav-icon ml-auto mr-auto">
+      <div class="nav-menu-tab" (click)="toDashboard()" *ngIf="isAdmin()">
+        <img src="assets/images/icons/dashboard.svg" class="img-responsive nav-icon ml-auto mr-auto">
       </div>
       <div class="nav-menu-tab" (click)="toDiscovery()">
         <img src="assets/images/icons/search.svg" class="img-responsive nav-icon ml-auto mr-auto">
@@ -58,9 +58,6 @@
               <a class="nav-link" (click)="onLogout()">Logout</a>
             </div>
           </div>
-        </li>
-        <li class="nav-item" *ngIf="isAdmin()">
-          <a class="nav-link" href="#">Dashboard</a>
         </li>
       </ul>
       <ul class="navbar-nav mr-auto" *ngIf="!isLoggedIn()">

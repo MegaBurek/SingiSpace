@@ -1,1 +1,81 @@
-<p>manage-users works!</p>
+<div class="card dashboard ml-auto mr-auto">
+  <div class="card-body">
+    <h5 class="card-title text-center detail-card-title" style="margin: 0">User Management System</h5>
+    <div class="dashboard-column-titles">
+      <h2 class="dashboard-column-title title-3 text-center">Learners</h2>
+      <h2 class="dashboard-column-title title-3 text-center">Tutors</h2>
+      <h2 class="dashboard-column-title title-3 text-center">Admins</h2>
+    </div>
+    <div class="dashboard-main">
+      <div class="dashboard-column user-column">
+        <div class="user-card" *ngFor="let learner of learners">
+          <img class="profile-photo user-card-photo" [src]="learner.imgUrl">
+          <div class="user-card-texts">
+            <h2 class="detail-card-specific-text user-card-text">{{learner.name}}</h2>
+            <h2 class="detail-card-specific-text user-card-text">{{learner.surname}}</h2>
+          </div>
+          <div class="manage-action-box">
+            <div class="d-flex justify-content-center align-items-center action-box">
+              <img src="../../../../assets/images/icons/flag.svg" class="img-responsive actions">
+              <div class="info-drop">
+                <p class="info-text">Flags</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center action-box">
+              <img src="../../../../assets/images/icons/suspend.svg" class="img-responsive actions">
+              <div class="info-drop">
+                <p class="info-text">Suspend</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-column user-column">
+        <div class="user-card" *ngFor="let tutor of tutors">
+          <img class="profile-photo user-card-photo" [src]="tutor.imgUrl">
+          <div class="user-card-texts">
+            <h2 class="detail-card-specific-text user-card-text">{{tutor.name}}</h2>
+            <h2 class="detail-card-specific-text user-card-text">{{tutor.surname}}</h2>
+          </div>
+          <div class="manage-action-box">
+            <div class="d-flex justify-content-center align-items-center action-box">
+              <img src="../../../../assets/images/icons/flag.svg" class="img-responsive actions">
+              <div class="info-drop">
+                <p class="info-text">Flags</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center action-box">
+              <img src="../../../../assets/images/icons/suspend.svg" class="img-responsive actions">
+              <div class="info-drop">
+                <p class="info-text">Suspend</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-column user-column">
+        <div class="user-card" *ngFor="let admin of admins">
+          <img class="profile-photo user-card-photo" [src]="admin.imgUrl">
+          <div class="user-card-texts">
+            <h2 class="detail-card-specific-text user-card-text">{{admin.name}}</h2>
+            <h2 class="detail-card-specific-text user-card-text">{{admin.surname}}</h2>
+          </div>
+          <div class="manage-action-box">
+            <div class="d-flex justify-content-center align-items-center action-box">
+              <img src="../../../../assets/images/icons/flag.svg" class="img-responsive actions">
+              <div class="info-drop">
+                <p class="info-text">Flags</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center action-box">
+              <img src="../../../../assets/images/icons/suspend.svg" class="img-responsive actions">
+              <div class="info-drop">
+                <p class="info-text">Suspend</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

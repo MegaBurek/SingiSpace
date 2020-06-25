@@ -41,12 +41,13 @@ export class AuthService {
         });
         await this.notify.showSuccess('Successful Attempt', 'Notification');
         if (this.isAdminLogged()) {
-          await this.router.navigate(['/home']);
-        } else {
           await this.router.navigate(['/dashboard']);
+        } else {
+          await this.router.navigate(['/home']);
         }
       }
     }, (err) => {
+      console.error(err);
       this.notify.showError('Incorrect Username or Password', 'Notification');
     });
     return;
@@ -86,13 +87,11 @@ export class AuthService {
   }
 
   isAdminLogged() {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      if (decode(token).sub === 'ROLE_ADMIN') {
-        return true;
-      } else {
-        return false;
-      }
+    const role = this.getCurrentRoles();
+    if (role[0] === 'ROLE_ADMIN') {
+      return true;
+    } else {
+      return false;
     }
   }
 

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import singispace.controllers.UserAccController;
+import singispace.dto.UserViewDTO;
 import singispace.service.users.AdminService;
 
 import java.util.Optional;
@@ -19,6 +20,21 @@ public class AdminController {
 
     @Autowired
     UserAccController userAccController;
+
+    @GetMapping(value = "/getAdmins")
+    public ResponseEntity<Iterable<UserViewDTO>> getAllAdmins() {
+        return new ResponseEntity<Iterable<UserViewDTO>>(adminService.getAllAdmins(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getLearners")
+    public ResponseEntity<Iterable<UserViewDTO>> getAllLearners() {
+        return new ResponseEntity<Iterable<UserViewDTO>>(adminService.getAllLearners(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getTutors")
+    public ResponseEntity<Iterable<UserViewDTO>> getAllTutors() {
+        return new ResponseEntity<Iterable<UserViewDTO>>(adminService.getAllTutors(), HttpStatus.OK);
+    }
 
 //    @GetMapping(value="/all")
 //    public ResponseEntity<Iterable<Admin>> getAll() {

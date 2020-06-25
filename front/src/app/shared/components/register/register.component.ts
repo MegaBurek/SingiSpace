@@ -8,6 +8,7 @@ import {ModalService} from '../../../_modal';
 import {Observable} from 'rxjs';
 import {ImgService} from '../../../services/img.service';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {UserAccService} from '../../../services/users/user-acc.service';
 
 @Component({
   selector: 'app-register',
@@ -47,7 +48,8 @@ export class RegisterComponent implements OnInit {
     private store: Store,
     private router: Router,
     private modal: ModalService,
-    private imgService: ImgService
+    private imgService: ImgService,
+    private userAccService: UserAccService
   ) {
   }
 
@@ -96,10 +98,16 @@ export class RegisterComponent implements OnInit {
     } else if (this.user.password.length < 6) {
       this.notify.showError('Your password has less than 6 characters', 'Notification');
     } else {
-      this.imgService.uploadProfile(this.selectedFile).subscribe(
+      const selectedFileName = this.selectedFile.name;
+      const uniqueName = this.makeid(10) + selectedFileName;
+      const blob = this.selectedFile.slice(0, this.selectedFile.size);
+      const newFile = new File([blob], uniqueName);
+      this.imgService.uploadProfile(newFile).subscribe(
         imgUrl => {
           this.user.imgUrl = imgUrl.toString();
-          this.store.dispatch(new RegisterUser(this.user));
+          this.userAccService.registerLearner(this.user).subscribe((value) => {
+            console.log(value);
+          });
           this.notify.showSuccess('You have successfully registered', 'Notification');
         }, error => {
           console.log(error);
@@ -110,6 +118,16 @@ export class RegisterComponent implements OnInit {
       this.selectedFile = undefined;
       this.router.navigate(['/login']);
     }
+  }
+
+  makeid(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 
   validateEmail(email) {

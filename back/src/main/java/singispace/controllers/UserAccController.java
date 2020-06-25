@@ -44,7 +44,7 @@ public class UserAccController {
     }
 
     @PostMapping(value="/register/tutor")
-    public ResponseEntity<User> addTutor(@RequestBody User user){
+    public ResponseEntity<> addTutor(@RequestBody User user){
         userAccService.addTutor(user);
         return new ResponseEntity<User>(user, HttpStatus.CREATED);
     }

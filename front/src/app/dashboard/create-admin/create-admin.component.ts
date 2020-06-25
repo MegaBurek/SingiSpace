@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../model/user';
 import {NotificaitionService} from '../../services/notificaition.service';
 import {Store} from '@ngxs/store';
@@ -93,9 +93,14 @@ export class CreateAdminComponent implements OnInit {
     } else if (this.user.password.length < 6) {
       this.notify.showError('Your password has less than 6 characters', 'Notification');
     } else {
-      this.imgService.uploadProfile(this.selectedFile).subscribe(
+      const selectedFileName = this.selectedFile.name;
+      const uniqueName = this.makeid(10) + selectedFileName;
+      const blob = this.selectedFile.slice(0, this.selectedFile.size);
+      const newFile = new File([blob], uniqueName);
+      this.imgService.uploadProfile(newFile).subscribe(
         imgUrl => {
           this.user.imgUrl = imgUrl.toString();
+          console.log(this.user.imgUrl);
           this.userAccService.registerAdmin(this.user).subscribe(user => {
             console.log(user);
           });
@@ -108,6 +113,16 @@ export class CreateAdminComponent implements OnInit {
       this.selectedFile = undefined;
       this.router.navigate(['/dashboard']);
     }
+  }
+
+  makeid(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 
   validateEmail(email) {
