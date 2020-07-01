@@ -35,6 +35,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.loginService.isAdminLogged();
   }
 
+  isTutor() {
+    return this.loginService.isTutorLogged();
+  }
+
   toHome() {
     this.router.navigate(['/home']);
   }

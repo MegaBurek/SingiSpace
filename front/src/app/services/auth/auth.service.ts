@@ -95,7 +95,7 @@ export class AuthService {
     }
   }
 
-  isTutor() {
+  isTutorLogged() {
     const token = localStorage.getItem('accessToken');
     if (token) {
       if (decode(token).sub === 'ROLE_TUTOR') {

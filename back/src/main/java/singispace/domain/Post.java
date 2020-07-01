@@ -1,6 +1,13 @@
 package singispace.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Post {
+
+    @Id
+    private String id;
 
     private String title;
 
@@ -34,6 +41,14 @@ public class Post {
         this.owner = owner;
         this.comments = comments;
         this.likes = likes;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Theme} from 'src/app/model/theme';
 import {HttpClient} from '@angular/common/http';
+import {Post} from '../../model/post';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class ThemesService {
 
   deleteThemeByID(id) {
     return this.http.delete<string>(this.baseUrl + `/${id}`);
+  }
+
+  getThemeFeed(id) {
+    return this.http.get<Post[]>(this.baseUrl + `/feed` + `/${id}`);
   }
 
   editTheme(id, theme) {

@@ -21,13 +21,13 @@ public class Theme {
 
     private List<String> members;
 
-    private List<Post> feed;
+    private List<String> feed;
 
     private List<String> categories;
 
     public Theme() {}
 
-    public Theme(String id, String name, String desc, String owner, String imgUrl, List<String> members, List<Post> feed, List<String> categories) {
+    public Theme(String id, String name, String desc, String owner, String imgUrl, List<String> members, List<String> feed, List<String> categories) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -38,7 +38,7 @@ public class Theme {
         this.imgUrl = imgUrl;
     }
 
-    public Theme(String name, String desc, String owner, String imgUrl, List<String> members, List<Post> feed, List<String> categories) {
+    public Theme(String name, String desc, String owner, String imgUrl, List<String> members, List<String> feed, List<String> categories) {
         this.name = name;
         this.desc = desc;
         this.owner = owner;
@@ -96,11 +96,11 @@ public class Theme {
         this.members = members;
     }
 
-    public List<Post> getFeed() {
+    public List<String> getFeed() {
         return feed;
     }
 
-    public void setFeed(List<Post> feed) {
+    public void setFeed(List<String> feed) {
         this.feed = feed;
     }
 

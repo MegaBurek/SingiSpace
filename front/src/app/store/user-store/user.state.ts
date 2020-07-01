@@ -12,10 +12,11 @@ import {FriendsService} from '../../services/friends/friends.service';
 import {Page} from '../../model/page';
 import {Theme} from '../../model/theme';
 import {CreatePage, DeletePage, GetPage, GetUserPageSubs, UpdatePage} from './page.actions';
-import {CreatePost, CreateTheme, DeleteTheme, GetTheme, GetUserThemeSubs, SelectTheme, UpdateTheme} from './theme.action';
+import {CreatePost, CreateTheme, DeleteTheme, GetTheme, GetThemeFeed, GetUserThemeSubs, SelectTheme, UpdateTheme} from './theme.action';
 import {ThemesService} from '../../services/themes/themes.service';
 import {PostsService} from '../../services/posts/posts.service';
 import {PagesService} from '../../services/pages/pages.service';
+import {Post} from '../../model/post';
 
 
 export class UserStateModel {
@@ -28,6 +29,7 @@ export class UserStateModel {
   subbedThemes: Theme[];
   myThemes: Theme[];
   selectedTheme: Theme;
+  selectedThemeFeed: Post[];
 }
 
 @State<UserStateModel>({
@@ -52,6 +54,7 @@ export class UserStateModel {
     selectedTheme: {
       id: null, name: null, desc: null, feed: null, members: null, owner: null, imgUrl: null, categories: null
     }
+    , selectedThemeFeed: []
   }
 })
 export class UserState {
@@ -76,7 +79,7 @@ export class UserState {
 
   @Selector()
   static getSelectedThemeFeed(state: UserStateModel) {
-    return state.selectedTheme.feed;
+    return state.selectedThemeFeed;
   }
 
   @Selector()
@@ -188,6 +191,15 @@ export class UserState {
         selectedTheme: theme
       });
     })));
+  }
+
+  @Action(GetThemeFeed)
+  getThemeFeed({patchState}: StateContext<UserStateModel>, {id}: GetThemeFeed) {
+    return this.themesService.getThemeFeed(id).pipe(tap((themeFeed) => {
+      patchState({
+        selectedThemeFeed: themeFeed
+      });
+    }));
   }
 
   @Action(SelectTheme)

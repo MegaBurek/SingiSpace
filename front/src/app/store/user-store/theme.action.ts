@@ -36,6 +36,13 @@ export class GetTheme {
   }
 }
 
+export class GetThemeFeed {
+  static readonly type = '[Theme API] Get Theme Feed';
+
+  constructor(public id: string) {
+  }
+}
+
 export class SelectTheme {
   static readonly type = '[Theme API] Select Theme';
 

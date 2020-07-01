@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {ModalService} from '../../../_modal';
 import {Post} from '../../../model/post';
 import {NotificaitionService} from '../../../services/notificaition.service';
-import {CreatePost, UpdateTheme} from '../../../store/user-store/theme.action';
+import {CreatePost, GetThemeFeed, UpdateTheme} from '../../../store/user-store/theme.action';
 import {error} from 'util';
 import {PostsService} from '../../../services/posts/posts.service';
 import {UserState} from '../../../store/user-store/user.state';
@@ -20,8 +20,8 @@ import {ImgService} from '../../../services/img.service';
 export class ThemeDetailComponent implements OnInit {
 
   @Select(UserState.getSelectedTheme) selectedTheme: Observable<Theme>;
+  @Select(UserState.getSelectedThemeFeed) selectedThemeFeed: Observable<Post[]>;
   currentTheme: Theme;
-  feed: Post[];
 
   public imagePath;
   imageSrc: any;
@@ -32,6 +32,7 @@ export class ThemeDetailComponent implements OnInit {
   createPostopen = false;
 
   post: Post = {
+    id: '',
     title: '',
     owner: '',
     textContent: '',
@@ -50,12 +51,10 @@ export class ThemeDetailComponent implements OnInit {
   ) {
     this.selectedTheme.subscribe((value) => {
       this.currentTheme = value;
-      this.feed = value.feed;
     });
   }
 
   ngOnInit() {
-    // this.store.dispatch(new GetSelectedThemeFeed());
   }
 
   tryCreatePost() {
@@ -85,12 +84,14 @@ export class ThemeDetailComponent implements OnInit {
             console.error(error2);
           });
       } else {
-        this.imgService.uploadPostPhoto(this.selectedFile).subscribe((downloadUrl) => {
+        const selectedFileName = this.selectedFile.name;
+        const uniqueName = this.makeid(10) + selectedFileName;
+        const blob = this.selectedFile.slice(0, this.selectedFile.size);
+        const newFile = new File([blob], uniqueName);
+        this.imgService.uploadPostPhoto(newFile).subscribe((downloadUrl) => {
           this.post.imgContent = downloadUrl;
-          this.currentTheme.feed.push(this.post);
-          console.log(this.post);
-          this.postsService.createThemePost(this.currentTheme.id, this.post).subscribe((updatedTheme) => {
-            this.store.dispatch(new UpdateTheme(updatedTheme.id, updatedTheme));
+          this.postsService.createThemePost(this.currentTheme.id, this.post).subscribe(_ => {
+            this.store.dispatch(new GetThemeFeed(this.currentTheme.id));
             this.closeCreatePage('custom-modal-1');
             this.textPost = false;
             this.createPostopen = false;
@@ -105,6 +106,16 @@ export class ThemeDetailComponent implements OnInit {
 
     }
   }
+  makeid(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
 
   openCreatePage(id: string) {
     this.modalService.open(id);
