@@ -11,12 +11,10 @@ import {Friend} from '../../model/friend';
 import {FriendsService} from '../../services/friends/friends.service';
 import {Page} from '../../model/page';
 import {Theme} from '../../model/theme';
-import {CreatePage, DeletePage, GetPage, GetUserPageSubs, UpdatePage} from './page.actions';
-import {CreatePost, CreateTheme, DeleteTheme, GetTheme, GetThemeFeed, GetUserThemeSubs, SelectTheme, UpdateTheme} from './theme.action';
+import {GetUserPageSubs} from './page.actions';
+import {GetUserThemeSubs} from './theme.action';
 import {ThemesService} from '../../services/themes/themes.service';
-import {PostsService} from '../../services/posts/posts.service';
 import {PagesService} from '../../services/pages/pages.service';
-import {Post} from '../../model/post';
 
 
 export class UserStateModel {
@@ -25,11 +23,9 @@ export class UserStateModel {
   loggedInUser: User;
   subbedPages: Page[];
   myPages: Page[];
-  selectedPage: Page;
   subbedThemes: Theme[];
   myThemes: Theme[];
-  selectedTheme: Theme;
-  selectedThemeFeed: Post[];
+
 }
 
 @State<UserStateModel>({
@@ -46,15 +42,8 @@ export class UserStateModel {
     },
     subbedPages: [],
     myPages: [],
-    selectedPage: {
-      id: null, name: null, desc: null, feed: null, members: null, owner: null, imgUrl: null, categories: null
-    },
     subbedThemes: [],
-    myThemes: [],
-    selectedTheme: {
-      id: null, name: null, desc: null, feed: null, members: null, owner: null, imgUrl: null, categories: null
-    }
-    , selectedThemeFeed: []
+    myThemes: []
   }
 })
 export class UserState {
@@ -62,8 +51,7 @@ export class UserState {
     private userAccService: UserAccService,
     private friendsService: FriendsService,
     private themesService: ThemesService,
-    private pagesService: PagesService,
-    private postsService: PostsService
+    private pagesService: PagesService
   ) {
   }
 
@@ -73,23 +61,8 @@ export class UserState {
   }
 
   @Selector()
-  static getSelectedTheme(state: UserStateModel) {
-    return state.selectedTheme;
-  }
-
-  @Selector()
-  static getSelectedThemeFeed(state: UserStateModel) {
-    return state.selectedThemeFeed;
-  }
-
-  @Selector()
   static getUserThemeSubs(state: UserStateModel) {
     return state.subbedThemes;
-  }
-
-  @Selector()
-  static getSelectedPage(state: UserStateModel) {
-    return state.selectedPage;
   }
 
   @Selector()
@@ -100,6 +73,11 @@ export class UserState {
   @Selector()
   static getLoggedInUser(state: UserStateModel) {
     return state.loggedInUser;
+  }
+
+  @Selector()
+  static getLoggedInUserId(state: UserStateModel) {
+    return state.loggedInUser.id;
   }
 
   @Selector()
@@ -133,47 +111,6 @@ export class UserState {
   }
 
   // Page actions
-  @Action(GetPage)
-  getPage({patchState}: StateContext<UserStateModel>, {id}: GetPage) {
-    return this.pagesService.getPageByID(id).pipe(tap((page => {
-      patchState({
-        selectedPage: page
-      });
-    })));
-  }
-
-  @Action(DeletePage)
-  deletePage({getState, patchState}: StateContext<UserStateModel>, {id}: DeletePage) {
-    return this.pagesService.deletePageByID(id).pipe(tap((page) => {
-      const state = getState();
-      const filteredPages = state.myPages.filter(page => page.id !== id);
-      patchState({
-        myPages: [...filteredPages]
-      });
-    }));
-  }
-
-  @Action(UpdatePage)
-  updatePage({getState, patchState}: StateContext<UserStateModel>, {id}: UpdatePage, {page}: UpdatePage) {
-    return this.pagesService.editPage(id, page).pipe(tap((page) => {
-      const state = getState();
-      const filteredPages = state.myPages.filter(page => page.id !== id);
-      patchState({
-        myPages: [...filteredPages]
-      });
-    }));
-  }
-
-  @Action(CreatePage)
-  addPage({getState, patchState}: StateContext<UserStateModel>, {page}: CreatePage) {
-    return this.pagesService.createPage(page).pipe(tap((resultPage) => {
-      const state = getState();
-      patchState({
-        myPages: [...state.myPages, resultPage]
-      });
-    }));
-  }
-
   @Action(GetUserPageSubs)
   getUserPageSubs({patchState}: StateContext<UserStateModel>, {id}: GetUserPageSubs) {
     return this.pagesService.getUserPageSubs(id).pipe(tap((resultPages) => {
@@ -184,74 +121,6 @@ export class UserState {
   }
 
   // Theme actions
-  @Action(GetTheme)
-  getTheme({patchState}: StateContext<UserStateModel>, {id}: GetTheme) {
-    return this.themesService.getThemeByID(id).pipe(tap((theme => {
-      patchState({
-        selectedTheme: theme
-      });
-    })));
-  }
-
-  @Action(GetThemeFeed)
-  getThemeFeed({patchState}: StateContext<UserStateModel>, {id}: GetThemeFeed) {
-    return this.themesService.getThemeFeed(id).pipe(tap((themeFeed) => {
-      patchState({
-        selectedThemeFeed: themeFeed
-      });
-    }));
-  }
-
-  @Action(SelectTheme)
-  selectTheme({patchState}: StateContext<UserStateModel>, {theme}: SelectTheme) {
-    patchState({
-      selectedTheme: theme
-    });
-  }
-
-  @Action(CreatePost)
-  createPost({getState, patchState}: StateContext<UserStateModel>, {id}: CreatePost, {post}: CreatePost) {
-    console.log('Here is the {post} thing: ' + post + ' id: ' + id);
-    return this.postsService.createThemePost(id, post).pipe(tap((theme) => {
-      console.log('Here is the tap thing: ' + theme);
-      const state = getState();
-      const filteredThemes = state.subbedThemes.filter(theme => theme.id !== id);
-      patchState({
-        subbedThemes: [...filteredThemes]
-      });
-    }));
-  }
-
-  @Action(DeleteTheme)
-  deleteTheme({getState, patchState}: StateContext<UserStateModel>, {id}: DeleteTheme) {
-    return this.themesService.deleteThemeByID(id).pipe(tap((theme) => {
-      const state = getState();
-      const filteredThemes = state.myThemes.filter(theme => theme.id !== id);
-      patchState({
-        myThemes: [...filteredThemes]
-      });
-    }));
-  }
-
-  @Action(UpdateTheme)
-  updateTheme({getState, patchState}: StateContext<UserStateModel>, {id, theme}: UpdateTheme) {
-    const state = getState();
-    const filteredThemes = state.myThemes.filter(theme => theme.id !== id);
-    patchState({
-      myThemes: [...filteredThemes]
-    });
-  }
-
-  @Action(CreateTheme)
-  addTheme({getState, patchState}: StateContext<UserStateModel>, {theme}: CreateTheme) {
-    return this.themesService.createTheme(theme).pipe(tap((resultTheme) => {
-      const state = getState();
-      patchState({
-        myThemes: [...state.myThemes, resultTheme]
-      });
-    }));
-  }
-
   @Action(GetUserThemeSubs)
   getUserThemeSubs({patchState}: StateContext<UserStateModel>, {id}: GetUserThemeSubs) {
     return this.themesService.getUserThemeSubs(id).pipe(tap((resultThemes) => {

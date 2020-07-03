@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import singispace.domain.Post;
 import singispace.domain.Theme;
+import singispace.repositories.ThemesRepository;
 import singispace.service.PostService;
 import singispace.service.ThemesService;
 
@@ -21,6 +22,9 @@ public class ThemeController {
     private ThemesService themesService;
 
     @Autowired
+    private ThemesRepository themesRepository;
+
+    @Autowired
     private PostService postService;
 
     @GetMapping(value = "/{id}")
@@ -32,9 +36,18 @@ public class ThemeController {
         return new ResponseEntity<Theme>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/feed/{id}")
-    public ResponseEntity<Iterable<Post>> getThemeFeed(@PathVariable String id) {
-        return new ResponseEntity<>(postService.getThemeFeed(id), HttpStatus.OK);
+    @GetMapping(value = "/theme/{name}")
+    public ResponseEntity<Theme> getThemeByName(@PathVariable String name) {
+        Optional<Theme> theme = themesRepository.findByName(name);
+        if (theme.isPresent()) {
+            return new ResponseEntity<Theme>(theme.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<Theme>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/feed/{name}")
+    public ResponseEntity<Iterable<Post>> getThemeFeed(@PathVariable String name) {
+        return new ResponseEntity<>(postService.getThemeFeed(name), HttpStatus.OK);
     }
 
 //    @GetMapping(value="/theme/{name}")

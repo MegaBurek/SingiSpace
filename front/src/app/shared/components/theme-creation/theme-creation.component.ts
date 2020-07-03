@@ -4,7 +4,6 @@ import {NotificaitionService} from '../../../services/notificaition.service';
 import {Store} from '@ngxs/store';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth.service';
-import {CreateTheme} from '../../../store/user-store/theme.action';
 import {ModalService} from '../../../_modal';
 import {ImgService} from '../../../services/img.service';
 import {CreatePage} from '../../../store/user-store/page.actions';
@@ -67,7 +66,6 @@ export class ThemeCreationComponent implements OnInit {
       this.imgService.uploadThemePhoto(this.selectedFile).subscribe(
         imgUrl => {
           this.theme.imgUrl = imgUrl.toString();
-          this.store.dispatch(new CreateTheme(this.theme));
           this.notify.showSuccess('Theme created successfully', 'Notification');
         }, error1 => {
           console.log(error1);

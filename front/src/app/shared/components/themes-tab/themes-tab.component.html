@@ -1,7 +1,7 @@
 <h3 class="tab-title">Themes</h3>
 <div class="tab-feed">
   <ul class="tab-list">
-    <li class="tab-item" *ngFor="let theme of subbedThemes | async" (click)="openTheme(theme)">
+    <li class="tab-item" *ngFor="let theme of subbedThemes | async" routerLink="/theme/{{theme.name}}">
       <img class="tab-image img-responsive" src="https://via.placeholder.com/150" alt="">
       <h5 class="name-label">{{theme.name}}</h5>
     </li>

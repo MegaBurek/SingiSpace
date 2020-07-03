@@ -1,16 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Theme} from '../../../model/theme';
-import {Select, Store} from '@ngxs/store';
-import {Observable} from 'rxjs';
+import {Store} from '@ngxs/store';
 import {ModalService} from '../../../_modal';
 import {Post} from '../../../model/post';
 import {NotificaitionService} from '../../../services/notificaition.service';
-import {CreatePost, GetThemeFeed, UpdateTheme} from '../../../store/user-store/theme.action';
-import {error} from 'util';
 import {PostsService} from '../../../services/posts/posts.service';
-import {UserState} from '../../../store/user-store/user.state';
 import {ImgService} from '../../../services/img.service';
+import {ThemesService} from '../../../services/themes/themes.service';
+import {Observable} from 'rxjs';
+import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-theme-detail',
@@ -19,9 +18,8 @@ import {ImgService} from '../../../services/img.service';
 })
 export class ThemeDetailComponent implements OnInit {
 
-  @Select(UserState.getSelectedTheme) selectedTheme: Observable<Theme>;
-  @Select(UserState.getSelectedThemeFeed) selectedThemeFeed: Observable<Post[]>;
-  currentTheme: Theme;
+  selectedTheme: Observable<Theme>;
+  selectedThemeFeed: Observable<Post[]>;
 
   public imagePath;
   imageSrc: any;
@@ -32,7 +30,7 @@ export class ThemeDetailComponent implements OnInit {
   createPostopen = false;
 
   post: Post = {
-    id: '',
+    id: null,
     title: '',
     owner: '',
     textContent: '',
@@ -47,11 +45,13 @@ export class ThemeDetailComponent implements OnInit {
     private modalService: ModalService,
     private notify: NotificaitionService,
     private postsService: PostsService,
-    private imgService: ImgService
+    private imgService: ImgService,
+    private themesService: ThemesService,
+    private authService: AuthService,
   ) {
-    this.selectedTheme.subscribe((value) => {
-      this.currentTheme = value;
-    });
+    const name = this.activatedRoute.snapshot.params.themeName;
+    this.selectedTheme = this.themesService.getThemeByName(name);
+    this.selectedThemeFeed = this.themesService.getThemeFeed(name);
   }
 
   ngOnInit() {
@@ -67,22 +67,19 @@ export class ThemeDetailComponent implements OnInit {
     } else if (this.post.textContent.length <= 10) {
       this.notify.showError('Please enter at least 10 characters', 'Notification');
     } else {
+      this.post.owner = this.authService.getCurrentUserID();
       if (this.textPost === true) {
-        this.currentTheme.feed.push(this.post);
-        this.postsService.createThemePost(this.currentTheme.id, this.post)
-          .subscribe((theme) => {
-            this.store.dispatch(new UpdateTheme(theme.id, theme))
-              .subscribe(_ => {
-                this.closeCreatePage('custom-modal-1');
-                this.textPost = false;
-                this.createPostopen = false;
-                this.notify.showSuccess('You have successfully created a post', 'Notification');
-              }, error1 => {
-                console.error(error1);
-              });
-          }, error2 => {
-            console.error(error2);
+        this.selectedTheme.subscribe((theme) => {
+          this.postsService.createThemePost(theme.id, this.post).subscribe(_ => {
+            this.selectedThemeFeed = this.themesService.getThemeFeed(theme.name);
+            this.closeCreatePage('custom-modal-1');
+            this.textPost = false;
+            this.createPostopen = false;
+            this.notify.showSuccess('You have successfully created a post', 'Notification');
+          }, error1 => {
+            console.error(error1);
           });
+        });
       } else {
         const selectedFileName = this.selectedFile.name;
         const uniqueName = this.makeid(10) + selectedFileName;
@@ -90,14 +87,16 @@ export class ThemeDetailComponent implements OnInit {
         const newFile = new File([blob], uniqueName);
         this.imgService.uploadPostPhoto(newFile).subscribe((downloadUrl) => {
           this.post.imgContent = downloadUrl;
-          this.postsService.createThemePost(this.currentTheme.id, this.post).subscribe(_ => {
-            this.store.dispatch(new GetThemeFeed(this.currentTheme.id));
-            this.closeCreatePage('custom-modal-1');
-            this.textPost = false;
-            this.createPostopen = false;
-            this.notify.showSuccess('You have successfully created a post', 'Notification');
-          }, error1 => {
-            console.error(error1);
+          this.selectedTheme.subscribe((theme) => {
+            this.postsService.createThemePost(theme.id, this.post).subscribe(_ => {
+              this.selectedThemeFeed = this.themesService.getThemeFeed(theme.name);
+              this.closeCreatePage('custom-modal-1');
+              this.imagePost = false;
+              this.createPostopen = false;
+              this.notify.showSuccess('You have successfully created a post', 'Notification');
+            }, error1 => {
+              console.error(error1);
+            });
           });
         }, error2 => {
           console.error(error2);
@@ -106,6 +105,7 @@ export class ThemeDetailComponent implements OnInit {
 
     }
   }
+
   makeid(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

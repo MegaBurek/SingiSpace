@@ -26,6 +26,16 @@ public class Post {
 
     }
 
+    public Post(String id, String title, String textContent, String imgContent, String owner, Comment[] comments, Like[] likes) {
+        this.id = id;
+        this.title = title;
+        this.textContent = textContent;
+        this.imgContent = imgContent;
+        this.owner = owner;
+        this.comments = comments;
+        this.likes = likes;
+    }
+
     public Post(String title, String textContent, String imgContent, String owner, Comment[] comments, Like[] likes) {
         this.title = title;
         this.textContent = textContent;

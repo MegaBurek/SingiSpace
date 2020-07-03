@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
 import {catchError, map} from 'rxjs/operators';
+import {Post} from '../../model/post';
+import {Theme} from '../../model/theme';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,14 @@ export class PagesService {
 
   getUserPageSubs(id) {
     return this.http.get<Page[]>(this.baseUrl + `/user-subscribed` + `/${id}`);
+  }
+
+  getPageByName(name) {
+    return this.http.get<Theme>(this.baseUrl + `/page` + `/${name}`);
+  }
+
+  getPageFeed(name) {
+    return this.http.get<Post[]>(this.baseUrl + `/feed` + `/${name}`);
   }
 
   getPageByID(id) {

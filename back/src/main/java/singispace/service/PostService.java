@@ -6,6 +6,7 @@ import singispace.domain.Page;
 import singispace.domain.Post;
 import singispace.domain.Theme;
 import singispace.repositories.PostRepository;
+import singispace.repositories.ThemesRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,9 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private ThemesRepository themesRepository;
 
     @Autowired
     private PagesService pagesService;
@@ -35,12 +39,12 @@ public class PostService {
         return selectedTheme;
     }
 
-    public Iterable<Post> getThemeFeed(String id) {
+    public Iterable<Post> getThemeFeed(String name) {
         List<String> postIds;
         List<Post> posts = new ArrayList();
         Post post;
 
-        Optional<Theme> selectedTheme = themesService.getById(id);
+        Optional<Theme> selectedTheme = themesRepository.findByName(name);
         postIds = selectedTheme.get().getFeed();
         for (String postId : postIds) {
             post = getById(postId).get();

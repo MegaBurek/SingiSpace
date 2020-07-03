@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Theme} from 'src/app/model/theme';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {GetTheme, GetThemeFeed, SelectTheme} from '../../../store/user-store/theme.action';
-import {Router} from '@angular/router';
 import {UserState} from '../../../store/user-store/user.state';
 
 @Component({
@@ -16,18 +14,10 @@ export class ThemesTabComponent implements OnInit {
   @Select(UserState.getUserThemeSubs) subbedThemes: Observable<Theme[]>;
 
   constructor(
-    private store: Store,
-    private router: Router
   ) {
   }
 
   ngOnInit() {
-  }
-
-  openTheme(theme) {
-    this.store.dispatch(new SelectTheme(theme));
-    this.store.dispatch(new GetThemeFeed(theme.id));
-    this.router.navigate(['/theme/' + theme.name]);
   }
 
 }

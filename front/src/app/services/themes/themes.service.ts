@@ -23,8 +23,8 @@ export class ThemesService {
     return this.http.delete<string>(this.baseUrl + `/${id}`);
   }
 
-  getThemeFeed(id) {
-    return this.http.get<Post[]>(this.baseUrl + `/feed` + `/${id}`);
+  getThemeFeed(name) {
+    return this.http.get<Post[]>(this.baseUrl + `/feed` + `/${name}`);
   }
 
   editTheme(id, theme) {
