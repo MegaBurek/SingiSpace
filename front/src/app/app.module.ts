@@ -41,6 +41,7 @@ import { ManageUsersComponent } from './dashboard/manage-users/manage-users.comp
 import { FlaggedContentComponent } from './dashboard/flagged-content/flagged-content.component';
 import {AnalyticsState} from './store/analytics-store/analytics.state';
 import { DiscoveryPageComponent } from './shared/components/discovery-page/discovery-page.component';
+import { MyThemesComponent } from './shared/components/my-themes/my-themes.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { DiscoveryPageComponent } from './shared/components/discovery-page/disco
     CreateAdminComponent,
     ManageUsersComponent,
     FlaggedContentComponent,
-    DiscoveryPageComponent
+    DiscoveryPageComponent,
+    MyThemesComponent
   ],
   imports: [
     BrowserModule,

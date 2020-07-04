@@ -8,6 +8,8 @@ import {AuthService} from '../../../services/auth/auth.service';
 import {error} from 'util';
 import {ModalService} from '../../../_modal';
 import {ImgService} from '../../../services/img.service';
+import {PagesService} from '../../../services/pages/pages.service';
+import {CreateTheme} from '../../../store/user-store/theme.action';
 
 @Component({
   selector: 'app-page-creation',
@@ -42,7 +44,8 @@ export class PageCreationComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private modal: ModalService,
-    private imgService: ImgService
+    private imgService: ImgService,
+    private pagesService: PagesService
   ) {
   }
 
@@ -67,11 +70,16 @@ export class PageCreationComponent implements OnInit {
       for (let i = 0; i < this.userSelects.length; i++) {
         this.page.categories.push(this.userSelects[i].name);
       }
-      this.imgService.uploadPagePhoto(this.selectedFile).subscribe(
+      const selectedFileName = this.selectedFile.name;
+      const uniqueName = this.makeid(10) + selectedFileName;
+      const blob = this.selectedFile.slice(0, this.selectedFile.size);
+      const newFile = new File([blob], uniqueName);
+      this.imgService.uploadPagePhoto(newFile).subscribe(
         imgUrl => {
           this.page.imgUrl = imgUrl.toString();
           this.store.dispatch(new CreatePage(this.page));
-          this.notify.showSuccess('Page created successfully', 'Notification');
+          this.notify.showSuccess('Successfully created page', 'Notification');
+          this.router.navigate(['/my-pages']);
         }, error1 => {
           console.log(error1);
         }
@@ -79,6 +87,16 @@ export class PageCreationComponent implements OnInit {
       this.selectedFile = undefined;
       this.router.navigate(['/home']);
     }
+  }
+
+  makeid(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 
   isSelected(s) {

@@ -13,8 +13,7 @@ export class PostsService {
   private baseUrl = 'http://localhost:8080/post';
 
   constructor(
-    private http: HttpClient,
-    private imgService: ImgService
+    private http: HttpClient
   ) {
   }
 
@@ -24,5 +23,13 @@ export class PostsService {
 
   createPagePost(id, post) {
     return this.http.post<Post>(this.baseUrl + `/page` + `/${id}`, post);
+  }
+
+  like(id, userId) {
+    return this.http.post<string>(this.baseUrl + `/like` + `/${id}`, userId);
+  }
+
+  unlike(id, userId) {
+    return this.http.post<string>(this.baseUrl + `/unlike` + `/${id}`, userId);
   }
 }

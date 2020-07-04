@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import singispace.domain.Page;
 import singispace.domain.Post;
 import singispace.domain.Theme;
+import singispace.repositories.PagesRepository;
 import singispace.repositories.PostRepository;
 import singispace.repositories.ThemesRepository;
 
@@ -23,6 +24,9 @@ public class PostService {
 
     @Autowired
     private ThemesRepository themesRepository;
+
+    @Autowired
+    private PagesRepository pagesRepository;
 
     @Autowired
     private PagesService pagesService;
@@ -46,6 +50,20 @@ public class PostService {
 
         Optional<Theme> selectedTheme = themesRepository.findByName(name);
         postIds = selectedTheme.get().getFeed();
+        for (String postId : postIds) {
+            post = getById(postId).get();
+            posts.add(post);
+        }
+        return posts;
+    }
+
+    public Iterable<Post> getPageFeed(String name) {
+        List<String> postIds;
+        List<Post> posts = new ArrayList();
+        Post post;
+
+        Optional<Page> selectedPage = pagesRepository.findByName(name);
+        postIds = selectedPage.get().getFeed();
         for (String postId : postIds) {
             post = getById(postId).get();
             posts.add(post);

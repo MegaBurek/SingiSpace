@@ -1,0 +1,16 @@
+<div class="card dashboard ml-auto mr-auto">
+  <div class="card-body">
+    <h5 class="card-title text-center detail-card-title" style="margin: 0">My Themes</h5>
+    <!--    <div class="dashboard-column-titles">-->
+    <!--      <h2 class="dashboard-column-title disc-title text-center"></h2>-->
+    <!--      <h2 class="dashboard-column-title disc-title text-center">Results</h2>-->
+    <!--    </div>-->
+
+    <div class="dashboard-column my-social-groups">
+      <div class="social-group-box" *ngFor="let theme of ownedThemes | async" (click)="toTheme(theme.name)">
+        <img [src]="theme.imgUrl" class="img-responsive social-groups-image">
+        <h3 class="social-groups-text text-center">{{theme.name}}</h3>
+      </div>
+    </div>
+  </div>
+</div>

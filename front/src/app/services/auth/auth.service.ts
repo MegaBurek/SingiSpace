@@ -5,9 +5,9 @@ import decode from 'jwt-decode';
 import {Subject, BehaviorSubject, Observable} from 'rxjs';
 import {User} from 'src/app/model/user';
 import {NotificaitionService} from '../notificaition.service';
-import {GetUserPageSubs} from '../../store/user-store/page.actions';
+import {GetUserOwnedPages, GetUserPageSubs} from '../../store/user-store/page.actions';
 import {Store} from '@ngxs/store';
-import {GetUserThemeSubs} from '../../store/user-store/theme.action';
+import {GetUserOwnedThemes, GetUserThemeSubs} from '../../store/user-store/theme.action';
 import {GetUserFriends, SetLoggedIn} from '../../store/user-store/user.actions';
 import {UserAccService} from '../users/user-acc.service';
 
@@ -36,6 +36,8 @@ export class AuthService {
         await this.store.dispatch(new GetUserThemeSubs(id));
         await this.store.dispatch(new GetUserPageSubs(id));
         await this.store.dispatch(new GetUserFriends(id));
+        await this.store.dispatch(new GetUserOwnedThemes(id));
+        await this.store.dispatch(new GetUserOwnedPages(id));
         await this.userAccService.getCurrentUser(id).subscribe(logged => {
           this.store.dispatch(new SetLoggedIn(logged));
         });
@@ -55,6 +57,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('@@STATE');
     this.router.navigate(['/login']);
   }
 

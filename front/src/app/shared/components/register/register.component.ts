@@ -105,10 +105,9 @@ export class RegisterComponent implements OnInit {
       this.imgService.uploadProfile(newFile).subscribe(
         imgUrl => {
           this.user.imgUrl = imgUrl.toString();
-          this.userAccService.registerLearner(this.user).subscribe((value) => {
-            console.log(value);
+          this.userAccService.registerLearner(this.user).subscribe(_ => {
+            this.notify.showSuccess('You have successfully registered', 'Notification');
           });
-          this.notify.showSuccess('You have successfully registered', 'Notification');
         }, error => {
           console.log(error);
           this.progress = 0;

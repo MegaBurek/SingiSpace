@@ -1,6 +1,7 @@
 <h3 class="tab-title text-right">Groups</h3>
 <div class="tab-feed">
   <ul class="tab-list">
+    <p class="tab-message text-center" *ngIf="groups">You should check out the discovery tab 🔍</p>
     <li class="tab-item" *ngFor="let group of groups">
       <div class="tab-image-box">
         <img class="tab-image" [src]="group.imgUrl" alt="">

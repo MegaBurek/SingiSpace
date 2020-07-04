@@ -1,16 +1,16 @@
-<div class="card detail-card ml-auto mr-auto" *ngIf="selectedPage | async as theme">
+<div class="card detail-card ml-auto mr-auto" *ngIf="selectedPage | async as page">
   <div class="card-body">
-    <h5 class="card-title text-center detail-card-title">{{theme.name}}</h5>
+    <h5 class="card-title text-center detail-card-title">{{page.name}}</h5>
     <div class="detail-card-body">
       <div class="detail-card-info">
-        <div class="detail-card-owner">
-          <img src="../../../../assets/images/me.jpg" class="profile-photo img-responsive">
-          <h2 class="detail-card-subtitle">Anthony Markides</h2>
+        <div class="detail-card-owner" (click)="toUser(owner.username)">
+          <img [src]="owner.imgUrl" class="profile-photo owner-info img-responsive">
+          <h2 class="detail-card-subtitle">{{owner.name}} {{owner.surname}}</h2>
         </div>
         <div class="detail-card-about">
           <h2 class="detail-card-subtitle">About</h2>
           <p class="detail-card-text">
-            {{theme.desc}}
+            {{page.desc}}
           </p>
           <div class="d-flex justify-content-center flex-column">
             <div class="detail-card-specifics">

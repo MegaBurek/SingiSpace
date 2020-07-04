@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import singispace.domain.Page;
+import singispace.domain.Theme;
 import singispace.domain.User;
 import singispace.repositories.PagesRepository;
 
@@ -70,6 +71,14 @@ public class PagesService {
             page_subs.add(page);
         }
         return page_subs;
+    }
+
+    public Iterable<Page> getUserOwnedPages(String id) {
+        Query query = new Query();
+        List<Page> owned_pages = new ArrayList<>();
+        query.addCriteria(Criteria.where("owner").is(id));
+        owned_pages = mongoTemplate.find(query, Page.class);
+        return owned_pages;
     }
 
 }

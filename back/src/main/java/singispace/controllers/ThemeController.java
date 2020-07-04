@@ -9,6 +9,7 @@ import singispace.domain.Post;
 import singispace.domain.Theme;
 import singispace.repositories.ThemesRepository;
 import singispace.service.PostService;
+import singispace.service.SubscriptionService;
 import singispace.service.ThemesService;
 
 import java.util.Optional;
@@ -23,6 +24,9 @@ public class ThemeController {
 
     @Autowired
     private ThemesRepository themesRepository;
+
+    @Autowired
+    SubscriptionService subscriptionService;
 
     @Autowired
     private PostService postService;
@@ -49,6 +53,18 @@ public class ThemeController {
     public ResponseEntity<Iterable<Post>> getThemeFeed(@PathVariable String name) {
         return new ResponseEntity<>(postService.getThemeFeed(name), HttpStatus.OK);
     }
+
+    @PostMapping(value = "/subscribe/{name}")
+    public ResponseEntity<String> subscribeToTheme(@PathVariable String name, @RequestBody String id) {
+        subscriptionService.subscribeToTheme(id, name);
+        return new ResponseEntity<>("Subscribed", HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/owner/{id}")
+    public ResponseEntity<Iterable<Theme>> getUserOwnedThemes(@PathVariable String id) {
+        return new ResponseEntity<>(themesService.getUserOwnedThemes(id), HttpStatus.OK);
+    }
+
 
 //    @GetMapping(value="/theme/{name}")
 //    public ResponseEntity<Theme> getThemeByName(@PathVariable String name){

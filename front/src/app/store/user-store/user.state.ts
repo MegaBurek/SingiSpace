@@ -11,8 +11,8 @@ import {Friend} from '../../model/friend';
 import {FriendsService} from '../../services/friends/friends.service';
 import {Page} from '../../model/page';
 import {Theme} from '../../model/theme';
-import {GetUserPageSubs} from './page.actions';
-import {GetUserThemeSubs} from './theme.action';
+import {CreatePage, GetUserOwnedPages, GetUserPageSubs} from './page.actions';
+import {CreateTheme, GetUserOwnedThemes, GetUserThemeSubs} from './theme.action';
 import {ThemesService} from '../../services/themes/themes.service';
 import {PagesService} from '../../services/pages/pages.service';
 
@@ -53,6 +53,16 @@ export class UserState {
     private themesService: ThemesService,
     private pagesService: PagesService
   ) {
+  }
+
+  @Selector()
+  static getUserOwnedThemes(state: UserStateModel) {
+    return state.myThemes;
+  }
+
+  @Selector()
+  static getUserOwnedPages(state: UserStateModel) {
+    return state.myPages;
   }
 
   @Selector()
@@ -120,12 +130,51 @@ export class UserState {
     }));
   }
 
+  @Action(GetUserOwnedPages)
+  getUserOwnedPages({patchState}: StateContext<UserStateModel>, {id}: GetUserOwnedPages) {
+    return this.pagesService.getUserOwnedPages(id).pipe(tap((resultPages) => {
+      patchState({
+        myPages: resultPages
+      });
+    }));
+  }
+
+  @Action(CreatePage)
+  addNewPage({patchState, getState}: StateContext<UserStateModel>, {page}: CreatePage) {
+    return this.pagesService.createPage(page).pipe(tap((resPage) => {
+      const state = getState();
+      patchState({
+        myPages: [...state.myPages, resPage]
+      });
+    }));
+  }
+
   // Theme actions
   @Action(GetUserThemeSubs)
   getUserThemeSubs({patchState}: StateContext<UserStateModel>, {id}: GetUserThemeSubs) {
     return this.themesService.getUserThemeSubs(id).pipe(tap((resultThemes) => {
       patchState({
         subbedThemes: resultThemes
+      });
+    }));
+  }
+
+  @Action(GetUserOwnedThemes)
+  getUserOwnedThemes({patchState}: StateContext<UserStateModel>, {id}: GetUserOwnedThemes) {
+    return this.themesService.getUserOwnedThemes(id).pipe(tap((resultThemes) => {
+      patchState({
+        myThemes: resultThemes
+      });
+    }));
+  }
+
+  @Action(CreateTheme)
+  addNewTheme({patchState, getState}: StateContext<UserStateModel>, {theme}: CreateTheme) {
+    return this.themesService.createTheme(theme).pipe(tap((resultTheme) => {
+      const state = getState();
+
+      patchState({
+        myThemes: [...state.myThemes, resultTheme]
       });
     }));
   }

@@ -19,4 +19,8 @@ export class FriendsService {
     return this.http.get<Friend[]>(this.baseUrl + `/friends` + `/${id}`);
   }
 
+  getFriend(id) {
+    return this.http.get<Friend>(this.baseUrl + `/friend` + `/${id}`);
+  }
+
 }

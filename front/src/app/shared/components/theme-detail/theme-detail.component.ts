@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Theme} from '../../../model/theme';
 import {Store} from '@ngxs/store';
 import {ModalService} from '../../../_modal';
@@ -10,6 +10,8 @@ import {ImgService} from '../../../services/img.service';
 import {ThemesService} from '../../../services/themes/themes.service';
 import {Observable} from 'rxjs';
 import {AuthService} from '../../../services/auth/auth.service';
+import {Friend} from '../../../model/friend';
+import {FriendsService} from '../../../services/friends/friends.service';
 
 @Component({
   selector: 'app-theme-detail',
@@ -20,6 +22,7 @@ export class ThemeDetailComponent implements OnInit {
 
   selectedTheme: Observable<Theme>;
   selectedThemeFeed: Observable<Post[]>;
+  owner: Friend;
 
   public imagePath;
   imageSrc: any;
@@ -48,6 +51,8 @@ export class ThemeDetailComponent implements OnInit {
     private imgService: ImgService,
     private themesService: ThemesService,
     private authService: AuthService,
+    private friendsService: FriendsService,
+    private router: Router
   ) {
     const name = this.activatedRoute.snapshot.params.themeName;
     this.selectedTheme = this.themesService.getThemeByName(name);
@@ -55,6 +60,11 @@ export class ThemeDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.selectedTheme.subscribe((theme) => {
+      this.friendsService.getFriend(theme.owner).subscribe((owner) => {
+        this.owner = owner;
+      });
+    });
   }
 
   tryCreatePost() {
@@ -162,6 +172,10 @@ export class ThemeDetailComponent implements OnInit {
   openCreateImagePost() {
     this.imagePost = true;
     this.createPostopen = true;
+  }
+
+  toUser(name) {
+    this.router.navigate(['/user/' + name]);
   }
 
 

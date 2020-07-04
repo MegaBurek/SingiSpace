@@ -34,7 +34,6 @@ public class ThemesService {
     }
 
     public void createTheme(Theme theme) {
-        System.out.println("Here is the theme" + theme.toString());
         themesRepository.save(theme);
     }
 
@@ -49,7 +48,7 @@ public class ThemesService {
         if (a.isPresent()) {
             theme.setId(a.get().getId());
 
-            themesRepository .save(theme);
+            themesRepository.save(theme);
         }
     }
 
@@ -71,5 +70,14 @@ public class ThemesService {
             theme_subs.add(theme);
         }
         return theme_subs;
+    }
+
+    // get all themes that logged in user owns
+    public Iterable<Theme> getUserOwnedThemes(String id) {
+        Query query = new Query();
+        List<Theme> owned_themes;
+        query.addCriteria(Criteria.where("owner").is(id));
+        owned_themes = mongoTemplate.find(query, Theme.class);
+        return owned_themes;
     }
 }

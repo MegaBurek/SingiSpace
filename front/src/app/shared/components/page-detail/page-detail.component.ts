@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Theme} from '../../../model/theme';
 import {Post} from '../../../model/post';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngxs/store';
 import {ModalService} from '../../../_modal';
 import {NotificaitionService} from '../../../services/notificaition.service';
@@ -11,6 +11,8 @@ import {ImgService} from '../../../services/img.service';
 import {AuthService} from '../../../services/auth/auth.service';
 import {PagesService} from '../../../services/pages/pages.service';
 import {Page} from '../../../model/page';
+import {Friend} from '../../../model/friend';
+import {FriendsService} from '../../../services/friends/friends.service';
 
 @Component({
   selector: 'app-page-detail',
@@ -21,6 +23,7 @@ export class PageDetailComponent implements OnInit {
 
   selectedPage: Observable<Page>;
   selectedPageFeed: Observable<Post[]>;
+  owner: Friend;
 
   public imagePath;
   imageSrc: any;
@@ -49,13 +52,20 @@ export class PageDetailComponent implements OnInit {
     private imgService: ImgService,
     private pagesService: PagesService,
     private authService: AuthService,
+    private friendsService: FriendsService,
+    private router: Router
   ) {
-    const name = this.activatedRoute.snapshot.params.themeName;
+    const name = this.activatedRoute.snapshot.params.pageName;
     this.selectedPage = this.pagesService.getPageByName(name);
     this.selectedPageFeed = this.pagesService.getPageFeed(name);
   }
 
   ngOnInit() {
+    this.selectedPage.subscribe((theme) => {
+      this.friendsService.getFriend(theme.owner).subscribe((owner) => {
+        this.owner = owner;
+      });
+    });
   }
 
   tryCreatePost() {
@@ -163,5 +173,9 @@ export class PageDetailComponent implements OnInit {
   openCreateImagePost() {
     this.imagePost = true;
     this.createPostopen = true;
+  }
+
+  toUser(name) {
+    this.router.navigate(['/user/' + name]);
   }
 }

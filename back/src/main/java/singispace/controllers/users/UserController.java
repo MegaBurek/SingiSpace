@@ -39,4 +39,13 @@ public class UserController {
         }
         return new ResponseEntity<UserViewDTO>(HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping(value="/friend/{id}")
+    public ResponseEntity<FriendDTO> findFriendById(@PathVariable String id) {
+        Optional<FriendDTO> friend = friendsService.getFriendById(id);
+        if(friend.isPresent()) {
+            return new ResponseEntity<FriendDTO>(friend.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<FriendDTO>(HttpStatus.NOT_FOUND);
+    }
 }

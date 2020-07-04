@@ -1,6 +1,7 @@
 <h3 class="tab-title text-right">Friends</h3>
 <div class="tab-feed">
   <ul class="tab-list">
+    <p class="tab-message text-center" *ngIf="userFriends">You should check out the discovery tab 🔍</p>
     <li class="tab-item" *ngFor="let friend of userFriends | async">
       <h5 class="name-label">{{friend.name}} {{friend.surname}}</h5>
       <img class="tab-image img-responsive" [src]="friend.imgUrl" alt="">

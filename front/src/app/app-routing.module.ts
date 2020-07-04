@@ -4,6 +4,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {SignInComponent} from './shared/components/sign-in/sign-in.component';
 import {HomeComponent} from './shared/layout/home/home.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
+import { MyThemesComponent } from './shared/components/my-themes/my-themes.component';
+import { MyPagesComponent} from './shared/components/my-pages/my-pages.component';
 import {RegisterComponent} from './shared/components/register/register.component';
 import {PageCreationComponent} from './shared/components/page-creation/page-creation.component';
 import {ThemeCreationComponent} from './shared/components/theme-creation/theme-creation.component';
@@ -25,6 +27,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {preload: true}},
   {path: 'discovery', component: DiscoveryPageComponent, data: {preload: true}},
   {path: 'user/:username', component: UserProfileComponent, data: {preload: true}},
+  {path: 'my-themes', component: MyThemesComponent, data: {preload: true}},
+  {path: 'my-pages', component: MyPagesComponent, data: {preload: true}},
   {path: 'dashboard', component: DashboardComponent, data: {preload: true}},
   {path: 'create-tutor', component: CreateTutorComponent},
   {path: 'create-admin', component: CreateAdminComponent},

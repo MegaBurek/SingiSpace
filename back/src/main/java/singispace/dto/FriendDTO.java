@@ -4,6 +4,7 @@ public class FriendDTO {
 
     public String id;
     public String name;
+    public String username;
     public String surname;
     public String imgUrl;
 
@@ -25,6 +26,14 @@ public class FriendDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getSurname() {

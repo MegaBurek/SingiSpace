@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import singispace.domain.User;
 import singispace.dto.FriendDTO;
+import singispace.dto.UserViewDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,11 @@ public class FriendsService {
         }
 
         return friends;
+    }
+
+    public Optional<FriendDTO> getFriendById(String id) {
+        Optional<User> user = userAccService.getById(id);
+        return Optional.of(convertToDto(user.get()));
     }
 
     private FriendDTO convertToDto(User user) {

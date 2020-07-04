@@ -1,0 +1,32 @@
+.my-social-groups{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 90%;
+}
+
+.social-group-box{
+  cursor: pointer;
+  margin: 1.5rem;
+  height: 200px;
+  width: 200px;
+  border-radius: 1rem;
+  background-color: $bars;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  .social-groups-image{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  .social-groups-text{
+    color: $text-color;
+  }
+  &:hover{
+    box-shadow: 0px 0px 5px #F5F5F5;
+  }
+}

@@ -31,8 +31,16 @@ export class ThemesService {
     return this.http.put<Theme>(this.baseUrl + `/${id}`, theme);
   }
 
+  subscribe(name) {
+    return this.http.post<string>(this.baseUrl + `/subscribe`, name);
+  }
+
   getUserThemeSubs(id) {
     return this.http.get<Theme[]>(this.baseUrl + `/user-subscribed` + `/${id}`);
+  }
+
+  getUserOwnedThemes(id) {
+    return this.http.get<Theme[]>(this.baseUrl + `/owner` + `/${id}`);
   }
 
   getThemeByID(id) {

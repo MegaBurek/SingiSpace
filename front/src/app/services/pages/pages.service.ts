@@ -35,8 +35,16 @@ export class PagesService {
     return this.http.get<Page[]>(this.baseUrl + `/user-subscribed` + `/${id}`);
   }
 
+  subscribe(name) {
+    return this.http.post<string>(this.baseUrl + `/subscribe`, name);
+  }
+
   getPageByName(name) {
-    return this.http.get<Theme>(this.baseUrl + `/page` + `/${name}`);
+    return this.http.get<Page>(this.baseUrl + `/page` + `/${name}`);
+  }
+
+  getUserOwnedPages(id) {
+    return this.http.get<Page[]>(this.baseUrl + `/owner` + `/${id}`);
   }
 
   getPageFeed(name) {

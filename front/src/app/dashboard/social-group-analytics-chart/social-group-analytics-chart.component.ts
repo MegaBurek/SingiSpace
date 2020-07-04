@@ -20,7 +20,7 @@ export class SocialGroupAnalyticsChartComponent implements OnInit {
       display: false
     }
   };
-  public pieChartLabels: Label[] = [['Themes'], ['Pages']];
+  public pieChartLabels: Label[] = [['Pages'], ['Themes']];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
